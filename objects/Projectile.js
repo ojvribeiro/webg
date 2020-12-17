@@ -1,4 +1,4 @@
-import { canvas, ctx } from '../js/config.js';
+import { canvas, ctx } from '../scripts/config.js';
 
 
 export default class Projectile {

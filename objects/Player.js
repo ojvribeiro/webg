@@ -1,5 +1,5 @@
-import { config, canvas, DOMSpeed, ctx } from '../js/config.js';
-import SpriteAnimation from '../js/modules/sprites.js';
+import { config, canvas, DOMSpeed, ctx } from '../scripts/config.js';
+import SpriteAnimation from '../scripts/modules/sprites.js';
 
 
 // Constants
