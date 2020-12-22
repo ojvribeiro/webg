@@ -1,5 +1,6 @@
 import { Config } from '../scripts/config.js';
 import { DOM } from '../scripts/modules/dom.js';
+import { State } from '../scripts/modules/states.js';
 import SpriteAnimation from '../scripts/modules/sprites.js';
 
 DOM.canvas.width = window.innerWidth;
@@ -37,39 +38,14 @@ playerSprite.src = playerConfig.SPRITE_SHEET;
 
 class Player {
   constructor() {
-    this.props = {
-      x: playerConfig.INITIAL_X_POS,
-      y: playerConfig.INITIAL_Y_POS,
-      speed: 0,
-      facing: 'up',
-      currentRowIndex: undefined,
-      sprites: playerConfig.SPRITE_SHEET,
-      controls: {
-        up: `Key${playerConfig.KEYBOARD_CONTROLS.up}`,
-        down: `Key${playerConfig.KEYBOARD_CONTROLS.down}`,
-        left: `Key${playerConfig.KEYBOARD_CONTROLS.left}`,
-        right: `Key${playerConfig.KEYBOARD_CONTROLS.right}`,
-        run: `${playerConfig.KEYBOARD_CONTROLS.run}`
-      }
-    }
-    
-    this.keyMap = {
-      up: false,
-      down: false,
-      left: false,
-      right: false,
-      shift: false,
-      
-      array: []
-    }
     
     
     this.hero = new SpriteAnimation(
       playerSprite, // sprite image object
-      this.props.x - (playerConfig.RADIUS / 2), // sprite x
-      this.props.y - (playerConfig.RADIUS / 2), // sprite y
-      playerConfig.RADIUS * playerConfig.SPRITE_SHEET_COLS, // sprite width
-      playerConfig.RADIUS * playerConfig.SPRITE_SHEET_ROWS, // sprite height
+      State.player.x - (Config.player.WIDTH / 2), // sprite x
+      State.player.y - (Config.player.HEIGHT / 2), // sprite y
+      Config.player.SIZE * Config.player.SPRITE_SHEET_COLS, // sprite width
+      Config.player.SIZE * Config.player.SPRITE_SHEET_ROWS, // sprite height
       100,
       playerConfig.SPRITE_SHEET_COLS,
       playerConfig.SPRITE_SHEET_ROWS,
@@ -96,202 +72,196 @@ class Player {
       else {
         return 1;
       }
+        x: State.player.x,
+        y: State.player.y - (Config.player.HEIGHT / 4) + 2,
+        x: State.player.x - (Config.player.WIDTH / 4) + 2,
+        y: State.player.y,
     }
 
-    switch (this.props.facing) {
+
+
+    switch (State.player.facing) {
       case 'up':
-        if (this.props.facing === 'up') {
-          if (this.props.moving) {
-            console.log('facing', this.props.facing);
-
-            this.props.currentRowIndex = 13;
-
-            this.props.facing = undefined;
+        if (State.player.facing === 'up') {
+          if (State.player.state === 'walking') {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.upWalking;
+          }
+          else if (State.player.state === 'running') {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.upRunning;
           }
           else {
-            // console.log('facing', this.props.facing);
-
-            this.props.currentRowIndex = 1;
-
-            this.props.facing = undefined;
+            State.player.currentRowIndex = Config.player.spriteRowIndex.up;
           }
         }
+
         break;
         
       case 'down':
-        if (this.props.facing === 'down') {
-          if (this.props.moving) {
-            // console.log('facing', this.props.facing);
-
-            this.props.currentRowIndex = 12;
-
-            this.props.facing = undefined;
+        if (State.player.facing === 'down') {
+          if (State.player.state === 'walking') {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.downWalking;
+          }
+          else if (State.player.state === 'running') {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.downRunning;
           }
           else {
-            this.props.currentRowIndex = 0;
-
-            this.props.facing = undefined;
+            State.player.currentRowIndex = Config.player.spriteRowIndex.down;
           }
         }
-        break;
+      break;
           
       case 'left':
-        if (this.props.facing === 'left') {
-          if (this.props.moving) {
-            // console.log('facing', this.props.facing);
-
-            this.props.currentRowIndex = 14;
-
-            this.props.facing = undefined;
+        if (State.player.facing === 'left') {
+          if (State.player.state === 'walking') {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.leftWalking;
+          }
+          else if (State.player.state === 'running') {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.leftRunning;
           }
           else {
-            this.props.currentRowIndex = 2;
-
-            this.props.facing = undefined;
+            State.player.currentRowIndex = Config.player.spriteRowIndex.left;
           }
         }
-        break;
+      break;
             
       case 'right':
-        if (this.props.facing === 'right') {
-          if (this.props.moving) {
-            // console.log('facing', this.props.facing);
-
-            this.props.currentRowIndex = 15;
-
-            this.props.facing = undefined;
+        if (State.player.facing === 'right') {
+          if (State.player.state === 'walking') {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.rightWalking;  
+          }
+          else if (State.player.state === 'running') {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.rightRunning;
           }
           else {
-            this.props.currentRowIndex = 3;
-
-            this.props.facing = undefined;
+            State.player.currentRowIndex = Config.player.spriteRowIndex.right;
           }
         }
-        break;
+      break;
       
       case 'up-left':
-        if (this.props.facing === 'up-left') {
-          if (this.props.moving) {
-            // console.log('facing', this.props.facing);
-
-            this.props.currentRowIndex = 14;
-
-            this.props.facing = undefined;
+        if (State.player.facing === 'up-left') {
+          if (State.player.state === 'walking') {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.upLeftWalking;  
+          }
+          else if (State.player.state === 'running') {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.upLeftRunning;
           }
           else {
-            this.props.currentRowIndex = 2;
-
-            this.props.facing = undefined;
+            State.player.currentRowIndex = Config.player.spriteRowIndex.upLeft;
           }
         }
-        break;
+      break;
             
       case 'up-right':
-        if (this.props.facing === 'up-right') {
-          if (this.props.moving) {
-            // console.log('facing', this.props.facing);
-
-            this.props.currentRowIndex = 15;
-
-            this.props.facing = undefined;
+        if (State.player.facing === 'up-right') {
+          if (State.player.state === 'walking') {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.upRightWalking;  
+          }
+          else if (State.player.state === 'running') {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.upRightRunning;
           }
           else {
-            this.props.currentRowIndex = 3;
-
-            this.props.facing = undefined;
+            State.player.currentRowIndex = Config.player.spriteRowIndex.upRight;
           }
         }
-        break;
+      break;
       
       case 'down-left':
-        if (this.props.facing === 'down-left') {
-          if (this.props.moving) {
-            // console.log('facing', this.props.facing);
-
-            this.props.currentRowIndex = 14;
-
-            this.props.facing = undefined;
+        if (State.player.facing === 'down-left') {
+          if (State.player.state === 'walking') {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.downLeftWalking;  
+          }
+          else if (State.player.state === 'running') {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.downLeftRunning;
           }
           else {
-            this.props.currentRowIndex = 2;
-
-            this.props.facing = undefined;
+            State.player.currentRowIndex = Config.player.spriteRowIndex.downLeft;
           }
         }
-        break;
+      break;
             
       case 'down-right':
-        if (this.props.facing === 'down-right') {
-          if (this.props.moving) {
-            // console.log('facing', this.props.facing);
-
-            this.props.currentRowIndex = 15;
-
-            this.props.facing = undefined;
+        if (State.player.facing === 'down-right') {
+          if (State.player.state === 'walking') {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.downRightWalking;  
+          }
+          else if (State.player.state === 'running') {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.downRightRunning;
           }
           else {
-            this.props.currentRowIndex = 3;
-
-            this.props.facing = undefined;
+            State.player.currentRowIndex = Config.player.spriteRowIndex.downRight;
           }
         }
-        break;
+      break;
               
       default:
+        State.player.currentRowIndex = Config.player.spriteRowIndex.down;
     }
 
 
     
     // Run
-    if (this.keyMap.shift) {
+    if (State.keyMap.shift) {
       
-      if (this.keyMap.up || this.keyMap.down || this.keyMap.left || this.keyMap.right) {
+      if (State.keyMap.up || State.keyMap.down || State.keyMap.left || State.keyMap.right) {
         
-        this.props.speed += 0.1;
+        State.player.speed += 0.1;
         
         // Locks the speed when it hits the maximum defined
-        if (this.props.speed >= playerConfig.RUN_VELOCITY) {
-          this.props.speed = playerConfig.RUN_VELOCITY;
+        if (State.player.speed >= Config.player.RUN_MAX_SPEED) {
+          State.player.speed = Config.player.RUN_MAX_SPEED;
         }
         
         // Listens to movement keys (allows multi press)
-        if (this.keyMap.up) {
-          this.props.y -= (this.props.speed * diagonalSpeed(this));
+        if (State.keyMap.up) {
+          State.player.y -= Physics.speed.normalize();
         }
         
-        if (this.keyMap.down) {
-          this.props.y += (this.props.speed * diagonalSpeed(this));
+        if (State.keyMap.down) {
+          State.player.y += Physics.speed.normalize();
         }
         
-        if (this.keyMap.left) {
-          this.props.x -= (this.props.speed * diagonalSpeed(this));
+        if (State.keyMap.left) {
+          State.player.x -= Physics.speed.normalize();
         }
         
-        if (this.keyMap.right) {
-          this.props.x += (this.props.speed * diagonalSpeed(this));
+        if (State.keyMap.right) {
+          State.player.x += Physics.speed.normalize();
         }
 
 
         // Listens to movement keys (do not allow multi press)
-        if (this.keyMap.up || this.keyMap.down || this.keyMap.left || this.keyMap.right) {
-          if (this.keyMap.up) {
-            this.props.currentRowIndex = 9;
+        if (State.keyMap.up || State.keyMap.down || State.keyMap.left || State.keyMap.right) {
+          if (State.keyMap.up && !State.keyMap.left && !State.keyMap.right) {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.upRunning;
           }
-          else if (this.keyMap.down) {
-            this.props.currentRowIndex = 8;
+          else if (State.keyMap.down && !State.keyMap.left && !State.keyMap.right) {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.downRunning;
           }
-          else if (this.keyMap.left) {
-            this.props.currentRowIndex = 10;
+          else if (State.keyMap.left && !State.keyMap.up && !State.keyMap.down) {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.leftRunning;
           }
-          else if (this.keyMap.right) {
-            this.props.currentRowIndex = 11;
+          else if (State.keyMap.right && !State.keyMap.up && !State.keyMap.down) {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.rightRunning;
+          }
+
+          else if (State.keyMap.down && State.keyMap.left) {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.downLeftRunning;
+          }
+          else if (State.keyMap.down && State.keyMap.right) {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.downRightRunning;
+          }
+          else if (State.keyMap.up && State.keyMap.left) {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.upLeftRunning;
+          }
+          else if (State.keyMap.up && State.keyMap.right) {
+            State.player.currentRowIndex = Config.player.spriteRowIndex.upRightRunning;
           }
 
           this.draw(
-            ctx,
-            this.props.currentRowIndex,
-            this.props.x,
-            this.props.y
+            State.player.currentRowIndex,
+            State.player.x,
+            State.player.y
           );
         }
         
@@ -299,10 +269,9 @@ class Player {
       }
       else {
         this.draw(
-          ctx, 
-          this.props.currentRowIndex, 
-          this.props.x, 
-          this.props.y
+          State.player.currentRowIndex, 
+          State.player.x, 
+          State.player.y
         );
 
         this.hero.update();
@@ -310,49 +279,54 @@ class Player {
     }
 
     // Walk
-    else if (!this.keyMap.shift && this.keyMap.up || this.keyMap.down || this.keyMap.left || this.keyMap.right) {
+    else if (
+      !State.keyMap.shift  && 
+      State.keyMap.up      || 
+      State.keyMap.down    || 
+      State.keyMap.left    || 
+      State.keyMap.right) {
       
       // Increases the speed
-      this.props.speed += 0.1;
+      State.player.speed += 0.1;
       
       
       // Locks the velocity to the maximun allowed
-      if (this.props.speed >= playerConfig.WALK_VELOCITY) {
-        this.props.speed = playerConfig.WALK_VELOCITY;
+      if (State.player.speed >= Config.player.WALK_MAX_SPEED) {
+        State.player.speed = Config.player.WALK_MAX_SPEED;
       }
       
       
-      if (this.keyMap.up) {
-        this.props.y -= (this.props.speed * diagonalSpeed(this));
+      if (State.keyMap.up) {
+        State.player.y -= Physics.speed.normalize();
       }
       
-      if (this.keyMap.down) {
-        this.props.y += (this.props.speed * diagonalSpeed(this));
+      if (State.keyMap.down) {
+        State.player.y += Physics.speed.normalize();
       }
       
-      if (this.keyMap.left) {
-        this.props.x -= (this.props.speed * diagonalSpeed(this));
+      if (State.keyMap.left) {
+        State.player.x -= Physics.speed.normalize();
       }
       
-      if (this.keyMap.right) {
-        this.props.x += (this.props.speed * diagonalSpeed(this));
+      if (State.keyMap.right) {
+        State.player.x += Physics.speed.normalize();
       }
 
 
-      if (this.keyMap.up) {
-        this.draw(ctx, this.props.currentRowIndex, this.props.x, this.props.y);
+      if (State.keyMap.up) {
+        walk(this);
       }
       
-      else if (this.keyMap.down) {
-        this.draw(ctx, this.props.currentRowIndex, this.props.x, this.props.y);
+      else if (State.keyMap.down) {
+        walk(this);
       }
       
-      else if (this.keyMap.left) {
-        this.draw(ctx, this.props.currentRowIndex, this.props.x, this.props.y);
+      else if (State.keyMap.left) {
+        walk(this);
       }
       
-      else if (this.keyMap.right) {
-        this.draw(ctx, this.props.currentRowIndex, this.props.x, this.props.y);
+      else if (State.keyMap.right) {
+        walk(this);
       }
 
       this.hero.update();
@@ -360,42 +334,160 @@ class Player {
 
     // Stop
     else {
-      this.draw(ctx, this.props.currentRowIndex, this.props.x, this.props.y);
-      this.hero.update();
-
-      this.props.speed -= 0.1;
+      State.player.speed -= 0.1;
       
-      if (this.props.speed <= 0) {
-        this.props.speed = 0;
+      if (State.player.speed <= 0) {
+        State.player.speed = 0;
       }
+
+      this.draw(
+        State.player.currentRowIndex, 
+        State.player.x, 
+        State.player.y
+      );
+      
     }
 
 
-    
-  }
+    function walk(playerObject) {
+      if (State.player.facing === 'up') {
+        if (State.keyMap.up) {
+          playerObject.draw(
+            Config.player.spriteRowIndex.upWalking, 
+            State.player.x, 
+            State.player.y
+          );
+        }
+        else {
+          playerObject.draw(
+            Config.player.spriteRowIndex.upWalkingBackwards, 
+            State.player.x, 
+            State.player.y
+          );
+        }
+      }
+
+      else if (State.player.facing === 'down') {
+        if (State.keyMap.up) {
+          playerObject.draw(
+            Config.player.spriteRowIndex.downWalking, 
+            State.player.x, 
+            State.player.y
+          );
+        }
+        else {
+          playerObject.draw(
+            Config.player.spriteRowIndex.downWalkingBackwards, 
+            State.player.x, 
+            State.player.y
+          );
+        }
+      }
+
+      else if (State.player.facing === 'left') {
+        if (State.keyMap.left) {
+          playerObject.draw(
+            Config.player.spriteRowIndex.leftWalking, 
+            State.player.x, 
+            State.player.y
+          );
+        }
+        else {
+          playerObject.draw(
+            Config.player.spriteRowIndex.leftWalkingBackwards, 
+            State.player.x, 
+            State.player.y
+          );
+        }
+      }
+
+      else if (State.player.facing === 'right') {
+        if (State.keyMap.right) {
+          playerObject.draw(
+            Config.player.spriteRowIndex.rightWalking, 
+            State.player.x, 
+            State.player.y
+          );
+        }
+        else {
+          playerObject.draw(
+            Config.player.spriteRowIndex.rightWalkingBackwards, 
+            State.player.x, 
+            State.player.y
+          );
+        }
+      }
 
 
+      else if (State.player.facing === 'up-left') {
+        if (State.keyMap.up) {
+          playerObject.draw(
+            Config.player.spriteRowIndex.upLeftWalking, 
+            State.player.x, 
+            State.player.y
+          );
+        }
+        else {
+          playerObject.draw(
+            Config.player.spriteRowIndex.upLeftWalking, 
+            State.player.x, 
+            State.player.y
+          );
+        }
+      }
 
-  draw(_ctx, rowIndex, x, y) {
-    // Draw hit box
-    _ctx.save();
-    _ctx.beginPath();
-    _ctx.arc(this.props.x, this.props.y, (playerConfig.RADIUS / 2), 0, (Math.PI * 2), false);
-    _ctx.fillStyle = playerConfig.BOUNDING_BOX_COLOR;
-    _ctx.fill();
-    _ctx.closePath();
-    _ctx.restore();
+      else if (State.player.facing === 'up-right') {
+        if (State.keyMap.up) {
+          playerObject.draw(
+            Config.player.spriteRowIndex.upRightWalking, 
+            State.player.x, 
+            State.player.y
+          );
+        }
+        else {
+          playerObject.draw(
+            Config.player.spriteRowIndex.upRightWalking, 
+            State.player.x, 
+            State.player.y
+          );
+        }
+      }
 
-    this.hero.draw(_ctx, rowIndex, x - (playerConfig.RADIUS / 2), y - (playerConfig.RADIUS / 2));
-  }
-  
-  
-  
-  
-  update() {
-    DOMSpeed.innerHTML = this.props.speed;
+      else if (State.player.facing === 'down-left') {
+        if (State.keyMap.up) {
+          playerObject.draw(
+            Config.player.spriteRowIndex.downLeftWalking, 
+            State.player.x, 
+            State.player.y
+          );
+        }
+        else {
+          playerObject.draw(
+            Config.player.spriteRowIndex.downLeftWalking, 
+            State.player.x, 
+            State.player.y
+          );
+        }
+      }
 
-    this.gameLogic();
+      else if (State.player.facing === 'down-right') {
+        if (State.keyMap.up) {
+          playerObject.draw(
+            Config.player.spriteRowIndex.downRightWalking, 
+            State.player.x, 
+            State.player.y
+          );
+        }
+        else {
+          playerObject.draw(
+            Config.player.spriteRowIndex.downRightWalking, 
+            State.player.x, 
+            State.player.y
+          );
+        }
+      }
+
+    }
   }
 }
 

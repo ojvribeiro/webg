@@ -3,6 +3,7 @@ import Projectile from '../objects/Projectile.js';
 
 import { Config } from './config.js';
 import { DOM } from './modules/dom.js';
+import { State } from './modules/states.js';
 
 
 DOM.canvas.width = window.innerWidth;
@@ -30,23 +31,24 @@ let game = {
       
       const projectile = new Projectile();
       projectile.shoot(projectiles)
-      
-        
       // Pop on other edge
-      if (player.props.y < 0) {
-        player.props.y = canvas.height;
+      if (State.player.y < 0) {
+        State.player.y = DOM.canvas.height;
       }
-      else if (player.props.y > canvas.height) {
-        player.props.y = 0;
+      else if (State.player.y > DOM.canvas.height) {
+        State.player.y = 0;
       }
-      else if (player.props.x < 0) {
-        player.props.x = canvas.width;
+      else if (State.player.x < 0) {
+        State.player.x = DOM.canvas.width;
       }
-      else if (player.props.x > canvas.width) {
-        player.props.x = 0;
+      else if (State.player.x > DOM.canvas.width) {
+        State.player.x = 0;
       }
-      
+
       player.update();
+      if (State.projectiles.length > 0) {
+        projectile.update();
+      }
 
       requestAnimationFrame(update);
     }
@@ -66,36 +68,59 @@ let game = {
         e.preventDefault();
       }
       
-      if (e.code === player.props.controls.run) {
-        player.keyMap.shift = true;
+      if (e.code === Config.player.KEYBOARD_CONTROLS.run) {
+        State.keyMap.shift = true;
       }
       
-      if (e.code === player.props.controls.up) {
-        player.keyMap.up = true;
-        player.props.moving = true;
+
+
+      if (e.code === Config.player.KEYBOARD_CONTROLS.up) {
+        State.keyMap.up = true;
+
+        changeRunningState();
       }
-      if (e.code === player.props.controls.down) {
-        player.keyMap.down = true;
-        player.props.moving = true;
+
+      if (e.code === Config.player.KEYBOARD_CONTROLS.down) {
+        State.keyMap.down = true;
+
+        changeRunningState();
       }
-      if (e.code === player.props.controls.left) {
-        player.keyMap.left = true;
-        player.props.moving = true;
+
+      if (e.code === Config.player.KEYBOARD_CONTROLS.left) {
+        State.keyMap.left = true;
+
+        changeRunningState();
       }
-      if (e.code === player.props.controls.right) {
-        player.keyMap.right = true;
-        player.props.moving = true;
+
+      if (e.code === Config.player.KEYBOARD_CONTROLS.right) {
+        State.keyMap.right = true;
+
+        changeRunningState();
       }
 
 
 
-      const index = player.keyMap.array.indexOf(e.code);
+      const index = State.keyMap.array.indexOf(e.code);
 
       if (index < 0) {
-        player.keyMap.array.push(e.code);
+        State.keyMap.array.push(e.code);
       }
 
-      DOMKeys.innerText = player.keyMap.array, player.props.speed;
+
+
+
+      function changeRunningState() {
+        if (e.code === Config.player.KEYBOARD_CONTROLS.run) {
+          State.player.state = 'running';
+        }
+        else {
+          State.player.state = 'walking';
+        }
+      }
+
+      //console.log(State.keyMap);
+
+      DOM.keysPressed.innerText = State.keyMap.array, State.player.speed;
     });
 
 
@@ -104,48 +129,54 @@ let game = {
 
 
     document.addEventListener('keyup', function (e) {
-      player.props.currentRowIndex = 0;
-      
-      if (e.code === player.props.controls.run) {
-        player.keyMap.shift = false;
+      if (e.code === Config.player.KEYBOARD_CONTROLS.run) {
+        State.keyMap.shift = false;
       }
       
-      if (e.code === player.props.controls.up) {
-        player.keyMap.up = false;
-        player.keyMap.upLeft = false;
-        player.keyMap.upRight = false;
+      if (e.code === Config.player.KEYBOARD_CONTROLS.up) {
+        State.keyMap.up = false;
+        State.keyMap.upLeft = false;
+        State.keyMap.upRight = false;
 
-        player.props.moving = false;
+        State.player.state = 'idle';
+        
+        State.player.currentRowIndex = Config.player.spriteRowIndex.up;
       }
 
-      if (e.code === player.props.controls.down) {
-        player.keyMap.down = false;
-        player.keyMap.downLeft = false;
-        player.keyMap.downRight = false;
+      if (e.code === Config.player.KEYBOARD_CONTROLS.down) {
+        State.keyMap.down = false;
+        State.keyMap.downLeft = false;
+        State.keyMap.downRight = false;
 
-        player.props.moving = false;
+        State.player.state = 'idle';
+        
+        State.player.currentRowIndex = Config.player.spriteRowIndex.down;
       }
 
-      if (e.code === player.props.controls.left) {
-        player.keyMap.left = false;
+      if (e.code === Config.player.KEYBOARD_CONTROLS.left) {
+        State.keyMap.left = false;
 
-        player.props.moving = false;
+        State.player.state = 'idle';
+        
+        State.player.currentRowIndex = Config.player.spriteRowIndex.left;
       }
 
-      if (e.code === player.props.controls.right) {
-        player.keyMap.right = false;
+      if (e.code === Config.player.KEYBOARD_CONTROLS.right) {
+        State.keyMap.right = false;
 
-        player.props.moving = false;
+        State.player.state = 'idle';
+        
+        State.player.currentRowIndex = Config.player.spriteRowIndex.right;
       }
 
 
-      const index = player.keyMap.array.indexOf(e.code);
+      const index = State.keyMap.array.indexOf(e.code);
 
       if (index > -1) {
-        player.keyMap.array.splice(index, 1);
+        State.keyMap.array.splice(index, 1);
       }
 
-      DOMKeys.innerText = player.keyMap.array;
+      //console.log(State.keyMap);
 
       DOM.keysPressed.innerText = State.keyMap.array;
     });
@@ -155,23 +186,22 @@ let game = {
 
 
     document.addEventListener('mousedown', function (e) {
-      const angle = Math.atan2(e.clientY - player.props.y, e.clientX - player.props.x);
-      const speed = {
-        x: Math.cos(angle) * 30,
-        y: Math.sin(angle) * 30
-      }
-      
-      projectiles.push(
-        new Projectile(
-          player.props.x,
-          player.props.y,
-          5,
-          '#fff',
-          speed
-        )
-      );
       DOM.mousePosition.x = e.clientX;
       DOM.mousePosition.y = e.clientY;
+
+      const angle = Math.atan2(DOM.mousePosition.y - State.player.y, DOM.mousePosition.x - State.player.x);
+      const velocity = Physics.velocity(angle, Config.projectiles.SPEED);
+
+      const projectile = {
+        x: State.player.x, 
+        y: State.player.y, 
+        radius: Config.projectiles.SIZE, 
+        color: Config.projectiles.COLOR, 
+        velocity: velocity
+      };
+
+      Projectile.shoot(projectile);
+      Projectile.update();
     });
 
 
@@ -181,58 +211,79 @@ let game = {
     playerSprite.src = playerConfig.SPRITE_SHEET;
 
     document.addEventListener('mousemove', function (e) {
-      const angle = Math.atan2(e.clientY - player.props.y, e.clientX - player.props.x);
       DOM.mousePosition.x = e.clientX;
       DOM.mousePosition.y = e.clientY;
       
+      const angle = Math.atan2(DOM.mousePosition.y - State.player.y, DOM.mousePosition.x - State.player.x);
 
-      // Looking up
-      if (angle <= -1.17 && angle >= -1.97) {
-        if (player.props.facing !== 'up') {
-          player.props.facing = 'up';
+      const direction = {
+        get up() { return angle <= -1.17 && angle >= -1.97 },
+        get down() { return angle <= 1.97 && angle >= 1.17 },
+        get left() { return angle <= 3.14 && angle >= 2.74 || angle >= -3.14 && angle <= -2.74 },
+        get right() { return angle > 0.01 && angle <= 0.4 || angle >= -0.4 && angle <= 0.01 },
+        get upLeft() { return angle > -2.74 && angle < -1.97 },
+        get upRight() { return angle > -1.17 && angle < -0.4 },
+        get downLeft() { return angle < 2.74 && angle > 1.97 },
+        get downRight() { return angle < 1.17 && angle > 0.4 },
+      }
+      
+      /** 
+       * The looking direction only changes if previous direction is different.
+       */
+
+      // Looking up ⬆️
+      if (direction.up) {
+        if (State.player.facing !== 'up') {
+          State.player.facing = 'up';
         }
       }
-      // Looking down
-      else if (angle <= 1.97 && angle >= 1.17) {
-        if (player.props.facing !== 'down') {
-          player.props.facing = 'down';
+
+      // Looking down ⬇️
+      else if (direction.down) {
+        if (State.player.facing !== 'down') {
+          State.player.facing = 'down';
         }
       }
-      // Looking left
-      else if (angle <= 3.14 && angle >= 2.74 || angle >= -3.14 && angle <= -2.74) {
-        if (player.props.facing !== 'left') {
-          player.props.facing = 'left';
+
+      // Looking left ⬅️
+      else if (direction.left) {
+        if (State.player.facing !== 'left') {
+          State.player.facing = 'left';
         }
       }
-      // Looking right
-      else if (angle >= 0.01 && angle <= 0.4 || angle >= -0.4 && angle <= 0.01) {
-        if (player.props.facing !== 'right') {
-          player.props.facing = 'right';
+
+      // Looking right ➡️
+      else if (direction.right) {
+        if (State.player.facing !== 'right') {
+          State.player.facing = 'right';
         }
       }
       
-      // Looking up-left
-      else if (angle > -2.74 && angle < -1.97) {
-        if (player.props.facing !== 'up-left') {
-          player.props.facing = 'up-left';
+      // Looking up-left ↖️
+      else if (direction.upLeft) {
+        if (State.player.facing !== 'up-left') {
+          State.player.facing = 'up-left';
         }
       }
-      // Looking up-right
-      else if (angle > -1.17 && angle < -0.4) {
-        if (player.props.facing !== 'up-right') {
-          player.props.facing = 'up-right';
+
+      // Looking up-right ↗️
+      else if (direction.upRight) {
+        if (State.player.facing !== 'up-right') {
+          State.player.facing = 'up-right';
         }
       }
-      // Looking down-left
-      else if (angle < 2.74 && angle > 1.97) {
-        if (player.props.facing !== 'down-left') {
-          player.props.facing = 'down-left';
+
+      // Looking down-left ↙️
+      else if (direction.downLeft) {
+        if (State.player.facing !== 'down-left') {
+          State.player.facing = 'down-left';
         }
       }
-      // Looking down-right
-      else {
-        if (player.props.facing !== 'down-right') {
-          player.props.facing = 'down-right';
+
+      // Looking down-right ↘️
+      else if (direction.downRight) {
+        if (State.player.facing !== 'down-right') {
+          State.player.facing = 'down-right';
         }
       }
 
