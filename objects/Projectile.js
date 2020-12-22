@@ -1,4 +1,5 @@
-import { canvas, ctx } from '../scripts/config.js';
+import { Config } from '../scripts/config.js';
+import { DOM } from '../scripts/modules/dom.js';
 
 
 export default class Projectile {
@@ -9,6 +10,8 @@ export default class Projectile {
     this.color = color;
     this.speed = speed;
   }
+DOM.canvas.width = window.innerWidth;
+DOM.canvas.height = window.innerHeight;
 
 
 

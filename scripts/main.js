@@ -1,38 +1,32 @@
-import { config, canvas, DOMKeys, DOMSpeed, ctx } from './config.js';
 import Player, { playerConfig } from '../objects/Player.js';
 import Projectile from '../objects/Projectile.js';
 
+import { Config } from './config.js';
+import { DOM } from './modules/dom.js';
 
 
-const __DIR__ = config.__DIR__;
+DOM.canvas.width = window.innerWidth;
+DOM.canvas.height = window.innerHeight;
 
 let game = {
 
   init: () => {
     
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
 
 
     const player = new Player();
 
 
     const village = new Image();
-    village.src = __DIR__ + '/sprites/Maps/Village/Village.png';
-
-
-
-
     let projectiles = [];
-
-
-
+    village.src = Config.root + '/sprites/Maps/Village/Village.png';
+    
 
     function update() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      Config.ctx.clearRect(0, 0, DOM.canvas.width, DOM.canvas.height);
       
       // Draw background
-      ctx.drawImage(village, 0, 0, canvas.width, canvas.height);
+      // Config.ctx.drawImage(village, 0, 0, DOM.canvas.width, DOM.canvas.height, 0, 0, DOM.canvas.width * 2, DOM.canvas.height * 2);
       
       const projectile = new Projectile();
       projectile.shoot(projectiles)
@@ -152,6 +146,8 @@ let game = {
       }
 
       DOMKeys.innerText = player.keyMap.array;
+
+      DOM.keysPressed.innerText = State.keyMap.array;
     });
 
 
@@ -174,6 +170,8 @@ let game = {
           speed
         )
       );
+      DOM.mousePosition.x = e.clientX;
+      DOM.mousePosition.y = e.clientY;
     });
 
 
@@ -184,6 +182,8 @@ let game = {
 
     document.addEventListener('mousemove', function (e) {
       const angle = Math.atan2(e.clientY - player.props.y, e.clientX - player.props.x);
+      DOM.mousePosition.x = e.clientX;
+      DOM.mousePosition.y = e.clientY;
       
 
       // Looking up
@@ -236,7 +236,7 @@ let game = {
         }
       }
 
-      DOMKeys.innerText = angle;
+      // DOM.keysPressed.innerText = angle;
     });
 
   }

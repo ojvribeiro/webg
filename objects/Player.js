@@ -1,6 +1,9 @@
-import { config, canvas, DOMSpeed, ctx } from '../scripts/config.js';
+import { Config } from '../scripts/config.js';
+import { DOM } from '../scripts/modules/dom.js';
 import SpriteAnimation from '../scripts/modules/sprites.js';
 
+DOM.canvas.width = window.innerWidth;
+DOM.canvas.height = window.innerHeight;
 
 // Constants
 let playerConfig = {
