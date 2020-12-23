@@ -7,34 +7,12 @@ import SpriteAnimation from '../scripts/modules/sprites.js';
 DOM.canvas.width = window.innerWidth;
 DOM.canvas.height = window.innerHeight;
 
-// Constants
-let playerConfig = {
-  
-  // Define player keyboard controls
-  KEYBOARD_CONTROLS: {
-    up: 'W',
-    down: 'S',
-    left: 'A',
-    right: 'D',
-    run: 'ShiftLeft',
-  },
-  
-  SPRITE_SHEET: config.__DIR__ + '/sprites/Player/Player.png',
-  SPRITE_SHEET_ROWS: 8,
-  SPRITE_SHEET_COLS: 5,
-  BOUNDING_BOX_COLOR: 'rgba(255, 255, 255, 0.2)',
-  INITIAL_X_POS: (canvas.width / 2),
-  INITIAL_Y_POS: (canvas.height / 2),
-  RADIUS: 100,
-  WALK_VELOCITY: 1.5,
-  RUN_VELOCITY: 3
-}
-
+const ctx = Config.ctx;
 
 
 
 let playerSprite = new Image();
-playerSprite.src = playerConfig.SPRITE_SHEET;
+playerSprite.src = Config.root + Config.player.SPRITE_SHEET_PATH;
 
 
 class Player {
@@ -48,8 +26,8 @@ class Player {
       Config.player.SIZE * Config.player.SPRITE_SHEET_COLS, // sprite width
       Config.player.SIZE * Config.player.SPRITE_SHEET_ROWS, // sprite height
       100,
-      playerConfig.SPRITE_SHEET_COLS,
-      playerConfig.SPRITE_SHEET_ROWS,
+      Config.player.SPRITE_SHEET_COLS,
+      Config.player.SPRITE_SHEET_ROWS,
       0
     );
   }
@@ -75,11 +53,18 @@ class Player {
       }
         x: State.player.x,
         y: State.player.y - (Config.player.HEIGHT / 4) + 2,
+        radius: Config.player.HEIGHT / 4,
+        color: (Config.player.SHOW_HITBOX === true) ? Config.player.HITBOX_COLOR : 'transparent'
         x: State.player.x - (Config.player.WIDTH / 4) + 2,
         y: State.player.y,
+        width: (Config.player.WIDTH / 2),
+        height: (Config.player.HEIGHT / 2),
+        color: (Config.player.SHOW_HITBOX === true) ? Config.player.HITBOX_COLOR : 'transparent'
     }
 
 
+      x - (Config.player.SIZE / 2), 
+      y - (Config.player.SIZE / 2)
 
     switch (State.player.facing) {
       case 'up':

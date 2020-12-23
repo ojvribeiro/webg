@@ -1,3 +1,6 @@
+import { Config } from '../config.js';
+
+
 /** Class utility to animate sprites. */
 class SpriteAnimation {
   constructor(spritesheet, x, y, width, height, timePerFrame, numberOfColumns, numberOfRows, rowIndex) {
@@ -43,7 +46,7 @@ class SpriteAnimation {
       height: (this.height / this.numberOfRows),
     }
 
-    ctx.drawImage(
+    Config.ctx.drawImage(
       props.spritesheet,
       props.clipX,
       props.clipY,

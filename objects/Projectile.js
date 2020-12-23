@@ -2,6 +2,7 @@ import { Config } from '../scripts/config.js';
 import { DOM } from '../scripts/modules/dom.js';
 import { State } from '../scripts/modules/states.js';
 
+const ctx = Config.ctx;
 
 export default class Projectile {
   constructor(x, y, radius, color, speed) {

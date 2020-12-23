@@ -209,7 +209,7 @@ let game = {
 
 
     let playerSprite = new Image();
-    playerSprite.src = playerConfig.SPRITE_SHEET;
+    playerSprite.src = Config.root + Config.player.SPRITE_SHEET_PATH;
 
     document.addEventListener('mousemove', function (e) {
       DOM.mousePosition.x = e.clientX;
