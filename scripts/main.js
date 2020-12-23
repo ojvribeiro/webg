@@ -1,10 +1,10 @@
 import Player, { playerConfig } from '../objects/Player.js';
-import Projectile from '../objects/Projectile.js';
 
 import { Config } from './config.js';
 import { DOM } from './modules/dom.js';
 import { State } from './modules/states.js';
 import { Physics } from './modules/physics.js';
+import { Projectile } from '../objects/Projectile.js';
 
 
 DOM.canvas.width = window.innerWidth;
@@ -13,14 +13,10 @@ DOM.canvas.height = window.innerHeight;
 let game = {
 
   init: () => {
-    
-
-
     const player = new Player();
-
+    const projectile = Projectile;
 
     const village = new Image();
-    let projectiles = [];
     village.src = Config.root + '/sprites/Maps/Village/Village.png';
     
 
@@ -30,8 +26,6 @@ let game = {
       // Draw background
       // Config.ctx.drawImage(village, 0, 0, DOM.canvas.width, DOM.canvas.height, 0, 0, DOM.canvas.width * 2, DOM.canvas.height * 2);
       
-      const projectile = new Projectile();
-      projectile.shoot(projectiles)
       // Pop on other edge
       if (State.player.y < 0) {
         State.player.y = DOM.canvas.height;
