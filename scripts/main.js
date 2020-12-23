@@ -4,6 +4,7 @@ import Projectile from '../objects/Projectile.js';
 import { Config } from './config.js';
 import { DOM } from './modules/dom.js';
 import { State } from './modules/states.js';
+import { Physics } from './modules/physics.js';
 
 
 DOM.canvas.width = window.innerWidth;
