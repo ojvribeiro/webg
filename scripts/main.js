@@ -1,14 +1,19 @@
-import Player, { playerConfig } from '../objects/Player.js';
+import Stats from '../node_modules/stats-js/src/Stats.js';
 
 import { Config } from './config.js';
 import { DOM } from './modules/dom.js';
 import { State } from './modules/states.js';
 import { Physics } from './modules/physics.js';
+import Player from '../objects/Player.js';
 import { Projectile } from '../objects/Projectile.js';
 
 
 DOM.canvas.width = window.innerWidth;
 DOM.canvas.height = window.innerHeight;
+
+const stats = new Stats();
+stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+document.body.appendChild(stats.dom);
 
 let game = {
 
@@ -19,8 +24,9 @@ let game = {
     const village = new Image();
     village.src = Config.root + '/sprites/Maps/Village/Village.png';
     
+    (function update() {
+      stats.begin();
 
-    function update() {
       Config.ctx.clearRect(0, 0, DOM.canvas.width, DOM.canvas.height);
       
       // Draw background
@@ -44,21 +50,16 @@ let game = {
       if (State.projectiles.length > 0) {
         projectile.update();
       }
+      stats.end();
 
       requestAnimationFrame(update);
-    }
-      
-    update();
-
-
-
-
-
+    })();
 
 
 
 
     document.addEventListener('keydown', function (e) {
+      // Disable Alt key
       if (e.code === 'AltLeft') {
         e.preventDefault();
       }

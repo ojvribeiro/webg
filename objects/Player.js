@@ -31,33 +31,22 @@ class Player {
   }
 
 
-  gameLogic() {
-    /**
-     * 
-     * @param {Object} playerInstance - The player object instance
-     */
-    function diagonalSpeed(playerInstance) {
-      if ( (playerInstance.keyMap.up && playerInstance.keyMap.left) ||
-        (playerInstance.keyMap.up && playerInstance.keyMap.right) ||
-        (playerInstance.keyMap.down && playerInstance.keyMap.left) ||
-        (playerInstance.keyMap.down && playerInstance.keyMap.right) ) {
-        return 0.75;
-      }
-      else if (playerInstance.keyMap.shift) {
-        return 1;
-      }
-      else {
-        return 1;
-      }
+  draw(rowIndex, x, y) {
+    const hitBox = {
+      head: {
         x: State.player.x,
         y: State.player.y - (Config.player.HEIGHT / 4) + 2,
         radius: Config.player.HEIGHT / 4,
         color: (Config.player.SHOW_HITBOX === true) ? Config.player.HITBOX_COLOR : 'transparent'
+      },
+
+      body: {
         x: State.player.x - (Config.player.WIDTH / 4) + 2,
         y: State.player.y,
         width: (Config.player.WIDTH / 2),
         height: (Config.player.HEIGHT / 2),
         color: (Config.player.SHOW_HITBOX === true) ? Config.player.HITBOX_COLOR : 'transparent'
+      },
     }
 
 
@@ -69,6 +58,38 @@ class Player {
     );
     
     
+    // Draw hit box
+    ctx.save();
+    
+    ctx.beginPath();
+    ctx.fillStyle = hitBox.head.color;
+    ctx.arc(
+      hitBox.head.x, 
+      hitBox.head.y, 
+      hitBox.head.radius, 
+      0, 
+      (Math.PI * 2), 
+      false
+    );
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.fillStyle = hitBox.head.color;
+    ctx.fillRect(
+      hitBox.body.x, 
+      hitBox.body.y, 
+      hitBox.body.width, 
+      hitBox.body.height
+    );
+
+    ctx.restore();
+  }
+  
+  
+  
+  
+  update() {
+    // DOM.playerSpeed.innerHTML = State.player.speed;
 
     switch (State.player.facing) {
       case 'up':
@@ -482,6 +503,5 @@ class Player {
   }
 }
 
-export { playerConfig };
 export default Player;
 

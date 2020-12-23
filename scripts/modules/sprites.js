@@ -14,22 +14,20 @@ class SpriteAnimation {
     this.numberOfRows = numberOfRows || 1;  // number of frames(sprites) in the spritesheet, default 1
     this.rowIndex = rowIndex;
 
-    //current frame index pointer
+    // Current frame index pointer
     this.frameIndex = 0;
 
-    //time the frame index was last updated
+    // Time the frame index was last updated
     this.lastUpdate = Date.now();
-
   }
 
 
   /**
-   * @param ctx - The canvas rendering context
    * @param {number} rowIndex - The index of the row to animate on the sprite sheet.
-   * @param {*} x - The X position of the object on the screen.
-   * @param {*} y - The Y position of the object on the screen.
+   * @param {number} x - The X position of the object on the screen.
+   * @param {number} y - The Y position of the object on the screen.
    */
-  draw(ctx, rowIndex, x, y) {
+  draw(rowIndex, x, y) {
     const _x = x === undefined ? this.x : x;
     const _y = y === undefined ? this.y : y;
     const _rowIndex = rowIndex === undefined ? this.rowIndex : rowIndex;
@@ -60,13 +58,15 @@ class SpriteAnimation {
   }
 
 
-  //to update
+  // To update
   update() {
     if (Date.now() - this.lastUpdate >= this.timePerFrame) {
       this.frameIndex++;
+
       if (this.frameIndex >= this.numberOfColumns) {
         this.frameIndex = 0;
       }
+      
       this.lastUpdate = Date.now();
     }
   }
