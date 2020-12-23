@@ -17,9 +17,7 @@ playerSprite.src = Config.root + Config.player.SPRITE_SHEET_PATH;
 
 class Player {
   constructor() {
-    
-    
-    this.hero = new SpriteAnimation(
+    this.sprite = new SpriteAnimation(
       playerSprite, // sprite image object
       State.player.x - (Config.player.WIDTH / 2), // sprite x
       State.player.y - (Config.player.HEIGHT / 2), // sprite y
@@ -63,8 +61,14 @@ class Player {
     }
 
 
+    // Modifies sprites.js
+    this.sprite.draw(
+      rowIndex, 
       x - (Config.player.SIZE / 2), 
       y - (Config.player.SIZE / 2)
+    );
+    
+    
 
     switch (State.player.facing) {
       case 'up':
@@ -251,7 +255,7 @@ class Player {
           );
         }
         
-        this.hero.update();
+        this.sprite.update();
       }
       else {
         this.draw(
@@ -260,7 +264,7 @@ class Player {
           State.player.y
         );
 
-        this.hero.update();
+        this.sprite.update();
       }
     }
 
@@ -315,7 +319,7 @@ class Player {
         walk(this);
       }
 
-      this.hero.update();
+      this.sprite.update();
     }
 
     // Stop
@@ -332,6 +336,7 @@ class Player {
         State.player.y
       );
       
+      this.sprite.update();
     }
 
 
