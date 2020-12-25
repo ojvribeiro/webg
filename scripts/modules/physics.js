@@ -40,28 +40,36 @@ const Physics = {
     },
   
     circleRect: function(circle, rect) {
-  
+      let distX, distY, distance;
+
       // Temporary variables to set edges for testing
       let testX = circle.x;
       let testY = circle.y;
-      let radius = circle.radius;
+      const radius = circle.radius;
 
-      // Which edge is closest?
-      if (circle.x < rect.x) testX = rect.x;      // test left edge
-      else if (circle.x > rect.x + rect.width) testX = rect.x + rect.width;   // right edge
+      // Calculate which edge is the closest
+      if (circle.x < rect.x) {
+        testX = rect.x; // test left edge
+      } 
+      else if (circle.x > rect.x + rect.width) {
+        testX = rect.x + rect.width; // right edge
+      }
 
-      if (circle.y < rect.y) testY = rect.y;      // top edge
-      else if (circle.y > rect.y + rect.height) testY = rect.y + rect.height;   // bottom edge
+      if (circle.y < rect.y) {
+        testY = rect.y; // top edge
+      }
+      else if (circle.y > rect.y + rect.height) {
+        testY = rect.y + rect.height; // bottom edge
+      }
 
       // Get distance from closest edges
-      let distX = circle.x - testX;
-      let distY = circle.y - testY;
+      distX = circle.x - testX;
+      distY = circle.y - testY;
 
-      let distance = Math.sqrt((distX * distX) + (distY * distY));
+      distance = Math.hypot(distX, distY);
 
       // If the distance is less than the radius, collision!
       if (distance <= radius) {
-        console.log('collision');
         return true;
       }
       return false;
