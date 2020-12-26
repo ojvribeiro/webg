@@ -62,10 +62,10 @@ const Config = {
       leftWalking: 14,
       rightWalking: 15,
 
-      downRunningBackwards: 16,
-      upRunningBackwards: 17,
-      leftRunningBackwards: 18,
-      rightRunningBackwards: 19,
+      upLeftWalkingBackwards: 16,
+      upRightWalkingBackwards: 17,
+      downLeftWalkingBackwards: 18,
+      downRightWalkingBackwards: 19,
 
       downWalkingBackwards: 20,
       upWalkingBackwards: 21,

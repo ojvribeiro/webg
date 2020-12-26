@@ -324,20 +324,8 @@ class Player {
       }
 
 
-      if (State.keyMap.up) {
-        walk(this);
-      }
-      
-      else if (State.keyMap.down) {
-        walk(this);
-      }
-      
-      else if (State.keyMap.left) {
-        walk(this);
-      }
-      
-      else if (State.keyMap.right) {
-        walk(this);
+      if (State.keyMap.up || State.keyMap.down || State.keyMap.left || State.keyMap.right) {
+        this.changeSprite();
       }
 
       this.sprite.update();
@@ -359,178 +347,440 @@ class Player {
       
       this.sprite.update();
     }
+  }
 
 
-    function walk(playerObject) {
+
+  changeSprite() {
+    // Walking up
+    if (State.keyMap.up) {
+      // Facing up
       if (State.player.facing === 'up') {
-        if (State.keyMap.up) {
-          playerObject.draw(
-            State.player.x, 
-            State.player.y
-          );
-        }
-        else {
-          playerObject.draw(
-            State.player.x, 
-            State.player.y
-          );
-        }
+        this.draw(
           Config.player.spriteMap.upWalking, 
+          State.player.x, 
+          State.player.y
+        );
       }
-
+      // Facing down
       else if (State.player.facing === 'down') {
-        if (State.keyMap.up) {
-          playerObject.draw(
-            State.player.x, 
-            State.player.y
-          );
-        }
-        else {
-          playerObject.draw(
-            State.player.x, 
-            State.player.y
-          );
-        }
+        this.draw(
           Config.player.spriteMap.downWalkingBackwards, 
-          Config.player.spriteMap.leftWalking, 
-          Config.player.spriteMap.rightWalking, 
-          Config.player.spriteMap.upLeftWalking, 
+          State.player.x, 
+          State.player.y
+        );
       }
-          Config.player.spriteMap.upRightWalking, 
-          Config.player.spriteMap.upRightWalkingBackwards, 
-          Config.player.spriteMap.upLeftWalkingBackwards, 
-
-          Config.player.spriteMap.upWalkingBackwards, 
-          Config.player.spriteMap.downWalking, 
+      // Facing left
       else if (State.player.facing === 'left') {
-        if (State.keyMap.left) {
-          playerObject.draw(
-            State.player.x, 
-            State.player.y
-          );
-        }
-        else {
-          playerObject.draw(
-            State.player.x, 
-            State.player.y
-          );
-        }
+        this.draw(
           Config.player.spriteMap.leftWalking, 
-          Config.player.spriteMap.rightWalking, 
-          Config.player.spriteMap.downRightWalkingBackwards, 
-          Config.player.spriteMap.downLeftWalkingBackwards, 
-          Config.player.spriteMap.downLeftWalking, 
-          Config.player.spriteMap.downRightWalking, 
+          State.player.x, 
+          State.player.y
+        );
       }
-
-          Config.player.spriteMap.upWalking, 
-          Config.player.spriteMap.downWalking, 
-          Config.player.spriteMap.leftWalking, 
+      // Facing right
       else if (State.player.facing === 'right') {
-        if (State.keyMap.right) {
-          playerObject.draw(
-            State.player.x, 
-            State.player.y
-          );
-        }
-        else {
-          playerObject.draw(
-            State.player.x, 
-            State.player.y
-          );
-        }
-          Config.player.spriteMap.rightWalkingBackwards, 
-      }
-          Config.player.spriteMap.upLeftWalking, 
-          Config.player.spriteMap.downLeftWalkingBackwards, 
-          Config.player.spriteMap.downLeftWalking, 
-          Config.player.spriteMap.upLeftWalkingBackwards, 
-
-
-          Config.player.spriteMap.upWalking, 
-          Config.player.spriteMap.downWalking, 
-          Config.player.spriteMap.leftWalkingBackwards, 
+        this.draw(
           Config.player.spriteMap.rightWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing up-left
       else if (State.player.facing === 'up-left') {
-        if (State.keyMap.up) {
-          playerObject.draw(
-            State.player.x, 
-            State.player.y
-          );
-        }
-        else {
-          playerObject.draw(
-            State.player.x, 
-            State.player.y
-          );
-        }
-          Config.player.spriteMap.upRightWalking, 
-          Config.player.spriteMap.upRightWalkingBackwards, 
-          Config.player.spriteMap.downRightWalking, 
-      }
-
+        this.draw(
           Config.player.spriteMap.upLeftWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing up-right
       else if (State.player.facing === 'up-right') {
-        if (State.keyMap.up) {
-          playerObject.draw(
-            State.player.x, 
-            State.player.y
-          );
-        }
-        else {
-          playerObject.draw(
-            State.player.x, 
-            State.player.y
-          );
-        }
-          Config.player.spriteMap.downLeftWalkingBackwards, 
-          Config.player.spriteMap.downLeftWalking, 
-          Config.player.spriteMap.upLeftWalkingBackwards, 
-      }
-
-          Config.player.spriteMap.downRightWalkingBackwards, 
+        this.draw(
           Config.player.spriteMap.upRightWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing down-left
       else if (State.player.facing === 'down-left') {
-        if (State.keyMap.up) {
-          playerObject.draw(
-            State.player.x, 
-            State.player.y
-          );
-        }
-        else {
-          playerObject.draw(
-            State.player.x, 
-            State.player.y
-          );
-        }
+        this.draw(
           Config.player.spriteMap.upRightWalkingBackwards, 
+          State.player.x, 
+          State.player.y
+        );
       }
-          Config.player.spriteMap.downRightWalking, 
-
-          Config.player.spriteMap.downLeftWalking, 
+      // Facing down-right
       else if (State.player.facing === 'down-right') {
-        if (State.keyMap.up) {
-          playerObject.draw(
-            State.player.x, 
-            State.player.y
-          );
-        }
-        else {
-          playerObject.draw(
-            State.player.x, 
-            State.player.y
-          );
-        }
+        this.draw(
           Config.player.spriteMap.upLeftWalkingBackwards, 
-          Config.player.spriteMap.upLeftWalking, 
-          Config.player.spriteMap.downLeftWalkingBackwards, 
+          State.player.x, 
+          State.player.y
+        );
       }
-
-          Config.player.spriteMap.upRightWalkingBackwards, 
-          Config.player.spriteMap.downRightWalking, 
-          Config.player.spriteMap.downRightWalkingBackwards, 
-          Config.player.spriteMap.upRightWalking, 
     }
+
+
+
+    // Walking down
+    else if (State.keyMap.down) {
+      // Facing up
+      if (State.player.facing === 'up') {
+        this.draw(
+          Config.player.spriteMap.upWalkingBackwards, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing down
+      else if (State.player.facing === 'down') {
+        this.draw(
+          Config.player.spriteMap.downWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing left
+      else if (State.player.facing === 'left') {
+        this.draw(
+          Config.player.spriteMap.leftWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing right
+      else if (State.player.facing === 'right') {
+        this.draw(
+          Config.player.spriteMap.rightWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing up-left
+      else if (State.player.facing === 'up-left') {
+        this.draw(
+          Config.player.spriteMap.downRightWalkingBackwards, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing up-right
+      else if (State.player.facing === 'up-right') {
+        this.draw(
+          Config.player.spriteMap.downLeftWalkingBackwards, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing down-left
+      else if (State.player.facing === 'down-left') {
+        this.draw(
+          Config.player.spriteMap.downLeftWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing down-right
+      else if (State.player.facing === 'down-right') {
+        this.draw(
+          Config.player.spriteMap.downRightWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+    }
+
+
+
+    // Walking left
+    else if (State.keyMap.left) {
+      // Facing up
+      if (State.player.facing === 'up') {
+        this.draw(
+          Config.player.spriteMap.upWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing down
+      else if (State.player.facing === 'down') {
+        this.draw(
+          Config.player.spriteMap.downWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing left
+      else if (State.player.facing === 'left') {
+        this.draw(
+          Config.player.spriteMap.leftWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing right
+      else if (State.player.facing === 'right') {
+        this.draw(
+          Config.player.spriteMap.rightWalkingBackwards, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing up-left
+      else if (State.player.facing === 'up-left') {
+        this.draw(
+          Config.player.spriteMap.upLeftWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing up-right
+      else if (State.player.facing === 'up-right') {
+        this.draw(
+          Config.player.spriteMap.downLeftWalkingBackwards, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing down-left
+      else if (State.player.facing === 'down-left') {
+        this.draw(
+          Config.player.spriteMap.downLeftWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing down-right
+      else if (State.player.facing === 'down-right') {
+        this.draw(
+          Config.player.spriteMap.upLeftWalkingBackwards, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+    }
+
+
+
+
+    // Walking right
+    else if (State.keyMap.right) {
+      // Facing up
+      if (State.player.facing === 'up') {
+        this.draw(
+          Config.player.spriteMap.upWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing down
+      else if (State.player.facing === 'down') {
+        this.draw(
+          Config.player.spriteMap.downWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing left
+      else if (State.player.facing === 'left') {
+        this.draw(
+          Config.player.spriteMap.leftWalkingBackwards, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing right
+      else if (State.player.facing === 'right') {
+        this.draw(
+          Config.player.spriteMap.rightWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing up-left
+      else if (State.player.facing === 'up-left') {
+        this.draw(
+          Config.player.spriteMap.downRightWalkingBackwards, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing up-right
+      else if (State.player.facing === 'up-right') {
+        this.draw(
+          Config.player.spriteMap.upRightWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing down-left
+      else if (State.player.facing === 'down-left') {
+        this.draw(
+          Config.player.spriteMap.upRightWalkingBackwards, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing down-right
+      else if (State.player.facing === 'down-right') {
+        this.draw(
+          Config.player.spriteMap.downRightWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+    }
+
+
+
+
+
+
+
+
+    // Walking up-left
+    else if (State.keyMap.up && State.keyMap.left) {
+      // Facing up-left
+      if (State.player.facing === 'up-left') {
+        this.draw(
+          Config.player.spriteMap.upLeftWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing up-right
+      else if (State.player.facing === 'up-right') {
+        this.draw(
+          Config.player.spriteMap.downLeftWalkingBackwards, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing down-left
+      else if (State.player.facing === 'down-left') {
+        this.draw(
+          Config.player.spriteMap.downLeftWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing down-right
+      else if (State.player.facing === 'down-right') {
+        this.draw(
+          Config.player.spriteMap.upLeftWalkingBackwards, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+    }
+
+    // Walking up-right
+    else if (State.keyMap.up && State.keyMap.right) {
+      // Facing up-left
+      if (State.player.facing === 'up-left') {
+        this.draw(
+          Config.player.spriteMap.downRightWalkingBackwards, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing up-right
+      else if (State.player.facing === 'up-right') {
+        this.draw(
+          Config.player.spriteMap.upRightWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing down-left
+      else if (State.player.facing === 'down-left') {
+        this.draw(
+          Config.player.spriteMap.upRightWalkingBackwards, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing down-right
+      else if (State.player.facing === 'down-right') {
+        this.draw(
+          Config.player.spriteMap.downRightWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+    }
+
+    // Walking down-left
+    else if (State.keyMap.down && State.keyMap.left) {
+      // Facing down-left
+      if (State.player.facing === 'down-left') {
+        this.draw(
+          Config.player.spriteMap.downLeftWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing down-right
+      else if (State.player.facing === 'down-right') {
+        this.draw(
+          Config.player.spriteMap.upLeftWalkingBackwards, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing up-left
+      else if (State.player.facing === 'up-left') {
+        this.draw(
+          Config.player.spriteMap.upLeftWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing up-right
+      else if (State.player.facing === 'up-right') {
+        this.draw(
+          Config.player.spriteMap.downLeftWalkingBackwards, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+    }
+
+    else if (State.keyMap.down && State.keyMap.right) {
+      // Facing down-left
+      if (State.player.facing === 'down-left') {
+        this.draw(
+          Config.player.spriteMap.upRightWalkingBackwards, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing down-right
+      else if (State.player.facing === 'down-right') {
+        this.draw(
+          Config.player.spriteMap.downRightWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing up-left
+      else if (State.player.facing === 'up-left') {
+        this.draw(
+          Config.player.spriteMap.downRightWalkingBackwards, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+      // Facing up-right
+      else if (State.player.facing === 'up-right') {
+        this.draw(
+          Config.player.spriteMap.upRightWalking, 
+          State.player.x, 
+          State.player.y
+        );
+      }
+    }
+
   }
 }
 
