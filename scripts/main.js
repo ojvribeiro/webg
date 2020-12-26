@@ -4,7 +4,7 @@ import { Config } from './config.js';
 import { DOM } from './modules/dom.js';
 import { State } from './modules/states.js';
 import { Physics } from './modules/physics.js';
-import Player from '../objects/Player.js';
+import Player from '../objects/Player/Player.js';
 import { Projectile } from '../objects/Projectile.js';
 
 

@@ -1,8 +1,8 @@
-import { Config } from '../scripts/config.js';
-import { DOM } from '../scripts/modules/dom.js';
-import { State } from '../scripts/modules/states.js';
-import { Physics } from '../scripts/modules/physics.js';
-import SpriteAnimation from '../scripts/modules/sprites.js';
+import { Config } from '../../scripts/config.js';
+import { DOM } from '../../scripts/modules/dom.js';
+import { State } from '../../scripts/modules/states.js';
+import { Physics } from '../../scripts/modules/physics.js';
+import SpriteAnimation from '../../scripts/modules/sprites.js';
 
 DOM.canvas.width = window.innerWidth;
 DOM.canvas.height = window.innerHeight;
@@ -34,8 +34,8 @@ class Player {
   draw(rowIndex, x, y) {
     const hitBox = {
       head: {
-        x: State.player.x,
-        y: State.player.y - (Config.player.HEIGHT / 4) + 2,
+        x: State.player.x + 2,
+        y: State.player.y - (Config.player.HEIGHT / 4) + 3,
         radius: Config.player.HEIGHT / 4,
         color: (Config.player.SHOW_HITBOX === true) ? Config.player.HITBOX_COLOR : 'transparent'
       },
@@ -47,15 +47,40 @@ class Player {
         height: (Config.player.HEIGHT / 2),
         color: (Config.player.SHOW_HITBOX === true) ? Config.player.HITBOX_COLOR : 'transparent'
       },
+
+      enviroment: {
+        x: State.player.x - (Config.player.WIDTH / 4) + 2,
+        y: State.player.y + (Config.player.HEIGHT / 4) + 5,
+        width: Config.player.WIDTH / 2,
+        height: Config.player.HEIGHT / 5,
+        color: (Config.player.SHOW_COLLISION_BOX === true) ? Config.player.COLLISION_BOX_COLOR : 'transparent'
+      }
     }
 
+    State.player.hitBox.head = hitBox.head;
+    State.player.collisionBox = hitBox.enviroment;
 
-    // Modifies sprites.js
-    this.sprite.draw(
-      rowIndex, 
-      x - (Config.player.SIZE / 2), 
-      y - (Config.player.SIZE / 2)
+    ctx.beginPath();
+    ctx.fillStyle = '#000';
+    ctx.arc(
+      this.x, 
+      this.y, 
+      hitBox.head.radius, 
+      0, 
+      (Math.PI * 2), 
+      false
     );
+    ctx.fill();
+    ctx.closePath();
+
+    if (Config.player.SHOW_SPRITE === true) {
+      // Modifies sprites.js
+      this.sprite.draw(
+        rowIndex, 
+        x - (Config.player.SIZE / 2), 
+        y - (Config.player.SIZE / 2)
+      );
+    }
     
     
     // Draw hit box
@@ -74,6 +99,7 @@ class Player {
     ctx.fill();
     ctx.closePath();
 
+    ctx.beginPath();
     ctx.fillStyle = hitBox.head.color;
     ctx.fillRect(
       hitBox.body.x, 
@@ -81,6 +107,17 @@ class Player {
       hitBox.body.width, 
       hitBox.body.height
     );
+    ctx.closePath();
+
+    ctx.beginPath();
+    ctx.fillStyle = hitBox.enviroment.color;
+    ctx.fillRect(
+      hitBox.enviroment.x, 
+      hitBox.enviroment.y, 
+      hitBox.enviroment.width, 
+      hitBox.enviroment.height
+    );
+    ctx.closePath();
 
     ctx.restore();
   }
@@ -215,6 +252,7 @@ class Player {
     if (State.keyMap.shift) {
       
       if (State.keyMap.up || State.keyMap.down || State.keyMap.left || State.keyMap.right) {
+        State.player.state === 'running'
         
         State.player.speed += 0.1;
         
