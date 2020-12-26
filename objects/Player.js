@@ -95,13 +95,13 @@ class Player {
       case 'up':
         if (State.player.facing === 'up') {
           if (State.player.state === 'walking') {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.upWalking;
+            State.player.currentRowIndex = Config.player.spriteMap.upWalking;
           }
           else if (State.player.state === 'running') {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.upRunning;
+            State.player.currentRowIndex = Config.player.spriteMap.upRunning;
           }
           else {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.up;
+            State.player.currentRowIndex = Config.player.spriteMap.up;
           }
         }
 
@@ -110,13 +110,13 @@ class Player {
       case 'down':
         if (State.player.facing === 'down') {
           if (State.player.state === 'walking') {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.downWalking;
+            State.player.currentRowIndex = Config.player.spriteMap.downWalking;
           }
           else if (State.player.state === 'running') {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.downRunning;
+            State.player.currentRowIndex = Config.player.spriteMap.downRunning;
           }
           else {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.down;
+            State.player.currentRowIndex = Config.player.spriteMap.down;
           }
         }
       break;
@@ -124,13 +124,13 @@ class Player {
       case 'left':
         if (State.player.facing === 'left') {
           if (State.player.state === 'walking') {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.leftWalking;
+            State.player.currentRowIndex = Config.player.spriteMap.leftWalking;
           }
           else if (State.player.state === 'running') {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.leftRunning;
+            State.player.currentRowIndex = Config.player.spriteMap.leftRunning;
           }
           else {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.left;
+            State.player.currentRowIndex = Config.player.spriteMap.left;
           }
         }
       break;
@@ -138,13 +138,13 @@ class Player {
       case 'right':
         if (State.player.facing === 'right') {
           if (State.player.state === 'walking') {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.rightWalking;  
+            State.player.currentRowIndex = Config.player.spriteMap.rightWalking;  
           }
           else if (State.player.state === 'running') {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.rightRunning;
+            State.player.currentRowIndex = Config.player.spriteMap.rightRunning;
           }
           else {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.right;
+            State.player.currentRowIndex = Config.player.spriteMap.right;
           }
         }
       break;
@@ -152,13 +152,13 @@ class Player {
       case 'up-left':
         if (State.player.facing === 'up-left') {
           if (State.player.state === 'walking') {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.upLeftWalking;  
+            State.player.currentRowIndex = Config.player.spriteMap.upLeftWalking;  
           }
           else if (State.player.state === 'running') {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.upLeftRunning;
+            State.player.currentRowIndex = Config.player.spriteMap.upLeftRunning;
           }
           else {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.upLeft;
+            State.player.currentRowIndex = Config.player.spriteMap.upLeft;
           }
         }
       break;
@@ -166,13 +166,13 @@ class Player {
       case 'up-right':
         if (State.player.facing === 'up-right') {
           if (State.player.state === 'walking') {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.upRightWalking;  
+            State.player.currentRowIndex = Config.player.spriteMap.upRightWalking;  
           }
           else if (State.player.state === 'running') {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.upRightRunning;
+            State.player.currentRowIndex = Config.player.spriteMap.upRightRunning;
           }
           else {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.upRight;
+            State.player.currentRowIndex = Config.player.spriteMap.upRight;
           }
         }
       break;
@@ -180,13 +180,13 @@ class Player {
       case 'down-left':
         if (State.player.facing === 'down-left') {
           if (State.player.state === 'walking') {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.downLeftWalking;  
+            State.player.currentRowIndex = Config.player.spriteMap.downLeftWalking;  
           }
           else if (State.player.state === 'running') {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.downLeftRunning;
+            State.player.currentRowIndex = Config.player.spriteMap.downLeftRunning;
           }
           else {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.downLeft;
+            State.player.currentRowIndex = Config.player.spriteMap.downLeft;
           }
         }
       break;
@@ -194,19 +194,19 @@ class Player {
       case 'down-right':
         if (State.player.facing === 'down-right') {
           if (State.player.state === 'walking') {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.downRightWalking;  
+            State.player.currentRowIndex = Config.player.spriteMap.downRightWalking;  
           }
           else if (State.player.state === 'running') {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.downRightRunning;
+            State.player.currentRowIndex = Config.player.spriteMap.downRightRunning;
           }
           else {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.downRight;
+            State.player.currentRowIndex = Config.player.spriteMap.downRight;
           }
         }
       break;
               
       default:
-        State.player.currentRowIndex = Config.player.spriteRowIndex.down;
+        State.player.currentRowIndex = Config.player.spriteMap.down;
     }
 
 
@@ -244,29 +244,29 @@ class Player {
         // Listens to movement keys (do not allow multi press)
         if (State.keyMap.up || State.keyMap.down || State.keyMap.left || State.keyMap.right) {
           if (State.keyMap.up && !State.keyMap.left && !State.keyMap.right) {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.upRunning;
+            State.player.currentRowIndex = Config.player.spriteMap.upRunning;
           }
           else if (State.keyMap.down && !State.keyMap.left && !State.keyMap.right) {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.downRunning;
+            State.player.currentRowIndex = Config.player.spriteMap.downRunning;
           }
           else if (State.keyMap.left && !State.keyMap.up && !State.keyMap.down) {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.leftRunning;
+            State.player.currentRowIndex = Config.player.spriteMap.leftRunning;
           }
           else if (State.keyMap.right && !State.keyMap.up && !State.keyMap.down) {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.rightRunning;
+            State.player.currentRowIndex = Config.player.spriteMap.rightRunning;
           }
 
           else if (State.keyMap.down && State.keyMap.left) {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.downLeftRunning;
+            State.player.currentRowIndex = Config.player.spriteMap.downLeftRunning;
           }
           else if (State.keyMap.down && State.keyMap.right) {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.downRightRunning;
+            State.player.currentRowIndex = Config.player.spriteMap.downRightRunning;
           }
           else if (State.keyMap.up && State.keyMap.left) {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.upLeftRunning;
+            State.player.currentRowIndex = Config.player.spriteMap.upLeftRunning;
           }
           else if (State.keyMap.up && State.keyMap.right) {
-            State.player.currentRowIndex = Config.player.spriteRowIndex.upRightRunning;
+            State.player.currentRowIndex = Config.player.spriteMap.upRightRunning;
           }
 
           this.draw(
@@ -365,140 +365,171 @@ class Player {
       if (State.player.facing === 'up') {
         if (State.keyMap.up) {
           playerObject.draw(
-            Config.player.spriteRowIndex.upWalking, 
             State.player.x, 
             State.player.y
           );
         }
         else {
           playerObject.draw(
-            Config.player.spriteRowIndex.upWalkingBackwards, 
             State.player.x, 
             State.player.y
           );
         }
+          Config.player.spriteMap.upWalking, 
       }
 
       else if (State.player.facing === 'down') {
         if (State.keyMap.up) {
           playerObject.draw(
-            Config.player.spriteRowIndex.downWalking, 
             State.player.x, 
             State.player.y
           );
         }
         else {
           playerObject.draw(
-            Config.player.spriteRowIndex.downWalkingBackwards, 
             State.player.x, 
             State.player.y
           );
         }
+          Config.player.spriteMap.downWalkingBackwards, 
+          Config.player.spriteMap.leftWalking, 
+          Config.player.spriteMap.rightWalking, 
+          Config.player.spriteMap.upLeftWalking, 
       }
+          Config.player.spriteMap.upRightWalking, 
+          Config.player.spriteMap.upRightWalkingBackwards, 
+          Config.player.spriteMap.upLeftWalkingBackwards, 
 
+          Config.player.spriteMap.upWalkingBackwards, 
+          Config.player.spriteMap.downWalking, 
       else if (State.player.facing === 'left') {
         if (State.keyMap.left) {
           playerObject.draw(
-            Config.player.spriteRowIndex.leftWalking, 
             State.player.x, 
             State.player.y
           );
         }
         else {
           playerObject.draw(
-            Config.player.spriteRowIndex.leftWalkingBackwards, 
             State.player.x, 
             State.player.y
           );
         }
+          Config.player.spriteMap.leftWalking, 
+          Config.player.spriteMap.rightWalking, 
+          Config.player.spriteMap.downRightWalkingBackwards, 
+          Config.player.spriteMap.downLeftWalkingBackwards, 
+          Config.player.spriteMap.downLeftWalking, 
+          Config.player.spriteMap.downRightWalking, 
       }
 
+          Config.player.spriteMap.upWalking, 
+          Config.player.spriteMap.downWalking, 
+          Config.player.spriteMap.leftWalking, 
       else if (State.player.facing === 'right') {
         if (State.keyMap.right) {
           playerObject.draw(
-            Config.player.spriteRowIndex.rightWalking, 
             State.player.x, 
             State.player.y
           );
         }
         else {
           playerObject.draw(
-            Config.player.spriteRowIndex.rightWalkingBackwards, 
             State.player.x, 
             State.player.y
           );
         }
+          Config.player.spriteMap.rightWalkingBackwards, 
       }
+          Config.player.spriteMap.upLeftWalking, 
+          Config.player.spriteMap.downLeftWalkingBackwards, 
+          Config.player.spriteMap.downLeftWalking, 
+          Config.player.spriteMap.upLeftWalkingBackwards, 
 
 
+          Config.player.spriteMap.upWalking, 
+          Config.player.spriteMap.downWalking, 
+          Config.player.spriteMap.leftWalkingBackwards, 
+          Config.player.spriteMap.rightWalking, 
       else if (State.player.facing === 'up-left') {
         if (State.keyMap.up) {
           playerObject.draw(
-            Config.player.spriteRowIndex.upLeftWalking, 
             State.player.x, 
             State.player.y
           );
         }
         else {
           playerObject.draw(
-            Config.player.spriteRowIndex.upLeftWalking, 
             State.player.x, 
             State.player.y
           );
         }
+          Config.player.spriteMap.upRightWalking, 
+          Config.player.spriteMap.upRightWalkingBackwards, 
+          Config.player.spriteMap.downRightWalking, 
       }
 
+          Config.player.spriteMap.upLeftWalking, 
       else if (State.player.facing === 'up-right') {
         if (State.keyMap.up) {
           playerObject.draw(
-            Config.player.spriteRowIndex.upRightWalking, 
             State.player.x, 
             State.player.y
           );
         }
         else {
           playerObject.draw(
-            Config.player.spriteRowIndex.upRightWalking, 
             State.player.x, 
             State.player.y
           );
         }
+          Config.player.spriteMap.downLeftWalkingBackwards, 
+          Config.player.spriteMap.downLeftWalking, 
+          Config.player.spriteMap.upLeftWalkingBackwards, 
       }
 
+          Config.player.spriteMap.downRightWalkingBackwards, 
+          Config.player.spriteMap.upRightWalking, 
       else if (State.player.facing === 'down-left') {
         if (State.keyMap.up) {
           playerObject.draw(
-            Config.player.spriteRowIndex.downLeftWalking, 
             State.player.x, 
             State.player.y
           );
         }
         else {
           playerObject.draw(
-            Config.player.spriteRowIndex.downLeftWalking, 
             State.player.x, 
             State.player.y
           );
         }
+          Config.player.spriteMap.upRightWalkingBackwards, 
       }
+          Config.player.spriteMap.downRightWalking, 
 
+          Config.player.spriteMap.downLeftWalking, 
       else if (State.player.facing === 'down-right') {
         if (State.keyMap.up) {
           playerObject.draw(
-            Config.player.spriteRowIndex.downRightWalking, 
             State.player.x, 
             State.player.y
           );
         }
         else {
           playerObject.draw(
-            Config.player.spriteRowIndex.downRightWalking, 
             State.player.x, 
             State.player.y
           );
         }
+          Config.player.spriteMap.upLeftWalkingBackwards, 
+          Config.player.spriteMap.upLeftWalking, 
+          Config.player.spriteMap.downLeftWalkingBackwards, 
       }
 
+          Config.player.spriteMap.upRightWalkingBackwards, 
+          Config.player.spriteMap.downRightWalking, 
+          Config.player.spriteMap.downRightWalkingBackwards, 
+          Config.player.spriteMap.upRightWalking, 
     }
   }
 }

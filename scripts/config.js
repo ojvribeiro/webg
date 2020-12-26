@@ -41,7 +41,7 @@ const Config = {
     SHOW_HITBOX: false,
     HITBOX_COLOR: 'rgba(245, 50, 28, 0.5)',
 
-    spriteRowIndex: {
+    spriteMap: {
       down: 0,
       up: 1,
       left: 2,

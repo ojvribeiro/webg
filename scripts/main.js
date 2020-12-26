@@ -136,7 +136,7 @@ let game = {
 
         State.player.state = 'idle';
         
-        State.player.currentRowIndex = Config.player.spriteRowIndex.up;
+        State.player.currentRowIndex = Config.player.spriteMap.up;
       }
 
       if (e.code === Config.player.KEYBOARD_CONTROLS.down) {
@@ -146,7 +146,7 @@ let game = {
 
         State.player.state = 'idle';
         
-        State.player.currentRowIndex = Config.player.spriteRowIndex.down;
+        State.player.currentRowIndex = Config.player.spriteMap.down;
       }
 
       if (e.code === Config.player.KEYBOARD_CONTROLS.left) {
@@ -154,7 +154,7 @@ let game = {
 
         State.player.state = 'idle';
         
-        State.player.currentRowIndex = Config.player.spriteRowIndex.left;
+        State.player.currentRowIndex = Config.player.spriteMap.left;
       }
 
       if (e.code === Config.player.KEYBOARD_CONTROLS.right) {
@@ -162,7 +162,7 @@ let game = {
 
         State.player.state = 'idle';
         
-        State.player.currentRowIndex = Config.player.spriteRowIndex.right;
+        State.player.currentRowIndex = Config.player.spriteMap.right;
       }
 
 
