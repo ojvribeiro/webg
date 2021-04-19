@@ -8,9 +8,6 @@ import { Render } from '../../scripts/modules/render.js';
 DOM.canvas.width = window.innerWidth;
 DOM.canvas.height = window.innerHeight;
 
-const ctx = Config.ctx;
-
-
 
 let playerSprite = new Image();
 playerSprite.src = Config.root + Config.player.SPRITE_SHEET_PATH;
