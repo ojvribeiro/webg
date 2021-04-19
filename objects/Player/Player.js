@@ -116,7 +116,7 @@ class Player {
     // Run
     if (State.keyMap.shift) {
       if (State.keyMap.up || State.keyMap.down || State.keyMap.left || State.keyMap.right) {
-        State.player.state === 'running'
+        State.player.state = 'running';
         
         State.player.speed += 0.1;
         
