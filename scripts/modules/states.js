@@ -11,6 +11,7 @@ let State = {
     y: DOM.canvas.height / 2,
     speed: 0,
     facing: 'down',
+    state: 'idle',
     currentRowIndex: 0,
     sprites: Config.player.SPRITE_SHEET_PATH,
     hitBox: {
