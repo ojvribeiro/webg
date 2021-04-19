@@ -23,8 +23,6 @@ let Projectile = {
   
   
   update: () => {
-    const padding = 5;
-
     State.projectiles.forEach((projectile, index) => {
       projectile.x += projectile.velocity.x;
       projectile.y += projectile.velocity.y;
