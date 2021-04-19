@@ -73,4 +73,4 @@ class SpriteAnimation {
   }
 }
 
-export default SpriteAnimation;
+export { SpriteAnimation }

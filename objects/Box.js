@@ -48,4 +48,4 @@ class Box {
   }
 }
 
-export default Box;
+export { Box };

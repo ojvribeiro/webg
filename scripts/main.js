@@ -4,9 +4,9 @@ import { Config } from './config.js';
 import { DOM } from './modules/dom.js';
 import { State } from './modules/states.js';
 import { Physics } from './modules/physics.js';
-import Player from '../objects/Player/Player.js';
+import { Player } from '../objects/Player/Player.js';
 import { Projectile } from '../objects/Projectile.js';
-import Box from '../objects/Box.js';
+import { Box } from '../objects/Box.js';
 import { Village } from '../objects/Maps/Village.js';
 import { Render } from './modules/render.js';
 
