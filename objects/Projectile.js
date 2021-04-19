@@ -9,6 +9,8 @@ DOM.canvas.height = window.innerHeight
 let Projectile = {
   shoot: (arr) => {
     State.projectiles.push(arr)
+
+    Projectile.render()
   },
 
 
@@ -22,7 +24,7 @@ let Projectile = {
   },
   
   
-  update: () => {
+  render: () => {
     State.projectiles.forEach((projectile, index) => {
       projectile.x += projectile.velocity.x
       projectile.y += projectile.velocity.y

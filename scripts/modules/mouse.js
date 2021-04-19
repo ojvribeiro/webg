@@ -27,7 +27,6 @@ document.addEventListener('mousedown', function (e) {
     }
 
     Projectile.shoot(projectile)
-    Projectile.update()
   }
 })
 

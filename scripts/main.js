@@ -67,7 +67,7 @@ let game = {
 
 
       if (State.projectiles.length > 0) {
-        projectile.update()
+        projectile.render()
       }
       stats.end()
 
