@@ -47,6 +47,7 @@ let game = {
       })
 
       box.render();
+      player.render();
       
       // Pop on other edge
       if (State.player.y < 0) {
@@ -62,7 +63,7 @@ let game = {
         State.player.x = 0;
       }
 
-      player.update();
+
       if (State.projectiles.length > 0) {
         projectile.update();
       }

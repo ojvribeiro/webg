@@ -114,7 +114,6 @@ class Player {
   
   
   
-  update() {
     // DOM.playerSpeed.innerHTML = State.player.speed;
 
     switch (State.player.facing) {
@@ -236,6 +235,7 @@ class Player {
     }
 
 
+  render() {
     
     // Run
     if (State.keyMap.shift) {
