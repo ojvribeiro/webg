@@ -31,7 +31,9 @@ let State = {
     array: []
   },
 
-  projectiles: []
+  projectiles: [],
+
+  boxes: []
 }
 
 

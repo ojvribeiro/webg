@@ -16,6 +16,10 @@ class Box {
    */
   constructor(props) {
     this.boxes = props
+
+    for (let i in this.boxes) {
+      State.boxes.push(this.boxes[i])
+    }
   }
 
   render() {

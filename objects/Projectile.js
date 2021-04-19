@@ -1,6 +1,7 @@
 import { DOM } from '../scripts/modules/dom.js'
 import { State } from '../scripts/modules/states.js'
 import { Render } from '../scripts/modules/render.js'
+import { Physics } from '../scripts/modules/physics.js'
 
 DOM.canvas.width = window.innerWidth
 DOM.canvas.height = window.innerHeight
@@ -22,6 +23,11 @@ let Projectile = {
       backgroundColor: color
     })
   },
+
+
+  delete: (index) => {
+    State.projectiles.splice(index, 1)
+  },
   
   
   render: () => {
@@ -35,10 +41,18 @@ let Projectile = {
         projectile.y - projectile.radius < -50 ||
         projectile.y + projectile.radius > DOM.canvas.height + 50) {
 
-        State.projectiles.splice(index, 1)
+        Projectile.delete(index)
       }
   
       Projectile.draw(projectile.x, projectile.y, projectile.radius, projectile.color)
+
+      for (let i in State.boxes) {
+        // Enable collision
+        if (Physics.collision.circleRect(projectile, State.boxes[i])) {
+          // Destroy bullet
+          Projectile.delete(index)
+        }
+      }
   
       // console.log(State.projectiles)
     })
