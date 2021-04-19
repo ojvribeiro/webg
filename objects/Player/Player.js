@@ -3,6 +3,7 @@ import { DOM } from '../../scripts/modules/dom.js';
 import { State } from '../../scripts/modules/states.js';
 import { Physics } from '../../scripts/modules/physics.js';
 import SpriteAnimation from '../../scripts/modules/sprites.js';
+import { Render } from '../../scripts/modules/render.js';
 
 DOM.canvas.width = window.innerWidth;
 DOM.canvas.height = window.innerHeight;
@@ -82,10 +83,6 @@ class Player {
       );
     }
     
-    
-    // Draw hit box
-    ctx.save();
-    
     ctx.beginPath();
     ctx.fillStyle = hitBox.head.color;
     ctx.arc(
@@ -99,27 +96,25 @@ class Player {
     ctx.fill();
     ctx.closePath();
 
-    ctx.beginPath();
-    ctx.fillStyle = hitBox.head.color;
-    ctx.fillRect(
-      hitBox.body.x, 
-      hitBox.body.y, 
-      hitBox.body.width, 
-      hitBox.body.height
-    );
-    ctx.closePath();
+    // Render body hitbox
+    Render.box({
+      x: hitBox.body.x,
+      y: hitBox.body.y,
+      width: hitBox.body.width,
+      height: hitBox.body.height,
+      backgroundColor: hitBox.head.color,
+      borderColor: 'transparent'
+    })
 
-    ctx.beginPath();
-    ctx.fillStyle = hitBox.enviroment.color;
-    ctx.fillRect(
-      hitBox.enviroment.x, 
-      hitBox.enviroment.y, 
-      hitBox.enviroment.width, 
-      hitBox.enviroment.height
-    );
-    ctx.closePath();
-
-    ctx.restore();
+    // Render enviroment collision box
+    Render.box({
+      x: hitBox.enviroment.x,
+      y: hitBox.enviroment.y,
+      width: hitBox.enviroment.width,
+      height: hitBox.enviroment.height,
+      backgroundColor: hitBox.enviroment.color,
+      borderColor: 'transparent'
+    })
   }
   
   

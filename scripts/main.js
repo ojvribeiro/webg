@@ -6,6 +6,7 @@ import { State } from './modules/states.js';
 import { Physics } from './modules/physics.js';
 import Player from '../objects/Player/Player.js';
 import { Projectile } from '../objects/Projectile.js';
+import Box from '../objects/Box.js';
 
 
 DOM.canvas.width = window.innerWidth;
