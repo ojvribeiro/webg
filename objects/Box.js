@@ -1,5 +1,6 @@
 import { State } from '../scripts/modules/states.js';
 import { Physics } from '../scripts/modules/physics.js';
+import { DOM } from '../scripts/modules/dom.js';
 import { Render } from '../scripts/modules/render.js';
 
 const showObjectsName = true
@@ -44,6 +45,7 @@ class Box {
 
       // Enable collision
       Physics.collision.rectRect(State.player.collisionBox, this.boxes[i])
+      DOM.playerPosition.innerHTML = [(this.boxes[0].y + this.boxes[0].height), (State.player.y + State.player.hitBox.body.height)]
     }
   }
 }
