@@ -1,7 +1,7 @@
-import { State } from '../scripts/modules/states.js';
-import { Physics } from '../scripts/modules/physics.js';
-import { DOM } from '../scripts/modules/dom.js';
-import { Render } from '../scripts/modules/render.js';
+import { State } from '../scripts/modules/states.js'
+import { Physics } from '../scripts/modules/physics.js'
+import { DOM } from '../scripts/modules/dom.js'
+import { Render } from '../scripts/modules/render.js'
 
 const showObjectsName = true
 
@@ -50,4 +50,4 @@ class Box {
   }
 }
 
-export { Box };
+export { Box }

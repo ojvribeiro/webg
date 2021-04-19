@@ -1,8 +1,8 @@
-import { DOM } from './dom.js';
-import { Config } from '../config.js';
+import { DOM } from './dom.js'
+import { Config } from '../config.js'
 
-DOM.canvas.width = window.innerWidth;
-DOM.canvas.height = window.innerHeight;
+DOM.canvas.width = window.innerWidth
+DOM.canvas.height = window.innerHeight
 
 // These defaults are automatically updated
 let State = {
@@ -35,4 +35,4 @@ let State = {
 }
 
 
-export { State };
+export { State }

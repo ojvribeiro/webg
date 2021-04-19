@@ -1,16 +1,16 @@
-import { Config } from '../../scripts/config.js';
-import { DOM } from '../../scripts/modules/dom.js';
-import { State } from '../../scripts/modules/states.js';
-import { Physics } from '../../scripts/modules/physics.js';
-import { SpriteAnimation } from '../../scripts/modules/sprites.js';
-import { Render } from '../../scripts/modules/render.js';
+import { Config } from '../../scripts/config.js'
+import { DOM } from '../../scripts/modules/dom.js'
+import { State } from '../../scripts/modules/states.js'
+import { Physics } from '../../scripts/modules/physics.js'
+import { SpriteAnimation } from '../../scripts/modules/sprites.js'
+import { Render } from '../../scripts/modules/render.js'
 
-DOM.canvas.width = window.innerWidth;
-DOM.canvas.height = window.innerHeight;
+DOM.canvas.width = window.innerWidth
+DOM.canvas.height = window.innerHeight
 
 
-let playerSprite = new Image();
-playerSprite.src = Config.root + Config.player.SPRITE_SHEET_PATH;
+let playerSprite = new Image()
+playerSprite.src = Config.root + Config.player.SPRITE_SHEET_PATH
 
 
 class Player {
@@ -25,7 +25,7 @@ class Player {
       Config.player.SPRITE_SHEET_COLS,
       Config.player.SPRITE_SHEET_ROWS,
       0
-    );
+    )
   }
 
 
@@ -55,9 +55,9 @@ class Player {
       }
     }
 
-    State.player.hitBox.head = hitBox.head;
-    State.player.hitBox.body = hitBox.body;
-    State.player.collisionBox = hitBox.enviroment;
+    State.player.hitBox.head = hitBox.head
+    State.player.hitBox.body = hitBox.body
+    State.player.collisionBox = hitBox.enviroment
 
     // Render player shadow
     Render.circle({
@@ -75,7 +75,7 @@ class Player {
         rowIndex, 
         x - (Config.player.SIZE / 2), 
         y - (Config.player.SIZE / 2)
-      );
+      )
     }
     
     // Render head hitbox
@@ -117,40 +117,40 @@ class Player {
     // Run
     if (State.keyMap.shift) {
       if (State.keyMap.up || State.keyMap.down || State.keyMap.left || State.keyMap.right) {
-        State.player.state = 'running';
+        State.player.state = 'running'
         
-        State.player.speed += 0.1;
+        State.player.speed += 0.1
         
         // Locks the speed when it hits the maximum defined
         if (State.player.speed >= Config.player.RUN_MAX_SPEED) {
-          State.player.speed = Config.player.RUN_MAX_SPEED;
+          State.player.speed = Config.player.RUN_MAX_SPEED
         }
         
         // Listens to movement keys (allows multi press)
         if (State.keyMap.up) {
-          State.player.y -= Physics.speed.normalize();
+          State.player.y -= Physics.speed.normalize()
         }
         
         if (State.keyMap.down) {
-          State.player.y += Physics.speed.normalize();
+          State.player.y += Physics.speed.normalize()
         }
         
         if (State.keyMap.left) {
-          State.player.x -= Physics.speed.normalize();
+          State.player.x -= Physics.speed.normalize()
         }
         
         if (State.keyMap.right) {
-          State.player.x += Physics.speed.normalize();
+          State.player.x += Physics.speed.normalize()
         }
 
-        this.changeSprite();
+        this.changeSprite()
 
-        this.sprite.update();
+        this.sprite.update()
       }
       else {
-        this.changeSprite();
+        this.changeSprite()
 
-        this.sprite.update();
+        this.sprite.update()
       }
     }
 
@@ -162,53 +162,53 @@ class Player {
       State.keyMap.left    || 
       State.keyMap.right) {
 
-      State.player.state = 'walking';
+      State.player.state = 'walking'
       
       // Increases the speed
-      State.player.speed += 0.1;
+      State.player.speed += 0.1
       
       
       // Locks the velocity to the maximun allowed
       if (State.player.speed >= Config.player.WALK_MAX_SPEED) {
-        State.player.speed = Config.player.WALK_MAX_SPEED;
+        State.player.speed = Config.player.WALK_MAX_SPEED
       }
       
       
       if (State.keyMap.up) {
-        State.player.y -= Physics.speed.normalize();
+        State.player.y -= Physics.speed.normalize()
       }
       
       if (State.keyMap.down) {
-        State.player.y += Physics.speed.normalize();
+        State.player.y += Physics.speed.normalize()
       }
       
       if (State.keyMap.left) {
-        State.player.x -= Physics.speed.normalize();
+        State.player.x -= Physics.speed.normalize()
       }
       
       if (State.keyMap.right) {
-        State.player.x += Physics.speed.normalize();
+        State.player.x += Physics.speed.normalize()
       }
 
 
-      this.changeSprite();
+      this.changeSprite()
 
-      this.sprite.update();
+      this.sprite.update()
     }
 
     // Idle
     else {
-      State.player.state = 'idle';
+      State.player.state = 'idle'
 
-      State.player.speed -= 0.1;
+      State.player.speed -= 0.1
       
       if (State.player.speed <= 0) {
-        State.player.speed = 0;
+        State.player.speed = 0
       }
 
-      this.changeSprite();
+      this.changeSprite()
       
-      this.sprite.update();
+      this.sprite.update()
     }
   }
 
@@ -231,7 +231,7 @@ class Player {
           Config.player.spriteMap.up, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing down
       else if (State.player.facing === 'down') {
@@ -239,7 +239,7 @@ class Player {
           Config.player.spriteMap.down, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing left
       else if (State.player.facing === 'left') {
@@ -247,7 +247,7 @@ class Player {
           Config.player.spriteMap.left, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing right
       else if (State.player.facing === 'right') {
@@ -255,7 +255,7 @@ class Player {
           Config.player.spriteMap.right, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing up-left
       else if (State.player.facing === 'up-left') {
@@ -263,7 +263,7 @@ class Player {
           Config.player.spriteMap.upLeft, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing up-right
       else if (State.player.facing === 'up-right') {
@@ -271,7 +271,7 @@ class Player {
           Config.player.spriteMap.upRight, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing down-left
       else if (State.player.facing === 'down-left') {
@@ -279,7 +279,7 @@ class Player {
           Config.player.spriteMap.downLeft, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing down-right
       else if (State.player.facing === 'down-right') {
@@ -287,7 +287,7 @@ class Player {
           Config.player.spriteMap.downRight, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
     }
 
@@ -301,7 +301,7 @@ class Player {
           Config.player.spriteMap.upWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing down
       else if (State.player.facing === 'down') {
@@ -309,7 +309,7 @@ class Player {
           Config.player.spriteMap.downWalkingBackwards, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing left
       else if (State.player.facing === 'left') {
@@ -317,7 +317,7 @@ class Player {
           Config.player.spriteMap.leftWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing right
       else if (State.player.facing === 'right') {
@@ -325,7 +325,7 @@ class Player {
           Config.player.spriteMap.rightWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing up-left
       else if (State.player.facing === 'up-left') {
@@ -333,7 +333,7 @@ class Player {
           Config.player.spriteMap.upLeftWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing up-right
       else if (State.player.facing === 'up-right') {
@@ -341,7 +341,7 @@ class Player {
           Config.player.spriteMap.upRightWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing down-left
       else if (State.player.facing === 'down-left') {
@@ -349,7 +349,7 @@ class Player {
           Config.player.spriteMap.upRightWalkingBackwards, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing down-right
       else if (State.player.facing === 'down-right') {
@@ -357,7 +357,7 @@ class Player {
           Config.player.spriteMap.upLeftWalkingBackwards, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
     }
 
@@ -371,7 +371,7 @@ class Player {
           Config.player.spriteMap.upWalkingBackwards, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing down
       else if (State.player.facing === 'down') {
@@ -379,7 +379,7 @@ class Player {
           Config.player.spriteMap.downWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing left
       else if (State.player.facing === 'left') {
@@ -387,7 +387,7 @@ class Player {
           Config.player.spriteMap.leftWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing right
       else if (State.player.facing === 'right') {
@@ -395,7 +395,7 @@ class Player {
           Config.player.spriteMap.rightWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing up-left
       else if (State.player.facing === 'up-left') {
@@ -403,7 +403,7 @@ class Player {
           Config.player.spriteMap.downRightWalkingBackwards, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing up-right
       else if (State.player.facing === 'up-right') {
@@ -411,7 +411,7 @@ class Player {
           Config.player.spriteMap.downLeftWalkingBackwards, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing down-left
       else if (State.player.facing === 'down-left') {
@@ -419,7 +419,7 @@ class Player {
           Config.player.spriteMap.downLeftWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing down-right
       else if (State.player.facing === 'down-right') {
@@ -427,7 +427,7 @@ class Player {
           Config.player.spriteMap.downRightWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
     }
     
@@ -441,7 +441,7 @@ class Player {
           Config.player.spriteMap.upWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing down
       else if (State.player.facing === 'down') {
@@ -449,7 +449,7 @@ class Player {
           Config.player.spriteMap.downWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing left
       else if (State.player.facing === 'left') {
@@ -457,7 +457,7 @@ class Player {
           Config.player.spriteMap.leftWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing right
       else if (State.player.facing === 'right') {
@@ -465,7 +465,7 @@ class Player {
           Config.player.spriteMap.rightWalkingBackwards, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing up-left
       else if (State.player.facing === 'up-left') {
@@ -473,7 +473,7 @@ class Player {
           Config.player.spriteMap.upLeftWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing up-right
       else if (State.player.facing === 'up-right') {
@@ -481,7 +481,7 @@ class Player {
           Config.player.spriteMap.downLeftWalkingBackwards, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing down-left
       else if (State.player.facing === 'down-left') {
@@ -489,7 +489,7 @@ class Player {
           Config.player.spriteMap.downLeftWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing down-right
       else if (State.player.facing === 'down-right') {
@@ -497,7 +497,7 @@ class Player {
           Config.player.spriteMap.upLeftWalkingBackwards, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
     }
 
@@ -511,7 +511,7 @@ class Player {
           Config.player.spriteMap.upWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing down
       else if (State.player.facing === 'down') {
@@ -519,7 +519,7 @@ class Player {
           Config.player.spriteMap.downWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing left
       else if (State.player.facing === 'left') {
@@ -527,7 +527,7 @@ class Player {
           Config.player.spriteMap.leftWalkingBackwards, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing right
       else if (State.player.facing === 'right') {
@@ -535,7 +535,7 @@ class Player {
           Config.player.spriteMap.rightWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing up-left
       else if (State.player.facing === 'up-left') {
@@ -543,7 +543,7 @@ class Player {
           Config.player.spriteMap.downRightWalkingBackwards, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing up-right
       else if (State.player.facing === 'up-right') {
@@ -551,7 +551,7 @@ class Player {
           Config.player.spriteMap.upRightWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing down-left
       else if (State.player.facing === 'down-left') {
@@ -559,7 +559,7 @@ class Player {
           Config.player.spriteMap.upRightWalkingBackwards, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing down-right
       else if (State.player.facing === 'down-right') {
@@ -567,7 +567,7 @@ class Player {
           Config.player.spriteMap.downRightWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
     }
 
@@ -581,7 +581,7 @@ class Player {
           Config.player.spriteMap.upLeftWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing up-right
       else if (State.player.facing === 'up-right') {
@@ -589,7 +589,7 @@ class Player {
           Config.player.spriteMap.downLeftWalkingBackwards, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing down-left
       else if (State.player.facing === 'down-left') {
@@ -597,7 +597,7 @@ class Player {
           Config.player.spriteMap.downLeftWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing down-right
       else if (State.player.facing === 'down-right') {
@@ -605,7 +605,7 @@ class Player {
           Config.player.spriteMap.upLeftWalkingBackwards, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
     }
 
@@ -619,7 +619,7 @@ class Player {
           Config.player.spriteMap.downRightWalkingBackwards, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing up-right
       else if (State.player.facing === 'up-right') {
@@ -627,7 +627,7 @@ class Player {
           Config.player.spriteMap.upRightWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing down-left
       else if (State.player.facing === 'down-left') {
@@ -635,7 +635,7 @@ class Player {
           Config.player.spriteMap.upRightWalkingBackwards, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing down-right
       else if (State.player.facing === 'down-right') {
@@ -643,7 +643,7 @@ class Player {
           Config.player.spriteMap.downRightWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
     }
 
@@ -657,7 +657,7 @@ class Player {
           Config.player.spriteMap.downLeftWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing down-right
       else if (State.player.facing === 'down-right') {
@@ -665,7 +665,7 @@ class Player {
           Config.player.spriteMap.upLeftWalkingBackwards, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing up-left
       else if (State.player.facing === 'up-left') {
@@ -673,7 +673,7 @@ class Player {
           Config.player.spriteMap.upLeftWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing up-right
       else if (State.player.facing === 'up-right') {
@@ -681,7 +681,7 @@ class Player {
           Config.player.spriteMap.downLeftWalkingBackwards, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
     }
 
@@ -695,7 +695,7 @@ class Player {
           Config.player.spriteMap.upRightWalkingBackwards, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing down-right
       else if (State.player.facing === 'down-right') {
@@ -703,7 +703,7 @@ class Player {
           Config.player.spriteMap.downRightWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing up-left
       else if (State.player.facing === 'up-left') {
@@ -711,7 +711,7 @@ class Player {
           Config.player.spriteMap.downRightWalkingBackwards, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
       // Facing up-right
       else if (State.player.facing === 'up-right') {
@@ -719,7 +719,7 @@ class Player {
           Config.player.spriteMap.upRightWalking, 
           State.player.x, 
           State.player.y
-        );
+        )
       }
     }
 
@@ -733,7 +733,7 @@ class Player {
         Config.player.spriteMap.upRunning,
         State.player.x,
         State.player.y
-      );
+      )
     }
 
     /**
@@ -744,7 +744,7 @@ class Player {
         Config.player.spriteMap.downRunning,
         State.player.x,
         State.player.y
-      );
+      )
     }
 
     /**
@@ -755,7 +755,7 @@ class Player {
         Config.player.spriteMap.leftRunning,
         State.player.x,
         State.player.y
-      );
+      )
     }
 
     /**
@@ -766,7 +766,7 @@ class Player {
         Config.player.spriteMap.rightRunning,
         State.player.x,
         State.player.y
-      );
+      )
     }
 
     /**
@@ -777,7 +777,7 @@ class Player {
         Config.player.spriteMap.upLeftRunning,
         State.player.x,
         State.player.y
-      );
+      )
     }
 
     /**
@@ -788,7 +788,7 @@ class Player {
         Config.player.spriteMap.upRightRunning,
         State.player.x,
         State.player.y
-      );
+      )
     }
 
     /**
@@ -799,7 +799,7 @@ class Player {
         Config.player.spriteMap.downLeftRunning,
         State.player.x,
         State.player.y
-      );
+      )
     }
 
     /**
@@ -810,7 +810,7 @@ class Player {
         Config.player.spriteMap.downRightRunning,
         State.player.x,
         State.player.y
-      );
+      )
     }
     
     else {
@@ -818,10 +818,9 @@ class Player {
         Config.player.spriteMap.down,
         State.player.x,
         State.player.y
-      );
+      )
     }
   }
 }
 
-export { Player };
-
+export { Player }

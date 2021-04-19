@@ -43,11 +43,11 @@ let Render = {
    * @param {string} props.borderColor - The color of the text.
    */
   text: (props) => {
-    let lineheight = 10;
-    let lines = props.text.split('\n');
+    let lineheight = 10
+    let lines = props.text.split('\n')
 
     if (typeof props.text !== "undefined") {
-      ctx.beginPath();
+      ctx.beginPath()
   
       ctx.font = `${props.fontSize} ${props.fontFamily}`
       ctx.fillStyle = props.color
@@ -64,10 +64,10 @@ let Render = {
             lines[i], 
             props.x, 
             props.y + (i * lineheight)
-          );
+          )
         }
   
-        ctx.restore();
+        ctx.restore()
       }
 
       for (let i in lines) {
@@ -75,7 +75,7 @@ let Render = {
           lines[i], 
           props.x, 
           props.y + (i * lineheight)
-        );
+        )
       }
   
       ctx.closePath()
@@ -97,7 +97,7 @@ let Render = {
   circle: (props) => {
     ctx.beginPath()
 
-    ctx.fillStyle = props.backgroundColor;
+    ctx.fillStyle = props.backgroundColor
 
     // If borderWidth or borderColor are defined then render a stroke
     if (typeof props.borderWidth !== "undefined" || typeof props.borderColor !== "undefined") {
@@ -118,7 +118,7 @@ let Render = {
       0, 
       (Math.PI * 2), 
       false
-    );
+    )
     ctx.fill()
 
     ctx.closePath()

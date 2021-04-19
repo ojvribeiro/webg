@@ -1,4 +1,4 @@
-import { Render } from './render.js';
+import { Render } from './render.js'
 
 
 /**
@@ -19,21 +19,21 @@ class SpriteAnimation {
    * @param {!number} rowIndex - The animation row to be executed.
    * */
   constructor(spritesheet, x, y, width, height, timePerFrame, numberOfColumns = 1, numberOfRows = 1, rowIndex) {
-    this.spritesheet = spritesheet;
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-    this.timePerFrame = timePerFrame;
-    this.numberOfColumns = numberOfColumns || 1;
-    this.numberOfRows = numberOfRows || 1;
-    this.rowIndex = rowIndex;
+    this.spritesheet = spritesheet
+    this.x = x
+    this.y = y
+    this.width = width
+    this.height = height
+    this.timePerFrame = timePerFrame
+    this.numberOfColumns = numberOfColumns || 1
+    this.numberOfRows = numberOfRows || 1
+    this.rowIndex = rowIndex
 
     // Current frame index pointer
-    this.frameIndex = 0;
+    this.frameIndex = 0
 
     // Time the frame index was last updated
-    this.lastUpdate = Date.now();
+    this.lastUpdate = Date.now()
   }
 
 
@@ -45,9 +45,9 @@ class SpriteAnimation {
    * @param {!number} y - The Y position of the object on the screen.
    */
   render(rowIndex, x, y) {
-    const _x = x === undefined ? this.x : x;
-    const _y = y === undefined ? this.y : y;
-    const _rowIndex = rowIndex === undefined ? this.rowIndex : rowIndex;
+    const _x = x === undefined ? this.x : x
+    const _y = y === undefined ? this.y : y
+    const _rowIndex = rowIndex === undefined ? this.rowIndex : rowIndex
     
     const props = {
       spritesheet: this.spritesheet,
@@ -71,20 +71,20 @@ class SpriteAnimation {
       y: props.y,
       width: props.width,
       height: props.height
-    });
+    })
   }
 
 
   // To update
   update() {
     if (Date.now() - this.lastUpdate >= this.timePerFrame) {
-      this.frameIndex++;
+      this.frameIndex++
 
       if (this.frameIndex >= this.numberOfColumns) {
-        this.frameIndex = 0;
+        this.frameIndex = 0
       }
       
-      this.lastUpdate = Date.now();
+      this.lastUpdate = Date.now()
     }
   }
 }

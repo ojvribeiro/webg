@@ -1,5 +1,5 @@
 
-const d = document;
+const d = document
 
 const DOM = {
   canvas: d.getElementById('canvas'),

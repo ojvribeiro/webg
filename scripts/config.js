@@ -1,4 +1,4 @@
-import { DOM } from './modules/dom.js';
+import { DOM } from './modules/dom.js'
 
 
 const Config = {
@@ -12,7 +12,7 @@ const Config = {
   get root() {
     return (
       location.host === 'localhost' ? this.protocol + this.localDomain : this.protocol + this.domain
-    );
+    )
   },
 
   player: {

@@ -1,48 +1,48 @@
-import { Config } from '../config.js';
-import { State } from './states.js';
+import { Config } from '../config.js'
+import { State } from './states.js'
 
 document.addEventListener('keydown', function (e) {
   // Fires the keydown event only once
   if (!e.repeat) {
     // Disable Alt key
     if (e.code === 'AltLeft') {
-      e.preventDefault();
+      e.preventDefault()
     }
       
       if (e.code === Config.player.KEYBOARD_CONTROLS.run) {
-        State.keyMap.shift = true;
+        State.keyMap.shift = true
       }
 
       if (e.code === Config.player.KEYBOARD_CONTROLS.up) {
-        State.keyMap.up = true;
+        State.keyMap.up = true
       }
 
       if (e.code === Config.player.KEYBOARD_CONTROLS.down) {
-        State.keyMap.down = true;
+        State.keyMap.down = true
       }
 
       if (e.code === Config.player.KEYBOARD_CONTROLS.left) {
-        State.keyMap.left = true;
+        State.keyMap.left = true
       }
 
       if (e.code === Config.player.KEYBOARD_CONTROLS.right) {
-        State.keyMap.right = true;
+        State.keyMap.right = true
       }
 
-      const index = State.keyMap.array.indexOf(e.code);
+      const index = State.keyMap.array.indexOf(e.code)
 
       if (index < 0) {
-        State.keyMap.array.push(e.code);
+        State.keyMap.array.push(e.code)
       }
 
-      //console.log(State.keyMap);
+      //console.log(State.keyMap)
 
-      // DOM.keysPressed.innerText = State.keyMap.array, State.player.speed;
+      // DOM.keysPressed.innerText = State.keyMap.array, State.player.speed
       
-      // console.log('keydown');
+      // console.log('keydown')
   }
 
-});
+})
 
 
 
@@ -51,53 +51,53 @@ document.addEventListener('keydown', function (e) {
 
 document.addEventListener('keyup', function (e) {
   if (e.code === Config.player.KEYBOARD_CONTROLS.run) {
-    State.keyMap.shift = false;
+    State.keyMap.shift = false
   }
   
   if (e.code === Config.player.KEYBOARD_CONTROLS.up) {
-    State.keyMap.up = false;
-    State.keyMap.upLeft = false;
-    State.keyMap.upRight = false;
+    State.keyMap.up = false
+    State.keyMap.upLeft = false
+    State.keyMap.upRight = false
 
-    State.player.state = 'idle';
+    State.player.state = 'idle'
     
-    State.player.currentRowIndex = Config.player.spriteMap.up;
+    State.player.currentRowIndex = Config.player.spriteMap.up
   }
 
   if (e.code === Config.player.KEYBOARD_CONTROLS.down) {
-    State.keyMap.down = false;
-    State.keyMap.downLeft = false;
-    State.keyMap.downRight = false;
+    State.keyMap.down = false
+    State.keyMap.downLeft = false
+    State.keyMap.downRight = false
 
-    State.player.state = 'idle';
+    State.player.state = 'idle'
     
-    State.player.currentRowIndex = Config.player.spriteMap.down;
+    State.player.currentRowIndex = Config.player.spriteMap.down
   }
 
   if (e.code === Config.player.KEYBOARD_CONTROLS.left) {
-    State.keyMap.left = false;
+    State.keyMap.left = false
 
-    State.player.state = 'idle';
+    State.player.state = 'idle'
     
-    State.player.currentRowIndex = Config.player.spriteMap.left;
+    State.player.currentRowIndex = Config.player.spriteMap.left
   }
 
   if (e.code === Config.player.KEYBOARD_CONTROLS.right) {
-    State.keyMap.right = false;
+    State.keyMap.right = false
 
-    State.player.state = 'idle';
+    State.player.state = 'idle'
     
-    State.player.currentRowIndex = Config.player.spriteMap.right;
+    State.player.currentRowIndex = Config.player.spriteMap.right
   }
 
 
-  const index = State.keyMap.array.indexOf(e.code);
+  const index = State.keyMap.array.indexOf(e.code)
 
   if (index > -1) {
-    State.keyMap.array.splice(index, 1);
+    State.keyMap.array.splice(index, 1)
   }
 
-  // console.log(State.keyMap.array);
+  // console.log(State.keyMap.array)
 
-  // DOM.keysPressed.innerText = State.keyMap.array;
-});
+  // DOM.keysPressed.innerText = State.keyMap.array
+})

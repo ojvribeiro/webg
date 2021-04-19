@@ -1,4 +1,4 @@
-import { Config } from '../../scripts/config.js';
+import { Config } from '../../scripts/config.js'
 
 let Village = {
   mapSprite: Config.root + '/sprites/Maps/Village/Village.png',

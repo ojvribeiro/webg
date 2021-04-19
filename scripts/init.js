@@ -1,7 +1,7 @@
-import { game } from './main.js';
+import { game } from './main.js'
 
 document.addEventListener('DOMContentLoaded', function () {
-  game.init();
-});
+  game.init()
+})
 
 

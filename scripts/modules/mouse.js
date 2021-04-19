@@ -1,22 +1,22 @@
 
-import { DOM } from './dom.js';
-import { Config } from '../config.js';
-import { State } from './states.js';
-import { Projectile } from '../../objects/Projectile.js';
-import { Physics } from './physics.js';
+import { DOM } from './dom.js'
+import { Config } from '../config.js'
+import { State } from './states.js'
+import { Projectile } from '../../objects/Projectile.js'
+import { Physics } from './physics.js'
 
 
 document.addEventListener('mousedown', function (e) {
-  let angle, velocity;
+  let angle, velocity
 
-  // console.log(State.player.state);
+  // console.log(State.player.state)
 
   if (State.player.state !== 'running') {
-    DOM.mousePosition.x = e.clientX;
-    DOM.mousePosition.y = e.clientY;
+    DOM.mousePosition.x = e.clientX
+    DOM.mousePosition.y = e.clientY
 
-    angle = Math.atan2(DOM.mousePosition.y - State.player.y, DOM.mousePosition.x - State.player.x);
-    velocity = Physics.velocity(angle, Config.projectiles.SPEED);
+    angle = Math.atan2(DOM.mousePosition.y - State.player.y, DOM.mousePosition.x - State.player.x)
+    velocity = Physics.velocity(angle, Config.projectiles.SPEED)
 
     const projectile = {
       x: State.player.x, 
@@ -24,24 +24,24 @@ document.addEventListener('mousedown', function (e) {
       radius: Config.projectiles.SIZE, 
       color: Config.projectiles.COLOR, 
       velocity: velocity
-    };
+    }
 
-    Projectile.shoot(projectile);
-    Projectile.update();
+    Projectile.shoot(projectile)
+    Projectile.update()
   }
-});
+})
 
 
 
 
-let playerSprite = new Image();
-playerSprite.src = Config.root + Config.player.SPRITE_SHEET_PATH;
+let playerSprite = new Image()
+playerSprite.src = Config.root + Config.player.SPRITE_SHEET_PATH
 
 document.addEventListener('mousemove', function (e) {
-  DOM.mousePosition.x = e.clientX;
-  DOM.mousePosition.y = e.clientY;
+  DOM.mousePosition.x = e.clientX
+  DOM.mousePosition.y = e.clientY
   
-  const angle = Math.atan2(DOM.mousePosition.y - State.player.y, DOM.mousePosition.x - State.player.x);
+  const angle = Math.atan2(DOM.mousePosition.y - State.player.y, DOM.mousePosition.x - State.player.x)
 
   const direction = {
     get up() { return angle <= -1.17 && angle >= -1.97 },
@@ -61,58 +61,58 @@ document.addEventListener('mousemove', function (e) {
   // Looking up ⬆️
   if (direction.up) {
     if (State.player.facing !== 'up') {
-      State.player.facing = 'up';
+      State.player.facing = 'up'
     }
   }
 
   // Looking down ⬇️
   else if (direction.down) {
     if (State.player.facing !== 'down') {
-      State.player.facing = 'down';
+      State.player.facing = 'down'
     }
   }
 
   // Looking left ⬅️
   else if (direction.left) {
     if (State.player.facing !== 'left') {
-      State.player.facing = 'left';
+      State.player.facing = 'left'
     }
   }
 
   // Looking right ➡️
   else if (direction.right) {
     if (State.player.facing !== 'right') {
-      State.player.facing = 'right';
+      State.player.facing = 'right'
     }
   }
   
   // Looking up-left ↖️
   else if (direction.upLeft) {
     if (State.player.facing !== 'up-left') {
-      State.player.facing = 'up-left';
+      State.player.facing = 'up-left'
     }
   }
 
   // Looking up-right ↗️
   else if (direction.upRight) {
     if (State.player.facing !== 'up-right') {
-      State.player.facing = 'up-right';
+      State.player.facing = 'up-right'
     }
   }
 
   // Looking down-left ↙️
   else if (direction.downLeft) {
     if (State.player.facing !== 'down-left') {
-      State.player.facing = 'down-left';
+      State.player.facing = 'down-left'
     }
   }
 
   // Looking down-right ↘️
   else if (direction.downRight) {
     if (State.player.facing !== 'down-right') {
-      State.player.facing = 'down-right';
+      State.player.facing = 'down-right'
     }
   }
 
-  // DOM.keysPressed.innerText = angle;
-});
+  // DOM.keysPressed.innerText = angle
+})
