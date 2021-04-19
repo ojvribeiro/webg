@@ -7,6 +7,7 @@ import { Physics } from './modules/physics.js';
 import Player from '../objects/Player/Player.js';
 import { Projectile } from '../objects/Projectile.js';
 import Box from '../objects/Box.js';
+import { Render } from './modules/render.js';
 
 
 DOM.canvas.width = window.innerWidth;
@@ -31,7 +32,17 @@ let game = {
       Config.ctx.clearRect(0, 0, DOM.canvas.width, DOM.canvas.height);
       
       // Draw background
-      // Config.ctx.drawImage(village, 0, 0, DOM.canvas.width, DOM.canvas.height, 0, 0, DOM.canvas.width * 2, DOM.canvas.height * 2);
+      Render.image({
+        image: village,
+        clipX: 0,
+        clipY: 0,
+        clipWidth: DOM.canvas.width,
+        clipHeight: DOM.canvas.height,
+        x: 0,
+        y: 0,
+        width: DOM.canvas.width * 2,
+        height: DOM.canvas.height * 2
+      })
       
       // Pop on other edge
       if (State.player.y < 0) {

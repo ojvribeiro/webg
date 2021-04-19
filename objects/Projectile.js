@@ -3,6 +3,7 @@ import { DOM } from '../scripts/modules/dom.js';
 import { State } from '../scripts/modules/states.js';
 
 const ctx = Config.ctx;
+import { Render } from '../scripts/modules/render.js';
 
 DOM.canvas.width = window.innerWidth;
 DOM.canvas.height = window.innerHeight;
@@ -15,15 +16,12 @@ let Projectile = {
 
 
   draw: (x, y, radius, color) => {
-    ctx.save();
-
-    ctx.beginPath();
-    ctx.arc(x, y, radius, 0, Math.PI * 2, false);
-    ctx.fillStyle = color;
-    ctx.fill();
-    ctx.closePath();
-    
-    ctx.restore();
+    Render.circle({
+      x: x,
+      y: y,
+      size: radius,
+      backgroundColor: color
+    })
   },
   
   

@@ -1,4 +1,5 @@
 import { Config } from '../config.js';
+import { Render } from './render.js';
 
 
 /** Class utility to animate sprites. */
@@ -44,17 +45,17 @@ class SpriteAnimation {
       height: (this.height / this.numberOfRows),
     }
 
-    Config.ctx.drawImage(
-      props.spritesheet,
-      props.clipX,
-      props.clipY,
-      props.clipWidth,
-      props.clipHeight,
-      props.x,
-      props.y,
-      props.width,
-      props.height
-    );
+    Render.image({
+      image: props.spritesheet,
+      clipX: props.clipX,
+      clipY: props.clipY,
+      clipWidth: props.clipWidth,
+      clipHeight: props.clipHeight,
+      x: props.x,
+      y: props.y,
+      width: props.width,
+      height: props.height
+    });
   }
 
 

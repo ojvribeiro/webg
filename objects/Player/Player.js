@@ -61,18 +61,15 @@ class Player {
     State.player.hitBox.head = hitBox.head;
     State.player.collisionBox = hitBox.enviroment;
 
-    ctx.beginPath();
-    ctx.fillStyle = '#000';
-    ctx.arc(
-      this.x, 
-      this.y, 
-      hitBox.head.radius, 
-      0, 
-      (Math.PI * 2), 
-      false
-    );
-    ctx.fill();
-    ctx.closePath();
+    // Render player shadow
+    Render.circle({
+      x: State.player.x,
+      y: State.player.y + 45,
+      size: hitBox.head.radius / 2,
+      backgroundColor: 'rgba(0,0,0,0.3)',
+      borderColor: 'black',
+      borderWidth: 1
+    })
 
     if (Config.player.SHOW_SPRITE === true) {
       // Modifies sprites.js
@@ -83,18 +80,15 @@ class Player {
       );
     }
     
-    ctx.beginPath();
-    ctx.fillStyle = hitBox.head.color;
-    ctx.arc(
-      hitBox.head.x, 
-      hitBox.head.y, 
-      hitBox.head.radius, 
-      0, 
-      (Math.PI * 2), 
-      false
-    );
-    ctx.fill();
-    ctx.closePath();
+    // Render head hitbox
+    Render.circle({
+      x: hitBox.head.x,
+      y: hitBox.head.y,
+      size: hitBox.head.radius,
+      backgroundColor: hitBox.head.color,
+      borderColor: 'black',
+      borderWidth: 1
+    })
 
     // Render body hitbox
     Render.box({
