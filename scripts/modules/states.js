@@ -13,6 +13,11 @@ let State = {
     facing: 'down',
     currentRowIndex: 0,
     sprites: Config.player.SPRITE_SHEET_PATH,
+    hitBox: {
+      head: {},
+      body: {}
+    },
+    collisionBox: {}
   },
 
   keyMap: {

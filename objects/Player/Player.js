@@ -56,6 +56,7 @@ class Player {
     }
 
     State.player.hitBox.head = hitBox.head;
+    State.player.hitBox.body = hitBox.body;
     State.player.collisionBox = hitBox.enviroment;
 
     // Render player shadow
