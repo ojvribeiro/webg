@@ -70,7 +70,7 @@ class Player {
 
     if (Config.player.SHOW_SPRITE === true) {
       // Modifies sprites.js
-      this.sprite.draw(
+      this.sprite.render(
         rowIndex, 
         x - (Config.player.SIZE / 2), 
         y - (Config.player.SIZE / 2)

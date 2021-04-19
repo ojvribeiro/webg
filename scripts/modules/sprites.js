@@ -27,7 +27,7 @@ class SpriteAnimation {
    * @param {number} x - The X position of the object on the screen.
    * @param {number} y - The Y position of the object on the screen.
    */
-  draw(rowIndex, x, y) {
+  render(rowIndex, x, y) {
     const _x = x === undefined ? this.x : x;
     const _y = y === undefined ? this.y : y;
     const _rowIndex = rowIndex === undefined ? this.rowIndex : rowIndex;
