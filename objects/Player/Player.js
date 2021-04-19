@@ -115,7 +115,6 @@ class Player {
     
     // Run
     if (State.keyMap.shift) {
-      
       if (State.keyMap.up || State.keyMap.down || State.keyMap.left || State.keyMap.right) {
         State.player.state === 'running'
         
@@ -143,50 +142,12 @@ class Player {
           State.player.x += Physics.speed.normalize();
         }
 
+        this.changeSprite();
 
-        // Listens to movement keys (do not allow multi press)
-        if (State.keyMap.up || State.keyMap.down || State.keyMap.left || State.keyMap.right) {
-          if (State.keyMap.up && !State.keyMap.left && !State.keyMap.right) {
-            State.player.currentRowIndex = Config.player.spriteMap.upRunning;
-          }
-          else if (State.keyMap.down && !State.keyMap.left && !State.keyMap.right) {
-            State.player.currentRowIndex = Config.player.spriteMap.downRunning;
-          }
-          else if (State.keyMap.left && !State.keyMap.up && !State.keyMap.down) {
-            State.player.currentRowIndex = Config.player.spriteMap.leftRunning;
-          }
-          else if (State.keyMap.right && !State.keyMap.up && !State.keyMap.down) {
-            State.player.currentRowIndex = Config.player.spriteMap.rightRunning;
-          }
-
-          else if (State.keyMap.down && State.keyMap.left) {
-            State.player.currentRowIndex = Config.player.spriteMap.downLeftRunning;
-          }
-          else if (State.keyMap.down && State.keyMap.right) {
-            State.player.currentRowIndex = Config.player.spriteMap.downRightRunning;
-          }
-          else if (State.keyMap.up && State.keyMap.left) {
-            State.player.currentRowIndex = Config.player.spriteMap.upLeftRunning;
-          }
-          else if (State.keyMap.up && State.keyMap.right) {
-            State.player.currentRowIndex = Config.player.spriteMap.upRightRunning;
-          }
-
-          this.draw(
-            State.player.currentRowIndex,
-            State.player.x,
-            State.player.y
-          );
-        }
-        
         this.sprite.update();
       }
       else {
-        this.draw(
-          State.player.currentRowIndex, 
-          State.player.x, 
-          State.player.y
-        );
+        this.changeSprite();
 
         this.sprite.update();
       }
@@ -199,6 +160,8 @@ class Player {
       State.keyMap.down    || 
       State.keyMap.left    || 
       State.keyMap.right) {
+
+      State.player.state = 'walking';
       
       // Increases the speed
       State.player.speed += 0.1;
@@ -227,26 +190,22 @@ class Player {
       }
 
 
-      if (State.keyMap.up || State.keyMap.down || State.keyMap.left || State.keyMap.right) {
-        this.changeSprite();
-      }
+      this.changeSprite();
 
       this.sprite.update();
     }
 
-    // Stop
+    // Idle
     else {
+      State.player.state = 'idle';
+
       State.player.speed -= 0.1;
       
       if (State.player.speed <= 0) {
         State.player.speed = 0;
       }
 
-      this.draw(
-        State.player.currentRowIndex, 
-        State.player.x, 
-        State.player.y
-      );
+      this.changeSprite();
       
       this.sprite.update();
     }
@@ -763,6 +722,103 @@ class Player {
       }
     }
 
+
+    
+    /**
+     * Running up
+     * */
+    else if (State.keyMap.shift && State.keyMap.up && !State.keyMap.left && !State.keyMap.right) {
+      this.draw(
+        Config.player.spriteMap.upRunning,
+        State.player.x,
+        State.player.y
+      );
+    }
+
+    /**
+     * Running down
+     * */
+    else if (State.keyMap.shift && State.keyMap.down && !State.keyMap.left && !State.keyMap.right) {
+      this.draw(
+        Config.player.spriteMap.downRunning,
+        State.player.x,
+        State.player.y
+      );
+    }
+
+    /**
+     * Running left
+     * */
+    else if (State.keyMap.shift && State.keyMap.left && !State.keyMap.up && !State.keyMap.down) {
+      this.draw(
+        Config.player.spriteMap.leftRunning,
+        State.player.x,
+        State.player.y
+      );
+    }
+
+    /**
+     * Running right
+     * */
+    else if (State.keyMap.shift && State.keyMap.right && !State.keyMap.up && !State.keyMap.down) {
+      this.draw(
+        Config.player.spriteMap.rightRunning,
+        State.player.x,
+        State.player.y
+      );
+    }
+
+    /**
+     * Running up-left
+     * */
+    else if (State.keyMap.shift && State.keyMap.up && State.keyMap.left) {
+      this.draw(
+        Config.player.spriteMap.upLeftRunning,
+        State.player.x,
+        State.player.y
+      );
+    }
+
+    /**
+     * Running up-right
+     * */
+    else if (State.keyMap.shift && State.keyMap.up && State.keyMap.right) {
+      this.draw(
+        Config.player.spriteMap.upRightRunning,
+        State.player.x,
+        State.player.y
+      );
+    }
+
+    /**
+     * Running down-left
+     * */
+    else if (State.keyMap.shift && State.keyMap.down && State.keyMap.left) {
+      this.draw(
+        Config.player.spriteMap.downLeftRunning,
+        State.player.x,
+        State.player.y
+      );
+    }
+
+    /**
+     * Running down-right
+     * */
+    else if (State.keyMap.shift && State.keyMap.down && State.keyMap.right) {
+      this.draw(
+        Config.player.spriteMap.downRightRunning,
+        State.player.x,
+        State.player.y
+      );
+    }
+    
+    else {
+      this.draw(
+        Config.player.spriteMap.down,
+        State.player.x,
+        State.player.y
+      );
+    }
   }
 }
 
