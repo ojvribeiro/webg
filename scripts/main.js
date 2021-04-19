@@ -7,6 +7,7 @@ import { Physics } from './modules/physics.js';
 import Player from '../objects/Player/Player.js';
 import { Projectile } from '../objects/Projectile.js';
 import Box from '../objects/Box.js';
+import { Village } from '../objects/Maps/Village.js';
 import { Render } from './modules/render.js';
 
 
@@ -22,9 +23,10 @@ let game = {
   init: () => {
     const player = new Player();
     const projectile = Projectile;
+    const box = new Box(Village.objects);
 
     const village = new Image();
-    village.src = Config.root + '/sprites/Maps/Village/Village.png';
+    village.src = Village.mapSprite;
     
     (function update() {
       stats.begin();
@@ -43,6 +45,8 @@ let game = {
         width: DOM.canvas.width * 2,
         height: DOM.canvas.height * 2
       })
+
+      box.render();
       
       // Pop on other edge
       if (State.player.y < 0) {
