@@ -1,17 +1,32 @@
 import { Render } from './render.js';
 
 
-/** Class utility to animate sprites. */
+/**
+ * Class utility to animate sprites.
+ * @class
+ * */
 class SpriteAnimation {
-  constructor(spritesheet, x, y, width, height, timePerFrame, numberOfColumns, numberOfRows, rowIndex) {
-    this.spritesheet = spritesheet;             // the spritesheet image
-    this.x = x;                                 // the x coordinate of the object
-    this.y = y;                                 // the y coordinate of the object
-    this.width = width;                         // width of spritesheet
-    this.height = height;                       // height of spritesheet
-    this.timePerFrame = timePerFrame;           // time in(ms) given to each frame
-    this.numberOfColumns = numberOfColumns || 1;  // number of frames(sprites) in the spritesheet, default 1
-    this.numberOfRows = numberOfRows || 1;  // number of frames(sprites) in the spritesheet, default 1
+  /**
+   * @constructs
+   * @param {object} spritesheet - The spritesheet image object (created with the `new` contructor).
+   * @param {!number} x - The X coordinate of the object.
+   * @param {!number} y - The Y coordinate of the object.
+   * @param {!number} width - Width of spritesheet.
+   * @param {!number} height - Height of spritesheet.
+   * @param {!number} timePerFrame - Time in milliseconds given to each frame.
+   * @param {number} [numberOfColumns=1] - The number of columns (frames) in the spritesheet.
+   * @param {number} [numberOfRows=1] - The number of rows (animations) in the spritesheet.
+   * @param {!number} rowIndex - The animation row to be executed.
+   * */
+  constructor(spritesheet, x, y, width, height, timePerFrame, numberOfColumns = 1, numberOfRows = 1, rowIndex) {
+    this.spritesheet = spritesheet;
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.timePerFrame = timePerFrame;
+    this.numberOfColumns = numberOfColumns || 1;
+    this.numberOfRows = numberOfRows || 1;
     this.rowIndex = rowIndex;
 
     // Current frame index pointer
@@ -23,9 +38,11 @@ class SpriteAnimation {
 
 
   /**
-   * @param {number} rowIndex - The index of the row to animate on the sprite sheet.
-   * @param {number} x - The X position of the object on the screen.
-   * @param {number} y - The Y position of the object on the screen.
+   * The render method
+   * @method
+   * @param {!number} rowIndex - The index of the row to animate on the sprite sheet.
+   * @param {!number} x - The X position of the object on the screen.
+   * @param {!number} y - The Y position of the object on the screen.
    */
   render(rowIndex, x, y) {
     const _x = x === undefined ? this.x : x;
