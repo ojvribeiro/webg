@@ -43,8 +43,8 @@ let Render = {
    * @param {string} props.borderColor - The color of the text.
    */
   text: (props) => {
-    let lineheight = 10
     let lines = props.text.split('\n')
+    let lineHeight = 10
 
     if (typeof props.text !== "undefined") {
       ctx.beginPath()
@@ -63,7 +63,7 @@ let Render = {
           ctx.strokeText(
             lines[i], 
             props.x, 
-            props.y + (i * lineheight)
+            props.y + (i * lineHeight)
           )
         }
   
@@ -74,7 +74,7 @@ let Render = {
         ctx.fillText(
           lines[i], 
           props.x, 
-          props.y + (i * lineheight)
+          props.y + (i * lineHeight)
         )
       }
   
