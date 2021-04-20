@@ -10,7 +10,7 @@ let Village = {
       y: 425,
       width: 20,
       height: 25,
-      backgroundColor: 'red',
+      backgroundColor: 'transparent',
       borderColor: '#3cff00'
     },
 
@@ -20,7 +20,7 @@ let Village = {
       y: 368,
       width: 25,
       height: 25,
-      backgroundColor: 'blue',
+      backgroundColor: 'transparent',
       borderColor: '#3cff00'
     },
 
@@ -30,7 +30,7 @@ let Village = {
       y: 297,
       width: 76,
       height: 50,
-      backgroundColor: 'yellow',
+      backgroundColor: 'transparent',
       borderColor: '#3cff00'
     },
 
@@ -40,7 +40,7 @@ let Village = {
       y: 446,
       width: 120,
       height: 15,
-      backgroundColor: 'brown',
+      backgroundColor: 'transparent',
       borderColor: '#3cff00'
     }
   ]
