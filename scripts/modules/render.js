@@ -43,8 +43,8 @@ let Render = {
    * @param {string} props.borderColor - The color of the text.
    */
   text: (props) => {
-    let lines = props.text.split('\n')
     let lineHeight = 10
+    let lineBreaks = props.text.split('\n')
 
     if (typeof props.text !== "undefined") {
       ctx.beginPath()
@@ -59,9 +59,9 @@ let Render = {
         ctx.strokeStyle = props.borderColor || 'black' // Defaults to black
         ctx.lineWidth = props.borderWidth * 2 || 2 // A doubled value produces a more accurate result (default: 2 [1px])
   
-        for (let i in lines) {
+        for (let i in lineBreaks) {
           ctx.strokeText(
-            lines[i], 
+            lineBreaks[i], 
             props.x, 
             props.y + (i * lineHeight)
           )
@@ -70,9 +70,9 @@ let Render = {
         ctx.restore()
       }
 
-      for (let i in lines) {
+      for (let i in lineBreaks) {
         ctx.fillText(
-          lines[i], 
+          lineBreaks[i], 
           props.x, 
           props.y + (i * lineHeight)
         )
