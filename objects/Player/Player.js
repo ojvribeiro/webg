@@ -119,6 +119,19 @@ class Player {
       borderColor: 'transparent'
     })
 
+    if (Config.showObjectInfo) {
+      Render.text({
+        text: `player \n x: ${parseInt(hitBox.enviroment.x)} \n y: ${parseInt(hitBox.enviroment.y)}`,
+        fontFamily: 'Arial, sans-serif',
+        fontSize: '10px',
+        color: 'lightgreen',
+        borderWidth: 1,
+        borderColor: 'black',
+        x: hitBox.enviroment.x + hitBox.enviroment.width,
+        y: hitBox.enviroment.y + hitBox.enviroment.height,
+      })
+    }
+
 
     const renderChain = Render.chain
     const renderChainLen = renderChain.length

@@ -6,6 +6,8 @@ const Config = {
   domain: 'webg.io',
   localDomain: 'localhost/github/webg',
   protocol: 'http://',
+
+  showObjectInfo: false,
   
   ctx: DOM.canvas.getContext('2d'),
   

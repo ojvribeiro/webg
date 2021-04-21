@@ -1,9 +1,6 @@
 import { State } from '../scripts/modules/states.js'
 import { Physics } from '../scripts/modules/physics.js'
-import { DOM } from '../scripts/modules/dom.js'
 import { Render } from '../scripts/modules/render.js'
-
-const showObjectsName = true
 import { Config } from '../scripts/config.js'
 
 /**
@@ -42,15 +39,17 @@ class Box {
     // Render loop
     if (object.type === 'box') {
       Render.box(boxProps)
+
+      if (Config.showObjectInfo) {
         Render.text({
-          text: `${this.boxes[i].name} \n x: ${this.boxes[i].x} \n y: ${this.boxes[i].y}`,
+          text: `${object.name} \n x: ${boxProps.x} \n y: ${boxProps.y}`,
           fontFamily: 'Arial, sans-serif',
           fontSize: '10px',
           color: 'lightgreen',
           borderWidth: 1,
           borderColor: 'black',
-          x: this.boxes[i].x + this.boxes[i].width,
-          y: this.boxes[i].y + this.boxes[i].height + 5
+          x: boxProps.x + boxProps.width,
+          y: boxProps.y + boxProps.height + 5
         })
       }
 
