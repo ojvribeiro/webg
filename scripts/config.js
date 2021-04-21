@@ -36,7 +36,7 @@ const Config = {
     RUN_MAX_SPEED: 4, // Pixels per frame
     
     SHOW_SPRITE: true,
-    SPRITE_SHEET_PATH: '/sprites/Player/Player.png',
+    SPRITE_SHEET_PATH: '/sprites/Player/Player.svg',
     SPRITE_SHEET_ROWS: 32,
     SPRITE_SHEET_COLS: 5,
 
