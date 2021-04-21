@@ -1,9 +1,79 @@
+import Stats from '../../node_modules/stats-js/src/Stats.js'
+
 import { Config } from '../config.js'
+import { DOM } from './dom.js'
+import { State } from './states.js'
+import { Player } from '../../objects/Player/Player.js'
+import { Projectile } from '../../objects/Projectile.js'
+import { Village } from '../../objects/Maps/Village/Village.js'
+import { Box } from '../../objects/Box.js'
+
 
 const ctx = Config.ctx
 
+DOM.canvas.width = window.innerWidth
+DOM.canvas.height = window.innerHeight
+
+const stats = new Stats()
+stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
+document.getElementById('stats').appendChild(stats.dom)
+
 
 let Render = {
+  loop: () => {
+    const player = new Player()
+    const projectile = Projectile
+    const boxes = new Box(village.objects)
+    
+    ;(function update() {
+      stats.begin()
+      Config.ctx.clearRect(0, 0, DOM.canvas.width, DOM.canvas.height)
+      
+      if (State.projectiles.length > 0) {
+        projectile.render()
+      }
+      
+
+
+      if (Config.showObjectInfo) {
+        Render.text({
+          text: `mouse \n x: ${DOM.mousePosition.x} \n y: ${DOM.mousePosition.y}`,
+          fontFamily: 'Arial, sans-serif',
+          fontSize: '10px',
+          color: 'lightgreen',
+          borderWidth: 1,
+          borderColor: 'black',
+          x: DOM.mousePosition.x + 20,
+          y: DOM.mousePosition.y + 20,
+        })
+      }
+
+
+      // Pop on other edge
+      if (State.player.y < 0) {
+        State.player.y = DOM.canvas.height
+      }
+      else if (State.player.y > DOM.canvas.height) {
+        State.player.y = 0
+      }
+      else if (State.player.x < 0) {
+        State.player.x = DOM.canvas.width
+      }
+      else if (State.player.x > DOM.canvas.width) {
+        State.player.x = 0
+      }
+
+
+      
+
+
+      stats.end()
+
+      requestAnimationFrame(update)
+    })()
+  },
+
+
   /**
    * Method that renders a canvas rectangle (box).
    * 
