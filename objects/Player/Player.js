@@ -221,12 +221,20 @@ class Player {
         State.player.y += Physics.speed.normalize()
       }
       
+      if (State.keyMap.up && State.keyMap.down) {
+        State.player.y += 0
+      }
+      
       if (State.keyMap.left) {
         State.player.x -= Physics.speed.normalize()
       }
       
       if (State.keyMap.right) {
         State.player.x += Physics.speed.normalize()
+      }
+
+      if (State.keyMap.left && State.keyMap.right) {
+        State.player.y += 0
       }
 
 
@@ -333,7 +341,7 @@ class Player {
     /**
      * Walking up
      * */
-    else if (State.keyMap.up && !State.keyMap.shift) {
+    else if (State.keyMap.up && !State.keyMap.down && !State.keyMap.shift) {
       // Facing up
       if (State.player.facing === 'up') {
         this.draw(
@@ -403,7 +411,7 @@ class Player {
     /**
      * Walking down
      * */
-    else if (State.keyMap.down && !State.keyMap.shift) {
+    else if (State.keyMap.down && !State.keyMap.up && !State.keyMap.shift) {
       // Facing up
       if (State.player.facing === 'up') {
         this.draw(
@@ -473,7 +481,7 @@ class Player {
     /**
      * Walking left
      * */
-    else if (State.keyMap.left && !State.keyMap.shift) {
+    else if (State.keyMap.left && !State.keyMap.right && !State.keyMap.shift) {
       // Facing up
       if (State.player.facing === 'up') {
         this.draw(
@@ -543,7 +551,7 @@ class Player {
     /**
      * Walking right
      * */
-    else if (State.keyMap.right && !State.keyMap.shift) {
+    else if (State.keyMap.right && !State.keyMap.left && !State.keyMap.shift) {
       // Facing up
       if (State.player.facing === 'up') {
         this.draw(
@@ -767,7 +775,7 @@ class Player {
     /**
      * Running up
      * */
-    else if (State.keyMap.shift && State.keyMap.up && !State.keyMap.left && !State.keyMap.right) {
+    else if (State.keyMap.shift && State.keyMap.up && !State.keyMap.down && !State.keyMap.left && !State.keyMap.right) {
       this.draw(
         Config.player.spriteMap.upRunning,
         State.player.x,
@@ -778,7 +786,7 @@ class Player {
     /**
      * Running down
      * */
-    else if (State.keyMap.shift && State.keyMap.down && !State.keyMap.left && !State.keyMap.right) {
+    else if (State.keyMap.shift && State.keyMap.down && !State.keyMap.up && !State.keyMap.left && !State.keyMap.right) {
       this.draw(
         Config.player.spriteMap.downRunning,
         State.player.x,
@@ -789,7 +797,7 @@ class Player {
     /**
      * Running left
      * */
-    else if (State.keyMap.shift && State.keyMap.left && !State.keyMap.up && !State.keyMap.down) {
+    else if (State.keyMap.shift && State.keyMap.left && !State.keyMap.right && !State.keyMap.up && !State.keyMap.down) {
       this.draw(
         Config.player.spriteMap.leftRunning,
         State.player.x,
@@ -800,7 +808,7 @@ class Player {
     /**
      * Running right
      * */
-    else if (State.keyMap.shift && State.keyMap.right && !State.keyMap.up && !State.keyMap.down) {
+    else if (State.keyMap.shift && State.keyMap.right && !State.keyMap.left && !State.keyMap.up && !State.keyMap.down) {
       this.draw(
         Config.player.spriteMap.rightRunning,
         State.player.x,
