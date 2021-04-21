@@ -1,6 +1,11 @@
+import { Objects } from './Objects.js'
 import { Render } from '../../../scripts/modules/render.js'
 
 class Village {
+  constructor() {
+    this.objects = Objects
+  }
+
   render(props) {
     Render.image({
       image: props.sprite.image,
