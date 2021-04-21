@@ -46,7 +46,10 @@ let Projectile = {
   
       Projectile.draw(projectile.x, projectile.y, projectile.radius, projectile.color)
 
-      for (let i in State.boxes) {
+      const renderChain = Render.chain
+      const renderChainLen = renderChain.length
+
+      for (let i = 0; i < renderChainLen; i++) {
         if (Render.chain[i].type === 'box') {
           // Enable collision
           if (Physics.collision.circleRect(projectile, Render.chain[i])) {
