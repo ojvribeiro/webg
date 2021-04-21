@@ -16,7 +16,7 @@ playerSprite.src = Config.root + Config.player.SPRITE_SHEET_PATH
 class Player {
   constructor() {
     this.sprite = new SpriteAnimation(
-      playerSprite, // sprite image object
+      playerSprite.src, // sprite image object
       State.player.x - (Config.player.WIDTH / 2), // sprite x
       State.player.y - (Config.player.HEIGHT / 2), // sprite y
       Config.player.SIZE * Config.player.SPRITE_SHEET_COLS, // sprite width
@@ -26,6 +26,17 @@ class Player {
       Config.player.SPRITE_SHEET_ROWS,
       0
     )
+    
+    this.player = {
+      type: 'player',
+      x: State.player.x - (Config.player.WIDTH / 4) + 2,
+      y: State.player.y + (Config.player.HEIGHT / 4) + 5,
+      bottomY: State.player.y + (Config.player.HEIGHT / 4) + 5,
+      width: Config.player.WIDTH / 2,
+      height: Config.player.HEIGHT / 5,
+    }
+    
+    Render.add(this.player)
   }
 
 
@@ -107,6 +118,21 @@ class Player {
       backgroundColor: hitBox.enviroment.color,
       borderColor: 'transparent'
     })
+
+
+    const renderChain = Render.chain
+    const renderChainLen = renderChain.length
+
+    for (let i = 0; i < renderChainLen; i++) {
+      let player
+      if (renderChain[i].type === 'player') {
+        player = renderChain[i]
+
+        player.x = State.player.x
+        player.y = hitBox.enviroment.y
+        player.bottomY = hitBox.enviroment.y + hitBox.enviroment.height
+      }
+    }
   }
   
   

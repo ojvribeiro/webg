@@ -32,8 +32,6 @@ let State = {
   },
 
   projectiles: [],
-
-  boxes: []
 }
 
 

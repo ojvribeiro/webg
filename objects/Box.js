@@ -4,6 +4,7 @@ import { DOM } from '../scripts/modules/dom.js'
 import { Render } from '../scripts/modules/render.js'
 
 const showObjectsName = true
+import { Config } from '../scripts/config.js'
 
 /**
  * Class of a box
@@ -15,26 +16,32 @@ class Box {
    * @param {array} props
    */
   constructor(props) {
-    this.boxes = props
+    const boxes = JSON.parse(JSON.stringify(props))
 
-    for (let i in this.boxes) {
-      State.boxes.push(this.boxes[i])
+    const boxesLen = boxes.length
+
+    for (let i = 0; i < boxesLen; i++) {
+      boxes[i].type = 'box'
+      boxes[i].bottomY = boxes[i].y + boxes[i].height
+
+      Render.add(boxes[i])
     }
   }
 
-  render() {
-    // Render loop
-    for (let i in this.boxes) {
-      Render.box({
-        x: this.boxes[i].x,
-        y: this.boxes[i].y,
-        width: this.boxes[i].width,
-        height: this.boxes[i].height,
-        backgroundColor: this.boxes[i].backgroundColor,
-        borderColor: this.boxes[i].borderColor
-      })
+  render(object) {
+    let boxProps = {
+      x: object.x,
+      y: object.y,
+      bottomY: object.bottomY,
+      width: object.width,
+      height: object.height,
+      backgroundColor: object.backgroundColor,
+      borderColor: Config.objects.SHOW_COLLISION_BOX === true ? object.borderColor : 'transparent',
+    }
 
-      if (showObjectsName === true) {
+    // Render loop
+    if (object.type === 'box') {
+      Render.box(boxProps)
         Render.text({
           text: `${this.boxes[i].name} \n x: ${this.boxes[i].x} \n y: ${this.boxes[i].y}`,
           fontFamily: 'Arial, sans-serif',
@@ -48,8 +55,7 @@ class Box {
       }
 
       // Enable collision
-      Physics.collision.rectRect(State.player.collisionBox, this.boxes[i])
-      DOM.playerPosition.innerHTML = [(this.boxes[0].y + this.boxes[0].height), (State.player.y + State.player.hitBox.body.height)]
+      Physics.collision.rectRect(State.player.collisionBox, object)
     }
   }
 }

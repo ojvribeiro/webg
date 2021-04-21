@@ -20,10 +20,24 @@ document.getElementById('stats').appendChild(stats.dom)
 
 
 let Render = {
+  /**
+   * The rendering order.
+   * @todo Every element to be drawn on screen should be here to be swaped when needed
+   * @type {array}
+  */
+  chain: [],
+
+  add: (props) => {
+    Render.chain.push(props)
+  },
+
   loop: () => {
     const player = new Player()
     const projectile = Projectile
+    const village = new Village()
     const boxes = new Box(village.objects)
+
+    const chainLen = Render.chain.length
     
     ;(function update() {
       stats.begin()
@@ -34,6 +48,24 @@ let Render = {
       }
       
 
+      Render.chain.sort(function(a, b) {
+        return a.bottomY - b.bottomY;
+      });
+
+
+      for (let i = 0; i < chainLen; i++) {
+        switch (Render.chain[i].type) {
+          case 'player':
+            player.render()
+            break;
+            case 'box':
+            boxes.render(Render.chain[i])
+            village.render(Render.chain[i])
+            break;
+          default:
+            console.error('There\'s something wrong.');
+        }
+      }
 
       if (Config.showObjectInfo) {
         Render.text({
@@ -210,17 +242,25 @@ let Render = {
    * @param {number} props.height - The height the image.
    */
   image: (props) => {
-    ctx.drawImage(
-      props.image,
-      props.clipX,
-      props.clipY,
-      props.clipWidth,
-      props.clipHeight,
-      props.x,
-      props.y,
-      props.width,
-      props.height
-    )
+    const image = new Image()
+    image.src = props.image
+
+    image.addEventListener('load', render, false)
+
+    function render() {
+      ctx.drawImage(
+        image,
+        props.clipX,
+        props.clipY,
+        props.clipWidth,
+        props.clipHeight,
+        props.x,
+        props.y,
+        props.width,
+        props.height
+      )
+    }
+    render()
   }
 }
 

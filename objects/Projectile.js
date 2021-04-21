@@ -47,10 +47,12 @@ let Projectile = {
       Projectile.draw(projectile.x, projectile.y, projectile.radius, projectile.color)
 
       for (let i in State.boxes) {
-        // Enable collision
-        if (Physics.collision.circleRect(projectile, State.boxes[i])) {
-          // Destroy bullet
-          Projectile.delete(index)
+        if (Render.chain[i].type === 'box') {
+          // Enable collision
+          if (Physics.collision.circleRect(projectile, Render.chain[i])) {
+            // Destroy bullet
+            Projectile.delete(index)
+          }
         }
       }
   
