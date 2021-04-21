@@ -43,7 +43,7 @@ const Config = {
     SPRITE_SHEET_COLS: 5,
 
     SHOW_HITBOX: false,
-    SHOW_COLLISION_BOX: true,
+    SHOW_COLLISION_BOX: false,
     HITBOX_COLOR: 'rgba(245, 50, 28, 0.5)',
     COLLISION_BOX_COLOR: 'rgba(254, 212, 150, 0.5)',
 
@@ -94,7 +94,11 @@ const Config = {
     SIZE: 3, // Projectile hitbox radius (default: 3)
     SPEED: 20, // Pixels per frame (default: 15)
     COLOR: '#fff'
-  }
+  },
+
+  objects: {
+    SHOW_COLLISION_BOX: false,
+  },
 }
 
 
