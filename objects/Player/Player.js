@@ -272,71 +272,20 @@ class Player {
       !State.keyMap.right && 
       !State.keyMap.shift
     ) {
-      // Facing up
-      if (State.player.facing === 'up') {
-        this.draw(
-          Config.player.spriteMap.up, 
-          State.player.x, 
-          State.player.y
-        )
+      switch (State.player.facing) {
+        case State.player.facing:
+          this.draw(
+            Config.player.spriteMap[State.player.facing], 
+            State.player.x, 
+            State.player.y
+          )
+          break;
+      
+        default:
+          console.error('Well, that\'s weird');
+          break;
       }
-      // Facing down
-      else if (State.player.facing === 'down') {
-        this.draw(
-          Config.player.spriteMap.down, 
-          State.player.x, 
-          State.player.y
-        )
-      }
-      // Facing left
-      else if (State.player.facing === 'left') {
-        this.draw(
-          Config.player.spriteMap.left, 
-          State.player.x, 
-          State.player.y
-        )
-      }
-      // Facing right
-      else if (State.player.facing === 'right') {
-        this.draw(
-          Config.player.spriteMap.right, 
-          State.player.x, 
-          State.player.y
-        )
-      }
-      // Facing up-left
-      else if (State.player.facing === 'up-left') {
-        this.draw(
-          Config.player.spriteMap.upLeft, 
-          State.player.x, 
-          State.player.y
-        )
-      }
-      // Facing up-right
-      else if (State.player.facing === 'up-right') {
-        this.draw(
-          Config.player.spriteMap.upRight, 
-          State.player.x, 
-          State.player.y
-        )
-      }
-      // Facing down-left
-      else if (State.player.facing === 'down-left') {
-        this.draw(
-          Config.player.spriteMap.downLeft, 
-          State.player.x, 
-          State.player.y
-        )
-      }
-      // Facing down-right
-      else if (State.player.facing === 'down-right') {
-        this.draw(
-          Config.player.spriteMap.downRight, 
-          State.player.x, 
-          State.player.y
-        )
-      }
-    }
+    } 
 
     /**
      * Walking up
@@ -345,7 +294,7 @@ class Player {
       // Facing up
       if (State.player.facing === 'up') {
         this.draw(
-          Config.player.spriteMap.upWalking, 
+          Config.player.spriteMap['up-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -353,7 +302,7 @@ class Player {
       // Facing down
       else if (State.player.facing === 'down') {
         this.draw(
-          Config.player.spriteMap.downWalkingBackwards, 
+          Config.player.spriteMap['down-walking-backwards'], 
           State.player.x, 
           State.player.y
         )
@@ -361,7 +310,7 @@ class Player {
       // Facing left
       else if (State.player.facing === 'left') {
         this.draw(
-          Config.player.spriteMap.leftWalking, 
+          Config.player.spriteMap['left-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -369,7 +318,7 @@ class Player {
       // Facing right
       else if (State.player.facing === 'right') {
         this.draw(
-          Config.player.spriteMap.rightWalking, 
+          Config.player.spriteMap['right-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -377,7 +326,7 @@ class Player {
       // Facing up-left
       else if (State.player.facing === 'up-left') {
         this.draw(
-          Config.player.spriteMap.upLeftWalking, 
+          Config.player.spriteMap['up-left-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -385,7 +334,7 @@ class Player {
       // Facing up-right
       else if (State.player.facing === 'up-right') {
         this.draw(
-          Config.player.spriteMap.upRightWalking, 
+          Config.player.spriteMap['up-right-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -393,7 +342,7 @@ class Player {
       // Facing down-left
       else if (State.player.facing === 'down-left') {
         this.draw(
-          Config.player.spriteMap.upRightWalkingBackwards, 
+          Config.player.spriteMap['up-right-walking-backwards'], 
           State.player.x, 
           State.player.y
         )
@@ -401,7 +350,7 @@ class Player {
       // Facing down-right
       else if (State.player.facing === 'down-right') {
         this.draw(
-          Config.player.spriteMap.upLeftWalkingBackwards, 
+          Config.player.spriteMap['up-left-walking-backwards'], 
           State.player.x, 
           State.player.y
         )
@@ -415,7 +364,7 @@ class Player {
       // Facing up
       if (State.player.facing === 'up') {
         this.draw(
-          Config.player.spriteMap.upWalkingBackwards, 
+          Config.player.spriteMap['up-walking-backwards'], 
           State.player.x, 
           State.player.y
         )
@@ -423,7 +372,7 @@ class Player {
       // Facing down
       else if (State.player.facing === 'down') {
         this.draw(
-          Config.player.spriteMap.downWalking, 
+          Config.player.spriteMap['down-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -431,7 +380,7 @@ class Player {
       // Facing left
       else if (State.player.facing === 'left') {
         this.draw(
-          Config.player.spriteMap.leftWalking, 
+          Config.player.spriteMap['left-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -439,7 +388,7 @@ class Player {
       // Facing right
       else if (State.player.facing === 'right') {
         this.draw(
-          Config.player.spriteMap.rightWalking, 
+          Config.player.spriteMap['right-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -447,7 +396,7 @@ class Player {
       // Facing up-left
       else if (State.player.facing === 'up-left') {
         this.draw(
-          Config.player.spriteMap.downRightWalkingBackwards, 
+          Config.player.spriteMap['down-right-walking-backwards'], 
           State.player.x, 
           State.player.y
         )
@@ -455,7 +404,7 @@ class Player {
       // Facing up-right
       else if (State.player.facing === 'up-right') {
         this.draw(
-          Config.player.spriteMap.downLeftWalkingBackwards, 
+          Config.player.spriteMap['down-left-walking-backwards'], 
           State.player.x, 
           State.player.y
         )
@@ -463,7 +412,7 @@ class Player {
       // Facing down-left
       else if (State.player.facing === 'down-left') {
         this.draw(
-          Config.player.spriteMap.downLeftWalking, 
+          Config.player.spriteMap['down-left-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -471,7 +420,7 @@ class Player {
       // Facing down-right
       else if (State.player.facing === 'down-right') {
         this.draw(
-          Config.player.spriteMap.downRightWalking, 
+          Config.player.spriteMap['down-right-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -485,7 +434,7 @@ class Player {
       // Facing up
       if (State.player.facing === 'up') {
         this.draw(
-          Config.player.spriteMap.upWalking, 
+          Config.player.spriteMap['up-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -493,7 +442,7 @@ class Player {
       // Facing down
       else if (State.player.facing === 'down') {
         this.draw(
-          Config.player.spriteMap.downWalking, 
+          Config.player.spriteMap['down-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -501,7 +450,7 @@ class Player {
       // Facing left
       else if (State.player.facing === 'left') {
         this.draw(
-          Config.player.spriteMap.leftWalking, 
+          Config.player.spriteMap['left-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -509,7 +458,7 @@ class Player {
       // Facing right
       else if (State.player.facing === 'right') {
         this.draw(
-          Config.player.spriteMap.rightWalkingBackwards, 
+          Config.player.spriteMap['right-walking-backwards'], 
           State.player.x, 
           State.player.y
         )
@@ -517,7 +466,7 @@ class Player {
       // Facing up-left
       else if (State.player.facing === 'up-left') {
         this.draw(
-          Config.player.spriteMap.upLeftWalking, 
+          Config.player.spriteMap['up-left-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -525,7 +474,7 @@ class Player {
       // Facing up-right
       else if (State.player.facing === 'up-right') {
         this.draw(
-          Config.player.spriteMap.downLeftWalkingBackwards, 
+          Config.player.spriteMap['down-left-walking-backwards'], 
           State.player.x, 
           State.player.y
         )
@@ -533,7 +482,7 @@ class Player {
       // Facing down-left
       else if (State.player.facing === 'down-left') {
         this.draw(
-          Config.player.spriteMap.downLeftWalking, 
+          Config.player.spriteMap['down-left-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -541,7 +490,7 @@ class Player {
       // Facing down-right
       else if (State.player.facing === 'down-right') {
         this.draw(
-          Config.player.spriteMap.upLeftWalkingBackwards, 
+          Config.player.spriteMap['up-left-walking-backwards'], 
           State.player.x, 
           State.player.y
         )
@@ -555,7 +504,7 @@ class Player {
       // Facing up
       if (State.player.facing === 'up') {
         this.draw(
-          Config.player.spriteMap.upWalking, 
+          Config.player.spriteMap['up-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -563,7 +512,7 @@ class Player {
       // Facing down
       else if (State.player.facing === 'down') {
         this.draw(
-          Config.player.spriteMap.downWalking, 
+          Config.player.spriteMap['down-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -571,7 +520,7 @@ class Player {
       // Facing left
       else if (State.player.facing === 'left') {
         this.draw(
-          Config.player.spriteMap.leftWalkingBackwards, 
+          Config.player.spriteMap['left-walking-backwards'], 
           State.player.x, 
           State.player.y
         )
@@ -579,7 +528,7 @@ class Player {
       // Facing right
       else if (State.player.facing === 'right') {
         this.draw(
-          Config.player.spriteMap.rightWalking, 
+          Config.player.spriteMap['right-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -587,7 +536,7 @@ class Player {
       // Facing up-left
       else if (State.player.facing === 'up-left') {
         this.draw(
-          Config.player.spriteMap.downRightWalkingBackwards, 
+          Config.player.spriteMap['down-right-walking-backwards'], 
           State.player.x, 
           State.player.y
         )
@@ -595,7 +544,7 @@ class Player {
       // Facing up-right
       else if (State.player.facing === 'up-right') {
         this.draw(
-          Config.player.spriteMap.upRightWalking, 
+          Config.player.spriteMap['up-right-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -603,7 +552,7 @@ class Player {
       // Facing down-left
       else if (State.player.facing === 'down-left') {
         this.draw(
-          Config.player.spriteMap.upRightWalkingBackwards, 
+          Config.player.spriteMap['up-right-walking-backwards'], 
           State.player.x, 
           State.player.y
         )
@@ -611,7 +560,7 @@ class Player {
       // Facing down-right
       else if (State.player.facing === 'down-right') {
         this.draw(
-          Config.player.spriteMap.downRightWalking, 
+          Config.player.spriteMap['down-right-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -625,7 +574,7 @@ class Player {
       // Facing up-left
       if (State.player.facing === 'up-left') {
         this.draw(
-          Config.player.spriteMap.upLeftWalking, 
+          Config.player.spriteMap['up-left-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -633,7 +582,7 @@ class Player {
       // Facing up-right
       else if (State.player.facing === 'up-right') {
         this.draw(
-          Config.player.spriteMap.downLeftWalkingBackwards, 
+          Config.player.spriteMap['down-left-walking-backwards'], 
           State.player.x, 
           State.player.y
         )
@@ -641,7 +590,7 @@ class Player {
       // Facing down-left
       else if (State.player.facing === 'down-left') {
         this.draw(
-          Config.player.spriteMap.downLeftWalking, 
+          Config.player.spriteMap['down-left-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -649,7 +598,7 @@ class Player {
       // Facing down-right
       else if (State.player.facing === 'down-right') {
         this.draw(
-          Config.player.spriteMap.upLeftWalkingBackwards, 
+          Config.player.spriteMap['up-left-walking-backwards'], 
           State.player.x, 
           State.player.y
         )
@@ -663,7 +612,7 @@ class Player {
       // Facing up-left
       if (State.player.facing === 'up-left') {
         this.draw(
-          Config.player.spriteMap.downRightWalkingBackwards, 
+          Config.player.spriteMap['down-right-walking-backwards'], 
           State.player.x, 
           State.player.y
         )
@@ -671,7 +620,7 @@ class Player {
       // Facing up-right
       else if (State.player.facing === 'up-right') {
         this.draw(
-          Config.player.spriteMap.upRightWalking, 
+          Config.player.spriteMap['up-right-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -679,7 +628,7 @@ class Player {
       // Facing down-left
       else if (State.player.facing === 'down-left') {
         this.draw(
-          Config.player.spriteMap.upRightWalkingBackwards, 
+          Config.player.spriteMap['up-right-walking-backwards'], 
           State.player.x, 
           State.player.y
         )
@@ -687,7 +636,7 @@ class Player {
       // Facing down-right
       else if (State.player.facing === 'down-right') {
         this.draw(
-          Config.player.spriteMap.downRightWalking, 
+          Config.player.spriteMap['down-right-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -701,7 +650,7 @@ class Player {
       // Facing down-left
       if (State.player.facing === 'down-left') {
         this.draw(
-          Config.player.spriteMap.downLeftWalking, 
+          Config.player.spriteMap['down-left-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -709,7 +658,7 @@ class Player {
       // Facing down-right
       else if (State.player.facing === 'down-right') {
         this.draw(
-          Config.player.spriteMap.upLeftWalkingBackwards, 
+          Config.player.spriteMap['up-left-walking-backwards'], 
           State.player.x, 
           State.player.y
         )
@@ -717,7 +666,7 @@ class Player {
       // Facing up-left
       else if (State.player.facing === 'up-left') {
         this.draw(
-          Config.player.spriteMap.upLeftWalking, 
+          Config.player.spriteMap['up-left-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -725,7 +674,7 @@ class Player {
       // Facing up-right
       else if (State.player.facing === 'up-right') {
         this.draw(
-          Config.player.spriteMap.downLeftWalkingBackwards, 
+          Config.player.spriteMap['down-left-walking-backwards'], 
           State.player.x, 
           State.player.y
         )
@@ -739,7 +688,7 @@ class Player {
       // Facing down-left
       if (State.player.facing === 'down-left') {
         this.draw(
-          Config.player.spriteMap.upRightWalkingBackwards, 
+          Config.player.spriteMap['up-right-walking-backwards'], 
           State.player.x, 
           State.player.y
         )
@@ -747,7 +696,7 @@ class Player {
       // Facing down-right
       else if (State.player.facing === 'down-right') {
         this.draw(
-          Config.player.spriteMap.downRightWalking, 
+          Config.player.spriteMap['down-right-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -755,7 +704,7 @@ class Player {
       // Facing up-left
       else if (State.player.facing === 'up-left') {
         this.draw(
-          Config.player.spriteMap.downRightWalkingBackwards, 
+          Config.player.spriteMap['down-right-walking-backwards'], 
           State.player.x, 
           State.player.y
         )
@@ -763,7 +712,7 @@ class Player {
       // Facing up-right
       else if (State.player.facing === 'up-right') {
         this.draw(
-          Config.player.spriteMap.upRightWalking, 
+          Config.player.spriteMap['up-right-walking'], 
           State.player.x, 
           State.player.y
         )
@@ -777,7 +726,7 @@ class Player {
      * */
     else if (State.keyMap.shift && State.keyMap.up && !State.keyMap.down && !State.keyMap.left && !State.keyMap.right) {
       this.draw(
-        Config.player.spriteMap.upRunning,
+        Config.player.spriteMap['up-running'],
         State.player.x,
         State.player.y
       )
@@ -788,7 +737,7 @@ class Player {
      * */
     else if (State.keyMap.shift && State.keyMap.down && !State.keyMap.up && !State.keyMap.left && !State.keyMap.right) {
       this.draw(
-        Config.player.spriteMap.downRunning,
+        Config.player.spriteMap['down-running'],
         State.player.x,
         State.player.y
       )
@@ -799,7 +748,7 @@ class Player {
      * */
     else if (State.keyMap.shift && State.keyMap.left && !State.keyMap.right && !State.keyMap.up && !State.keyMap.down) {
       this.draw(
-        Config.player.spriteMap.leftRunning,
+        Config.player.spriteMap['left-running'],
         State.player.x,
         State.player.y
       )
@@ -810,7 +759,7 @@ class Player {
      * */
     else if (State.keyMap.shift && State.keyMap.right && !State.keyMap.left && !State.keyMap.up && !State.keyMap.down) {
       this.draw(
-        Config.player.spriteMap.rightRunning,
+        Config.player.spriteMap['right-running'],
         State.player.x,
         State.player.y
       )
@@ -821,7 +770,7 @@ class Player {
      * */
     else if (State.keyMap.shift && State.keyMap.up && State.keyMap.left) {
       this.draw(
-        Config.player.spriteMap.upLeftRunning,
+        Config.player.spriteMap['up-left-running'],
         State.player.x,
         State.player.y
       )
@@ -832,7 +781,7 @@ class Player {
      * */
     else if (State.keyMap.shift && State.keyMap.up && State.keyMap.right) {
       this.draw(
-        Config.player.spriteMap.upRightRunning,
+        Config.player.spriteMap['up-right-running'],
         State.player.x,
         State.player.y
       )
@@ -843,7 +792,7 @@ class Player {
      * */
     else if (State.keyMap.shift && State.keyMap.down && State.keyMap.left) {
       this.draw(
-        Config.player.spriteMap.downLeftRunning,
+        Config.player.spriteMap['down-left-running'],
         State.player.x,
         State.player.y
       )
@@ -854,7 +803,7 @@ class Player {
      * */
     else if (State.keyMap.shift && State.keyMap.down && State.keyMap.right) {
       this.draw(
-        Config.player.spriteMap.downRightRunning,
+        Config.player.spriteMap['down-right-running'],
         State.player.x,
         State.player.y
       )
@@ -862,7 +811,7 @@ class Player {
     
     else {
       this.draw(
-        Config.player.spriteMap.down,
+        Config.player.spriteMap['down'],
         State.player.x,
         State.player.y
       )
