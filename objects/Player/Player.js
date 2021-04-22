@@ -124,7 +124,7 @@ class Player {
         text: `player \n x: ${parseInt(hitBox.enviroment.x)} \n y: ${parseInt(hitBox.enviroment.y)}`,
         fontFamily: 'Arial, sans-serif',
         fontSize: '10px',
-        color: 'lightgreen',
+        color: 'lime',
         borderWidth: 1,
         borderColor: 'black',
         x: hitBox.enviroment.x + hitBox.enviroment.width,

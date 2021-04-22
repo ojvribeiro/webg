@@ -45,7 +45,7 @@ class Box {
           text: `${props.name} \n x: ${boxProps.x} \n y: ${boxProps.y}`,
           fontFamily: 'Arial, sans-serif',
           fontSize: '10px',
-          color: 'lightgreen',
+          color: 'lime',
           borderWidth: 1,
           borderColor: 'black',
           x: boxProps.x + boxProps.width,

@@ -72,7 +72,7 @@ let Render = {
           text: `mouse \n x: ${DOM.mousePosition.x} \n y: ${DOM.mousePosition.y}`,
           fontFamily: 'Arial, sans-serif',
           fontSize: '10px',
-          color: 'lightgreen',
+          color: 'lime',
           borderWidth: 1,
           borderColor: 'black',
           x: DOM.mousePosition.x + 20,
