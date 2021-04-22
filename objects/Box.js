@@ -25,24 +25,24 @@ class Box {
     }
   }
 
-  render(object) {
+  render(props) {
     let boxProps = {
-      x: object.x,
-      y: object.y,
-      bottomY: object.bottomY,
-      width: object.width,
-      height: object.height,
-      backgroundColor: object.backgroundColor,
-      borderColor: Config.objects.SHOW_COLLISION_BOX === true ? object.borderColor : 'transparent',
+      x: props.x,
+      y: props.y,
+      bottomY: props.bottomY,
+      width: props.width,
+      height: props.height,
+      backgroundColor: props.backgroundColor,
+      borderColor: Config.objects.SHOW_COLLISION_BOX === true ? props.borderColor : 'transparent',
     }
 
     // Render loop
-    if (object.type === 'box') {
+    if (props.type === 'box') {
       Render.box(boxProps)
 
       if (Config.showObjectInfo) {
         Render.text({
-          text: `${object.name} \n x: ${boxProps.x} \n y: ${boxProps.y}`,
+          text: `${props.name} \n x: ${boxProps.x} \n y: ${boxProps.y}`,
           fontFamily: 'Arial, sans-serif',
           fontSize: '10px',
           color: 'lightgreen',
