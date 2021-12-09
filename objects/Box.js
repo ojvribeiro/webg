@@ -54,7 +54,7 @@ class Box {
       }
 
       // Enable collision
-      Physics.collision.rectRect(State.player.collisionBox, object)
+      Physics.collision.rectRect(State.player.collisionBox, boxProps)
     }
   }
 }

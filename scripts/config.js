@@ -7,7 +7,7 @@ const Config = {
   localDomain: 'localhost/github/webg',
   protocol: 'http://',
 
-  showObjectInfo: false,
+  showObjectInfo: true,
   
   ctx: DOM.canvas.getContext('2d'),
   
