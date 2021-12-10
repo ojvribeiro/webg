@@ -59,8 +59,8 @@ let Render = {
             player.render()
             break;
             case 'box':
-            boxes.render(Render.chain[i])
-            village.render(Render.chain[i])
+              village.render(Render.chain[i])
+              boxes.render(Render.chain[i])
             break;
           default:
             console.error('There\'s something wrong.');
