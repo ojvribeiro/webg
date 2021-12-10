@@ -4,7 +4,7 @@ import { DOM } from './modules/dom.js'
 const Config = {
   name: 'webg',
   domain: 'webg.io',
-  localDomain: 'localhost/github/webg',
+  localDomain: ['localhost/github/webg', 'webg.test'],
   protocol: 'http://',
 
   showObjectInfo: true,
@@ -12,9 +12,24 @@ const Config = {
   ctx: DOM.canvas.getContext('2d'),
   
   get root() {
-    return (
-      location.host === 'localhost' ? this.protocol + this.localDomain : this.protocol + this.domain
-    )
+    let localDomain
+    let found = false
+
+    for (let i in this.localDomain) {
+      if (location.host === this.localDomain[i]) {
+        localDomain = this.localDomain[i]
+        found = true
+
+        break
+      }
+    }
+
+    if (!found) {
+      return this.protocol + this.domain
+    }
+    else {
+      return this.protocol + localDomain
+    }
   },
 
   player: {
