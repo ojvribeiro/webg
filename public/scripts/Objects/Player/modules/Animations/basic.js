@@ -65,7 +65,7 @@ const keyframes = [
     id: 10,
     name: 'run-left',
     frames: [50, 51, 52, 53, 54],
-    frameRate: 15,
+    frameRate: 18,
   },
   {
     id: 11,
