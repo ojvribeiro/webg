@@ -28,7 +28,12 @@ const Config = {
       return this.protocol + this.domain
     }
     else {
-      return this.protocol + localDomain
+      if (localDomain.indexOf('gitpod.io') === -1) {
+        return this.protocol + localDomain + '/public'
+      }
+      else {
+        return this.protocol + localDomain
+      }
     }
   },
 
