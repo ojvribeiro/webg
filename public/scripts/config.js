@@ -4,8 +4,8 @@ import { DOM } from './modules/dom.js'
 const Config = {
   name: 'webg',
   domain: 'webg.io',
-  localDomain: ['localhost/github/webg', 'webg.test'],
-  protocol: 'http://',
+  localDomain: ['8001-ojvribeiro-webg-5xrpm9ghv21.ws-us42.gitpod.io', 'webg.test'],
+  protocol: 'https://',
 
   showObjectInfo: true,
   

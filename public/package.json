@@ -16,7 +16,6 @@
     "url": "https://github.com/ojvribeiro/webg/issues"
   },
   "homepage": "https://github.com/ojvribeiro/webg#readme",
-  "dependencies": {},
   "devDependencies": {
     "stats-js": "^1.0.1"
   }
