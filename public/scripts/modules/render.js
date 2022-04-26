@@ -63,8 +63,10 @@ let Render = {
           boxes.render(obj)
         }
       }
-
-      if (Config.showObjectInfo) {
+      
+      
+      
+      if (Config.showObjectInfo === true) {
         Render.text({
           text: `mouse \n x: ${DOM.mousePosition.x} \n y: ${DOM.mousePosition.y}`,
           fontFamily: 'Arial, sans-serif',
