@@ -1,10 +1,13 @@
 <!-- meta redirection -->
 <html lang="en">
 <head>
-    <script type="module">
-        import { Config } from './scripts/config.js'
+    <script>
+        const Config = {
+          localDomain: ['8001-ojvribeiro-webg-5xrpm9ghv21.ws-us42.gitpod.io', 'webg.test'],
+          protocol: 'https://',
+        }
 
-        (() => {
+        ;(() => {
             let localDomain
             let found = false
 
