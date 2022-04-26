@@ -16,7 +16,7 @@ const Config = {
     let found = false
 
     for (let i in this.localDomain) {
-      if (location.host === this.localDomain[i]) {
+      if (location.href.match(this.localDomain[i])) {
         localDomain = this.localDomain[i]
         found = true
 
