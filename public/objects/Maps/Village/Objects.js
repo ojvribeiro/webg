@@ -1,7 +1,3 @@
-import { Config } from '../../../scripts/config.js'
-
-const __dir = Config.root + '/sprites/Maps/Village/'
-
 let Objects = [
   {
     name: 'arvore',
@@ -40,11 +36,7 @@ let Objects = [
       clipHeight: 50,
     },
   },
-]
 
-Objects.forEach(function(el) {
-  el.sprite.image = __dir + el.sprite.image
-})
 
 
 export { Objects }

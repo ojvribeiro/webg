@@ -13,7 +13,7 @@ class Box {
    * @param {array} props
    */
   constructor(props) {
-    const boxes = JSON.parse(JSON.stringify(props))
+    const boxes = props
 
     const boxesLen = boxes.length
 

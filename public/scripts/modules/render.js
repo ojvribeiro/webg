@@ -48,22 +48,19 @@ let Render = {
       }
       
 
-      Render.chain.sort(function(a, b) {
-        return a.bottomY - b.bottomY;
-      });
-
-
+      Render.chain.sort((a, b) => a.bottomY - b.bottomY)
+      
+      
       for (let i = 0; i < chainLen; i++) {
-        switch (Render.chain[i].type) {
-          case 'player':
-            player.render()
-            break;
-            case 'box':
-              village.render(Render.chain[i])
-              boxes.render(Render.chain[i])
-            break;
-          default:
-            console.error('There\'s something wrong.');
+        const obj = Render.chain[i]
+
+        if (obj.type === 'player') {
+          player.render()
+        }
+        
+        else if (obj.type === 'box') {
+          village.render(obj)
+          boxes.render(obj)
         }
       }
 
@@ -248,6 +245,8 @@ let Render = {
     image.addEventListener('load', render, false)
 
     function render() {
+      ctx.globalCompositeOperation = 'source-over'
+      
       ctx.drawImage(
         image,
         props.clipX,
@@ -258,10 +257,11 @@ let Render = {
         props.y,
         props.width,
         props.height
-      )
+        )
+      }
+      render()
+      image.addEventListener('load', render, false)
     }
-    render()
-  }
 }
 
 export { Render }

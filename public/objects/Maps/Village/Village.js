@@ -1,5 +1,10 @@
 import { Objects } from './Objects.js'
 import { Render } from '../../../scripts/modules/render.js'
+import { Config } from '../../../scripts/config.js'
+import { SpriteAnimation } from '../../../scripts/modules/sprites.js'
+
+
+const __dir = Config.root + '/sprites/Maps/Village/'
 
 class Village {
   constructor() {
@@ -8,7 +13,7 @@ class Village {
 
   render(props) {
     Render.image({
-      image: props.sprite.image,
+      image: __dir + props.sprite.image,
       clipX: 0,
       clipY: 0,
       clipWidth: props.sprite.clipWidth,
