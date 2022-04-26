@@ -1,6 +1,31 @@
 <!-- meta redirection -->
 <html lang="en">
 <head>
-    <meta http-equiv="refresh" content="0; url=/public">
+    <script type="module">
+        import { Config } from './scripts/config.js'
+
+        (() => {
+            let localDomain
+            let found = false
+
+            for (let i in Config.localDomain) {
+                if (location.host === Config.localDomain[i]) {
+                localDomain = Config.localDomain[i]
+                found = true
+
+                break
+                }
+            }
+
+            if (!found) {
+                return Config.protocol + Config.domain
+            }
+            else {
+                if (localDomain.indexOf('gitpod.io') === -1) {
+                    location.href = Config.protocol + localDomain + '/public'
+                }
+            }
+        })()
+    </script>
 </head>
 </html>
