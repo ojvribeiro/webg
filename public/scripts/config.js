@@ -4,7 +4,7 @@ import { DOM } from './modules/dom.js'
 const Config = {
   name: 'webg',
   domain: 'webg.io',
-  localDomain: ['8001-ojvribeiro-webg-5xrpm9ghv21.ws-us42.gitpod.io', 'webg.test'],
+  localDomain: ['8001-ojvribeiro-webg-coxis1mo3tf.ws-us42.gitpod.io', 'webg.test'],
   protocol: 'https://',
 
   showObjectInfo: true,
@@ -16,7 +16,7 @@ const Config = {
     let found = false
 
     for (let i in this.localDomain) {
-      if (location.href.match(this.localDomain[i])) {
+      if (location.host === this.localDomain[i]) {
         localDomain = this.localDomain[i]
         found = true
 
