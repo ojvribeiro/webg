@@ -36,7 +36,7 @@ let Objects = [
       clipHeight: 50,
     },
   },
-
+]
 
 
 export { Objects }
