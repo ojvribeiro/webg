@@ -1,0 +1,19 @@
+{
+  "name": "webg",
+  "version": "1.0.0",
+  "description": "A PUBG like game, but for web.",
+  "main": "index.js",
+  "scripts": {
+    "start": "apachectl start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ojvribeiro/webg.git"
+  },
+  "author": "Victor Ribeiro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ojvribeiro/webg/issues"
+  },
+  "homepage": "https://github.com/ojvribeiro/webg#readme"
+}
