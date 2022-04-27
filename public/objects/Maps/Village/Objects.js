@@ -1,6 +1,7 @@
 let Objects = [
   {
     name: 'arvore',
+    isTangible: true,
     x: 335,
     y: 600,
     width: 80,
@@ -20,6 +21,7 @@ let Objects = [
 
   {
     name: 'rocha',
+    isTangible: true,
     x: 200,
     y: 400,
     width: 53,
@@ -36,6 +38,7 @@ let Objects = [
       clipHeight: 50,
     },
   },
+    isTangible: false,
 ]
 
 

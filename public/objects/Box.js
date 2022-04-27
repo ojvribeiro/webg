@@ -54,7 +54,9 @@ class Box {
       }
 
       // Enable collision
-      Physics.collision.rectRect(State.player.collisionBox, boxProps)
+      if (props.isTangible === true) {
+        Physics.collision.rectRect(State.player.collisionBox, boxProps)
+      }
     }
   }
 }
