@@ -38,7 +38,27 @@ let Objects = [
       clipHeight: 50,
     },
   },
+  
+  {
+    name: 'bush',
     isTangible: false,
+    isBulletTangible: false,
+    x: 220,
+    y: 580,
+    width: 80,
+    height: 20,
+    backgroundColor: 'transparent',
+    borderColor: '#3cff00',
+    sprite: {
+      image: 'Bush_1.svg',
+      x: 190,
+      y: 580,
+      width: 130,
+      height: 100,
+      clipWidth: 150,
+      clipHeight: 100,
+    },
+  },
 ]
 
 
