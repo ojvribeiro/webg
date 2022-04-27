@@ -1,6 +1,6 @@
 let Objects = [
   {
-    name: 'arvore',
+    name: 'tree',
     isTangible: true,
     x: 335,
     y: 600,
@@ -20,7 +20,7 @@ let Objects = [
   },
 
   {
-    name: 'rocha',
+    name: 'rock',
     isTangible: true,
     x: 200,
     y: 400,
