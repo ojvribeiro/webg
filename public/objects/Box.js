@@ -26,36 +26,26 @@ class Box {
   }
 
   render(props) {
-    let boxProps = {
-      x: props.x,
-      y: props.y,
-      bottomY: props.bottomY,
-      width: props.width,
-      height: props.height,
-      backgroundColor: props.backgroundColor,
-      borderColor: Config.objects.SHOW_COLLISION_BOX === true ? props.borderColor : 'transparent',
-    }
-
     // Render loop
     if (props.type === 'box') {
-      Render.box(boxProps)
+      Render.box(props)
 
       if (Config.showObjectInfo) {
         Render.text({
-          text: `${props.name} \n x: ${boxProps.x} \n y: ${boxProps.y}`,
+          text: `${props.name} \n x: ${props.x} \n y: ${props.y}`,
           fontFamily: 'Arial, sans-serif',
           fontSize: '10px',
           color: 'lime',
           borderWidth: 1,
           borderColor: 'black',
-          x: boxProps.x + boxProps.width,
-          y: boxProps.y + boxProps.height + 5
+          x: props.x + props.width,
+          y: props.y + props.height + 5
         })
       }
 
       // Enable collision
       if (props.isTangible === true) {
-        Physics.collision.rectRect(State.player.collisionBox, boxProps)
+        Physics.collision.rectRect(State.player.collisionBox, props)
       }
     }
   }
