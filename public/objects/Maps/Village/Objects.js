@@ -2,6 +2,7 @@ let Objects = [
   {
     name: 'tree',
     isTangible: true,
+    isBulletTangible: true,
     x: 335,
     y: 600,
     width: 80,
@@ -22,6 +23,7 @@ let Objects = [
   {
     name: 'rock',
     isTangible: true,
+    isBulletTangible: false,
     x: 200,
     y: 400,
     width: 53,

@@ -50,9 +50,11 @@ let Projectile = {
       const renderChainLen = renderChain.length
 
       for (let i = 0; i < renderChainLen; i++) {
-        if (Render.chain[i].type === 'box') {
+        const object = renderChain[i]
+
+        if (object.type === 'box' && object.isBulletTangible === true) {
           // Enable collision
-          if (Physics.collision.circleRect(projectile, Render.chain[i])) {
+          if (Physics.collision.circleRect(projectile, object)) {
             // Destroy bullet
             Projectile.delete(index)
           }
