@@ -1,4 +1,10 @@
-let Objects = [
+import { Config } from '../../../scripts/config.js'
+
+
+const __dir = Config.root
+const filePath = `${__dir}/sprites/Maps/Village/`
+
+const Objects = [
   {
     name: 'tree',
     isTangible: true,
@@ -10,13 +16,13 @@ let Objects = [
     backgroundColor: 'transparent',
     borderColor: '#3cff00',
     sprite: {
-      image: 'Tree_1.svg',
-      x: 80,
-      y: 348,
+      fileName: 'Tree_1.svg',
+      x: 172,
+      y: 120,
       width: 544,
       height: 520,
       clipWidth: 554,
-      clipHeight: 550,
+      clipHeight: 520,
     },
   },
 
@@ -31,7 +37,7 @@ let Objects = [
     backgroundColor: 'transparent',
     borderColor: '#3cff00',
     sprite: {
-      image: 'Rock_1.svg',
+      fileName: 'Rock_1.svg',
       x: 190,
       y: 380,
       width: 68,
@@ -52,9 +58,9 @@ let Objects = [
     backgroundColor: 'transparent',
     borderColor: '#3cff00',
     sprite: {
-      image: 'Bush_1.svg',
+      fileName: 'Bush_1.svg',
       x: 190,
-      y: 580,
+      y: 530,
       width: 130,
       height: 100,
       clipWidth: 150,
@@ -62,6 +68,12 @@ let Objects = [
     },
   },
 ]
+
+
+Objects.forEach(object => {
+  object.sprite.image = new Image()
+  object.sprite.image.src = filePath + object.sprite.fileName
+})
 
 
 export { Objects }

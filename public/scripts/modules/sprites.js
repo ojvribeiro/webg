@@ -61,8 +61,11 @@ class SpriteAnimation {
       height: (this.height / this.numberOfRows),
     }
 
+    const image = new Image()
+    image.src = props.spritesheet
+
     Render.image({
-      image: props.spritesheet,
+      image: image,
       clipX: props.clipX,
       clipY: props.clipY,
       clipWidth: props.clipWidth,

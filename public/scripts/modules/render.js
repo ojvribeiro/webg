@@ -241,15 +241,11 @@ let Render = {
    * @param {number} props.height - The height the image.
    */
   image: (props) => {
-    let image = new Image()
-    image.src = props.image
-    
-    
     function render() {
       ctx.globalCompositeOperation = 'source-over'
-      
+
       ctx.drawImage(
-        image,
+        props.image,
         props.clipX,
         props.clipY,
         props.clipWidth,
@@ -258,11 +254,13 @@ let Render = {
         props.y,
         props.width,
         props.height
-        )
-      }
-      render()
-      image.addEventListener('load', render, false)
+      )
     }
+
+    render()
+
+    props.image.addEventListener('load', render, false)
+  }
 }
 
-export { Render }
+export { Render }export { Render }
