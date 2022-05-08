@@ -32,7 +32,11 @@ class Box {
 
       if (Config.showObjectInfo) {
         Render.text({
-          text: `${props.name} \n x: ${props.x} \n y: ${props.y}`,
+          text: `
+            ${props.name}
+            x: ${props.x}
+            y: ${props.y}
+          `,
           fontFamily: 'Arial, sans-serif',
           fontSize: '10px',
           color: 'lime',

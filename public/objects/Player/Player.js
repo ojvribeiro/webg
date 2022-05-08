@@ -121,7 +121,11 @@ class Player {
 
     if (Config.showObjectInfo) {
       Render.text({
-        text: `player \n x: ${parseInt(hitBox.enviroment.x)} \n y: ${parseInt(hitBox.enviroment.y)}`,
+        text: `
+          player
+          x: ${parseInt(hitBox.enviroment.x)}
+          y: ${parseInt(hitBox.enviroment.y)}
+        `,
         fontFamily: 'Arial, sans-serif',
         fontSize: '10px',
         color: 'lime',

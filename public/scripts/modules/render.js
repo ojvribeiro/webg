@@ -67,7 +67,11 @@ let Render = {
 
       if (Config.showObjectInfo === true) {
         Render.text({
-          text: `mouse \n x: ${DOM.mousePosition.x} \n y: ${DOM.mousePosition.y}`,
+          text: `
+            mouse
+            x: ${DOM.mousePosition.x}
+            y: ${DOM.mousePosition.y}
+          `,
           fontFamily: 'Arial, sans-serif',
           fontSize: '10px',
           color: 'lime',
@@ -158,7 +162,7 @@ let Render = {
 
         for (let i in lineBreaks) {
           ctx.strokeText(
-            lineBreaks[i],
+            lineBreaks[i].trim(),
             props.x,
             props.y + (i * lineHeight)
           )
@@ -169,7 +173,7 @@ let Render = {
 
       for (let i in lineBreaks) {
         ctx.fillText(
-          lineBreaks[i],
+          lineBreaks[i].trim(),
           props.x,
           props.y + (i * lineHeight)
         )
