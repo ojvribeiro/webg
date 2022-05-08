@@ -38,34 +38,33 @@ let Render = {
     const boxes = new Box(village.objects)
 
     const chainLen = Render.chain.length
-    
+
     ;(function update() {
       stats.begin()
       Config.ctx.clearRect(0, 0, DOM.canvas.width, DOM.canvas.height)
-      
+
       if (State.projectiles.length > 0) {
         projectile.render()
       }
-      
+
 
       Render.chain.sort((a, b) => a.bottomY - b.bottomY)
-      
-      
+
+
       for (let i = 0; i < chainLen; i++) {
         const obj = Render.chain[i]
 
         if (obj.type === 'player') {
           player.render()
         }
-        
+
         else if (obj.type === 'box') {
           village.render(obj)
           boxes.render(obj)
         }
       }
-      
-      
-      
+
+
       if (Config.showObjectInfo === true) {
         Render.text({
           text: `mouse \n x: ${DOM.mousePosition.x} \n y: ${DOM.mousePosition.y}`,
@@ -95,9 +94,6 @@ let Render = {
       }
 
 
-      
-
-
       stats.end()
 
       requestAnimationFrame(update)
@@ -107,7 +103,7 @@ let Render = {
 
   /**
    * Method that renders a canvas rectangle (box).
-   * 
+   *
    * @param {Object} props - The box properties
    * @param {!number} props.x - The X position of the box
    * @param {!number} props.y - The Y position of the box
@@ -132,7 +128,7 @@ let Render = {
 
   /**
    * Method that renders a canvas text.
-   * 
+   *
    * @param {Object} props - The text properties.
    * @param {string} props.text - The text to be rendered.
    * @param {number} props.x - The X position of the text.
@@ -144,41 +140,41 @@ let Render = {
    * @param {string} props.borderColor - The color of the text.
    */
   text: (props) => {
-    let lineHeight = 10
-    let lineBreaks = props.text.split('\n')
+    const lineHeight = 10
+    const lineBreaks = props.text.split('\n')
 
     if (typeof props.text !== "undefined") {
       ctx.beginPath()
-  
+
       ctx.font = `${props.fontSize} ${props.fontFamily}`
       ctx.fillStyle = props.color
-      
+
       // If borderWidth or borderColor are defined then render a text stroke
-      if (typeof props.borderWidth !== "undefined" || typeof props.borderColor !== "undefined") {
+      if (typeof props.borderWidth !== 'undefined' || typeof props.borderColor !== 'undefined') {
         ctx.save()
-  
+
         ctx.strokeStyle = props.borderColor || 'black' // Defaults to black
         ctx.lineWidth = props.borderWidth * 2 || 2 // A doubled value produces a more accurate result (default: 2 [1px])
-  
+
         for (let i in lineBreaks) {
           ctx.strokeText(
-            lineBreaks[i], 
-            props.x, 
+            lineBreaks[i],
+            props.x,
             props.y + (i * lineHeight)
           )
         }
-  
+
         ctx.restore()
       }
 
       for (let i in lineBreaks) {
         ctx.fillText(
-          lineBreaks[i], 
-          props.x, 
+          lineBreaks[i],
+          props.x,
           props.y + (i * lineHeight)
         )
       }
-  
+
       ctx.closePath()
     }
   },
@@ -186,7 +182,7 @@ let Render = {
 
   /**
    * Method that renders a canvas text.
-   * 
+   *
    * @param {Object} props - The circle properties.
    * @param {string} props.backgroundColor - The background color of the circle.
    * @param {string} props.borderColor - The border color of the circle.
@@ -213,11 +209,11 @@ let Render = {
     }
 
     ctx.arc(
-      props.x, 
-      props.y, 
+      props.x,
+      props.y,
       props.size,
-      0, 
-      (Math.PI * 2), 
+      0,
+      (Math.PI * 2),
       false
     )
     ctx.fill()
@@ -228,7 +224,7 @@ let Render = {
 
   /**
    * Method that renders a image on canvas.
-   * 
+   *
    * @param {Object} props - The image properties.
    * @param {string} props.image - The image object.
    * @param {number} props.clipX - The X position to clip the image.
@@ -263,4 +259,4 @@ let Render = {
   }
 }
 
-export { Render }export { Render }
+export { Render }

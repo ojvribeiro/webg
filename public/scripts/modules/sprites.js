@@ -48,7 +48,7 @@ class SpriteAnimation {
     const _x = x === undefined ? this.x : x
     const _y = y === undefined ? this.y : y
     const _rowIndex = rowIndex === undefined ? this.rowIndex : rowIndex
-    
+
     const props = {
       spritesheet: this.spritesheet,
       clipX: (this.frameIndex * this.width / this.numberOfColumns),
@@ -86,7 +86,7 @@ class SpriteAnimation {
       if (this.frameIndex >= this.numberOfColumns) {
         this.frameIndex = 0
       }
-      
+
       this.lastUpdate = Date.now()
     }
   }

@@ -6,10 +6,8 @@ import { Projectile } from '../../objects/Projectile.js'
 import { Physics } from './physics.js'
 
 
-document.addEventListener('mousedown', function (e) {
+document.addEventListener('mousedown', e => {
   let angle, velocity
-
-  // console.log(State.player.state)
 
   if (State.player.state !== 'running') {
     DOM.mousePosition.x = e.clientX
@@ -19,10 +17,10 @@ document.addEventListener('mousedown', function (e) {
     velocity = Physics.velocity(angle, Config.projectiles.SPEED)
 
     const projectile = {
-      x: State.player.x, 
-      y: State.player.y, 
-      radius: Config.projectiles.SIZE, 
-      color: Config.projectiles.COLOR, 
+      x: State.player.x,
+      y: State.player.y,
+      radius: Config.projectiles.SIZE,
+      color: Config.projectiles.COLOR,
       velocity: velocity
     }
 
@@ -31,31 +29,25 @@ document.addEventListener('mousedown', function (e) {
 })
 
 
-
-
 let playerSprite = new Image()
 playerSprite.src = Config.root + Config.player.SPRITE_SHEET_PATH
 
-document.addEventListener('mousemove', function (e) {
+document.addEventListener('mousemove', e => {
   DOM.mousePosition.x = e.clientX
   DOM.mousePosition.y = e.clientY
-  
+
   const angle = Math.atan2(DOM.mousePosition.y - State.player.y, DOM.mousePosition.x - State.player.x)
 
   const direction = {
-    get up() { return angle <= -1.17 && angle >= -1.97 },
-    get down() { return angle <= 1.97 && angle >= 1.17 },
-    get left() { return angle <= 3.14 && angle >= 2.74 || angle >= -3.14 && angle <= -2.74 },
-    get right() { return angle > 0.01 && angle <= 0.4 || angle >= -0.4 && angle <= 0.01 },
-    get upLeft() { return angle > -2.74 && angle < -1.97 },
-    get upRight() { return angle > -1.17 && angle < -0.4 },
-    get downLeft() { return angle < 2.74 && angle > 1.97 },
-    get downRight() { return angle < 1.17 && angle > 0.4 },
+    up: angle <= -1.17 && angle >= -1.97,
+    down: angle <= 1.97 && angle >= 1.17,
+    left: angle <= 3.14 && angle >= 2.74 || angle >= -3.14 && angle <= -2.74,
+    right: angle > 0.01 && angle <= 0.4 || angle >= -0.4 && angle <= 0.01,
+    upLeft: angle > -2.74 && angle < -1.97,
+    upRight: angle > -1.17 && angle < -0.4,
+    downLeft: angle < 2.74 && angle > 1.97,
+    downRight: angle < 1.17 && angle > 0.4,
   }
-  
-  /** 
-   * The looking direction only changes if previous direction is different.
-   */
 
   // Looking up ⬆️
   if (direction.up) {
@@ -84,7 +76,7 @@ document.addEventListener('mousemove', function (e) {
       State.player.facing = 'right'
     }
   }
-  
+
   // Looking up-left ↖️
   else if (direction.upLeft) {
     if (State.player.facing !== 'up-left') {
@@ -113,5 +105,5 @@ document.addEventListener('mousemove', function (e) {
     }
   }
 
-  // DOM.keysPressed.innerText = angle
+  DOM.keysPressed.innerText = angle
 })

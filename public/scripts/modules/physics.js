@@ -12,7 +12,7 @@ const Physics = {
       // Half widths and half heights of the objects
       const ABMiddleHorizontal = (rectA.width / 2) + (rectB.width / 2)
       const ABMiddleVertical = (rectA.height / 2) + (rectB.height / 2)
-    
+
       // If the x and y vector are less than the half width or half height,
       // They we must be inside the object, causing a collision
       if (Math.abs(vectorX) < ABMiddleHorizontal && Math.abs(vectorY) < ABMiddleVertical) {
@@ -38,7 +38,7 @@ const Physics = {
         }
       }
     },
-  
+
     circleRect: function(circle, rect) {
       let distX, distY, distance
 
@@ -50,7 +50,7 @@ const Physics = {
       // Calculate which edge is the closest
       if (circle.x < rect.x) {
         testX = rect.x // test left edge
-      } 
+      }
       else if (circle.x > rect.x + rect.width) {
         testX = rect.x + rect.width // right edge
       }
@@ -83,7 +83,7 @@ const Physics = {
       y: Math.sin(angle) * speed
     }
   },
-  
+
 
 
 
@@ -92,7 +92,7 @@ const Physics = {
    */
   speed: {
     normalize: function() {
-      if ( 
+      if (
         State.keyMap.up && State.keyMap.left    ||
         State.keyMap.up && State.keyMap.right   ||
         State.keyMap.down && State.keyMap.left  ||

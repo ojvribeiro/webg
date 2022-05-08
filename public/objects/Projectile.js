@@ -28,8 +28,8 @@ let Projectile = {
   delete: (index) => {
     State.projectiles.splice(index, 1)
   },
-  
-  
+
+
   render: () => {
     State.projectiles.forEach((projectile, index) => {
       projectile.x += projectile.velocity.x
@@ -43,7 +43,7 @@ let Projectile = {
 
         Projectile.delete(index)
       }
-  
+
       Projectile.draw(projectile.x, projectile.y, projectile.radius, projectile.color)
 
       const renderChain = Render.chain
@@ -60,8 +60,6 @@ let Projectile = {
           }
         }
       }
-  
-      // console.log(State.projectiles)
     })
   }
 }

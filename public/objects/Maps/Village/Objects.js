@@ -46,7 +46,7 @@ const Objects = [
       clipHeight: 50,
     },
   },
-  
+
   {
     name: 'bush',
     isTangible: false,

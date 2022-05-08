@@ -8,26 +8,26 @@
         }
 
         ;(() => {
-            let localDomain
-            let found = false
+          let localDomain
+          let found = false
 
-            for (let i in Config.localDomain) {
-                if (location.host === Config.localDomain[i]) {
-                localDomain = Config.localDomain[i]
-                found = true
+          for (let i in Config.localDomain) {
+            if (location.host === Config.localDomain[i]) {
+              localDomain = Config.localDomain[i]
+              found = true
 
-                break
-                }
+              break
             }
+          }
 
-            if (!found) {
-                return Config.protocol + Config.domain
+          if (!found) {
+            return Config.protocol + Config.domain
+          }
+          else {
+            if (localDomain.indexOf('gitpod.io') === -1) {
+              location.href = Config.protocol + localDomain + '/public'
             }
-            else {
-                if (localDomain.indexOf('gitpod.io') === -1) {
-                    location.href = Config.protocol + localDomain + '/public'
-                }
-            }
+          }
         })()
     </script>
 </head>

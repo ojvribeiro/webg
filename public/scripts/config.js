@@ -10,7 +10,7 @@ const Config = {
   showObjectInfo: true,
   
   ctx: DOM.canvas.getContext('2d'),
-  
+
   get root() {
     let localDomain
     let found = false
@@ -38,7 +38,7 @@ const Config = {
   },
 
   player: {
-  
+
     /**
      * Define player keyboard controls
      * Uses `event.code` to capture key codes on `keydown`
@@ -56,7 +56,7 @@ const Config = {
     HEIGHT: 100,
     WALK_MAX_SPEED: 2, // Pixels per frame
     RUN_MAX_SPEED: 4, // Pixels per frame
-    
+
     SHOW_SPRITE: true,
     SPRITE_SHEET_PATH: '/sprites/Player/Player.svg',
     SPRITE_SHEET_ROWS: 32,
@@ -72,7 +72,7 @@ const Config = {
       'up': 1,
       'left': 2,
       'right': 3,
-      
+
       'up-left': 4,
       'up-right': 5,
       'down-left': 6,
