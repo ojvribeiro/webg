@@ -147,7 +147,7 @@ let Render = {
     const lineHeight = 10
     const lineBreaks = props.text.split('\n')
 
-    if (typeof props.text !== "undefined") {
+    if (typeof props.text !== 'undefined') {
       ctx.beginPath()
 
       ctx.font = `${props.fontSize} ${props.fontFamily}`
@@ -201,7 +201,7 @@ let Render = {
     ctx.fillStyle = props.backgroundColor
 
     // If borderWidth or borderColor are defined then render a stroke
-    if (typeof props.borderWidth !== "undefined" || typeof props.borderColor !== "undefined") {
+    if (typeof props.borderWidth !== 'undefined' || typeof props.borderColor !== 'undefined') {
       ctx.save()
 
       ctx.strokeStyle = props.borderColor || 'black' // Defaults to black
