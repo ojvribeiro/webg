@@ -15,9 +15,9 @@ playerSprite.src = Config.root + Config.player.SPRITE_SHEET_PATH
 class Player {
   constructor() {
     this.sprite = new SpriteAnimation(
-      State.player.x - (Config.player.WIDTH / 2), // sprite x
-      State.player.y - (Config.player.HEIGHT / 2), // sprite y
       playerSprite, // sprite image object
+      State.player.x - (Config.player.WIDTH / 2), // sprite x position
+      State.player.y - (Config.player.HEIGHT / 2), // sprite y position
       Config.player.SIZE * Config.player.SPRITE_SHEET_COLS, // sprite width
       Config.player.SIZE * Config.player.SPRITE_SHEET_ROWS, // sprite height
       100, // sprite frame rate
