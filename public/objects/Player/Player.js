@@ -5,6 +5,7 @@ import { State } from '../../scripts/modules/states.js'
 import { Physics } from '../../scripts/modules/physics.js'
 import { SpriteAnimation } from '../../scripts/modules/sprites.js'
 import { Render } from '../../scripts/modules/render.js'
+import { Calc } from '../../scripts/modules/math.js'
 
 
 let playerSprite = new Image()
