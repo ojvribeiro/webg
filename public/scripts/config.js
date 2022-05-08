@@ -27,7 +27,7 @@ const Config = {
     }
 
     if (found === false) {
-      if (currentDomain.indexOf('gitpod.io') === -1) {
+      if (currentDomain.indexOf('gitpod.io') !== -1) {
         return this.protocol + currentDomain + '/public'
       }
       else {
