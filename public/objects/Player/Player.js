@@ -20,10 +20,10 @@ class Player {
       playerSprite, // sprite image object
       Config.player.SIZE * Config.player.SPRITE_SHEET_COLS, // sprite width
       Config.player.SIZE * Config.player.SPRITE_SHEET_ROWS, // sprite height
-      100,
-      Config.player.SPRITE_SHEET_COLS,
-      Config.player.SPRITE_SHEET_ROWS,
-      0
+      100, // sprite frame rate
+      0, // sprite frame index
+      Config.player.SPRITE_SHEET_COLS, // sprite sheet columns
+      Config.player.SPRITE_SHEET_ROWS, // sprite sheet rows
     )
 
     this.player = {
