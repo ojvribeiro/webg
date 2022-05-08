@@ -1,13 +1,15 @@
+// @ts-check
 import { DOM } from '../scripts/modules/dom.js'
 import { State } from '../scripts/modules/states.js'
 import { Render } from '../scripts/modules/render.js'
 import { Physics } from '../scripts/modules/physics.js'
 
-DOM.canvas.width = window.innerWidth
-DOM.canvas.height = window.innerHeight
-
 
 let Projectile = {
+
+  /**
+  * @param {Object} arr - The array of projectiles to be rendered
+  */
   shoot: (arr) => {
     State.projectiles.push(arr)
 
@@ -15,12 +17,21 @@ let Projectile = {
   },
 
 
+  /**
+  *
+  * @param {number} x
+  * @param {number} y
+  * @param {number} radius
+  * @param {string} color
+  */
   draw: (x, y, radius, color) => {
     Render.circle({
       x: x,
       y: y,
       size: radius,
-      backgroundColor: color
+      backgroundColor: color,
+      borderColor: null,
+      borderWidth: 0,
     })
   },
 
@@ -37,8 +48,10 @@ let Projectile = {
 
       // Remove projectile if outside the canvas plus 50px.
       if (projectile.x - projectile.radius < -50 ||
+        // @ts-ignore
         projectile.x + projectile.radius > DOM.canvas.width + 50 ||
         projectile.y - projectile.radius < -50 ||
+        // @ts-ignore
         projectile.y + projectile.radius > DOM.canvas.height + 50) {
 
         Projectile.delete(index)

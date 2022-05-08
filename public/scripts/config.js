@@ -1,3 +1,4 @@
+// @ts-check
 import { DOM } from './modules/dom.js'
 
 
@@ -8,7 +9,8 @@ const Config = {
   protocol: 'https://',
 
   showObjectInfo: true,
-  
+
+  // @ts-ignore
   ctx: DOM.canvas.getContext('2d'),
 
   get root() {
@@ -111,14 +113,30 @@ const Config = {
   },
 
   projectiles: {
+    /**
+      * @type {number} - The projectile's size in pixels
+    */
     SIZE: 3, // Projectile hitbox radius (default: 3)
+
+    /**
+      * @type {number} - The projectile's speed in pixels per frame
+    */
     SPEED: 20, // Pixels per frame (default: 15)
+
+    /**
+      * @type {string} - The projectile's color
+    */
     COLOR: '#fff'
   },
 
   objects: {
+
+    /**
+      * @type {boolean} - Whether to show the objects' hitboxes
+    */
     SHOW_COLLISION_BOX: true,
   },
+
 }
 
 

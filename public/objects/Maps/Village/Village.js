@@ -1,3 +1,4 @@
+// @ts-check
 import { Objects } from './Objects.js'
 import { Render } from '../../../scripts/modules/render.js'
 

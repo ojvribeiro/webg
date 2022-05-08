@@ -1,3 +1,4 @@
+// @ts-check
 import { Config } from '../config.js'
 import { State } from './states.js'
 
@@ -38,10 +39,6 @@ document.addEventListener('keydown', e => {
       // DOM.keysPressed.innerText = State.keyMap.array, State.player.speed
   }
 })
-
-
-
-
 
 
 document.addEventListener('keyup', e => {

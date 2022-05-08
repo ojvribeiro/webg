@@ -1,3 +1,4 @@
+// @ts-check
 import { Render } from './modules/render.js'
 
 import './modules/mouse.js'
@@ -9,7 +10,6 @@ let game = {
     Render.loop()
   }
 }
-
 
 
 export { game }

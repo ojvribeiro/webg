@@ -1,4 +1,11 @@
+// @ts-check
 let Calc = {
+
+  /**
+   * Rounds a number in a more efficient way than Math.round().
+   * @param {number} number
+   * @returns
+   */
   round: (number) => {
     let rounded
 

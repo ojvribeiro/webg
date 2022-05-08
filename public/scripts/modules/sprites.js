@@ -1,24 +1,26 @@
+// @ts-check
 import { Render } from './render.js'
 
 
 /**
- * Class utility to animate sprites.
- * @class
- * */
+* Class utility to animate sprites.
+* @class
+* */
 class SpriteAnimation {
+
   /**
-   * @constructs
-   * @param {object} spritesheet - The spritesheet image object (created with the `new` contructor).
-   * @param {!number} x - The X coordinate of the object.
-   * @param {!number} y - The Y coordinate of the object.
-   * @param {!number} width - Width of spritesheet.
-   * @param {!number} height - Height of spritesheet.
-   * @param {!number} timePerFrame - Time in milliseconds given to each frame.
-   * @param {number} [numberOfColumns=1] - The number of columns (frames) in the spritesheet.
-   * @param {number} [numberOfRows=1] - The number of rows (animations) in the spritesheet.
-   * @param {!number} rowIndex - The animation row to be executed.
-   * */
-  constructor(spritesheet, x, y, width, height, timePerFrame, numberOfColumns = 1, numberOfRows = 1, rowIndex) {
+  * @constructs
+  * @param {object} spritesheet - The spritesheet image object (created with the `new` contructor).
+  * @param {!number} x - The X coordinate of the object.
+  * @param {!number} y - The Y coordinate of the object.
+  * @param {!number} width - Width of spritesheet.
+  * @param {!number} height - Height of spritesheet.
+  * @param {!number} timePerFrame - Time in milliseconds given to each frame.
+  * @param {!number} rowIndex - The animation row to be executed.
+  * @param {number} [numberOfColumns=1] - The number of columns (frames) in the spritesheet.
+  * @param {number} [numberOfRows=1] - The number of rows (animations) in the spritesheet.
+  * */
+  constructor(spritesheet, x, y, width, height, timePerFrame, rowIndex, numberOfColumns = 1, numberOfRows = 1) {
     this.spritesheet = spritesheet
     this.x = x
     this.y = y
@@ -61,11 +63,8 @@ class SpriteAnimation {
       height: (this.height / this.numberOfRows),
     }
 
-    const image = new Image()
-    image.src = props.spritesheet
-
     Render.image({
-      image: image,
+      image: props.spritesheet,
       clipX: props.clipX,
       clipY: props.clipY,
       clipWidth: props.clipWidth,

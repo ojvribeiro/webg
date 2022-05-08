@@ -1,3 +1,4 @@
+// @ts-check
 import { Config } from '../../../scripts/config.js'
 
 

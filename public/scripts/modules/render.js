@@ -1,3 +1,4 @@
+// @ts-check
 import Stats from '../../node_modules/stats-js/src/Stats.js'
 
 import { Config } from '../config.js'
@@ -11,9 +12,12 @@ import { Box } from '../../objects/Box.js'
 
 const ctx = Config.ctx
 
+// @ts-ignore
 DOM.canvas.width = window.innerWidth
+// @ts-ignore
 DOM.canvas.height = window.innerHeight
 
+// @ts-ignore
 const stats = new Stats()
 stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
 document.body.appendChild(stats.dom)
@@ -41,6 +45,8 @@ let Render = {
 
     ;(function update() {
       stats.begin()
+
+      // @ts-ignore
       Config.ctx.clearRect(0, 0, DOM.canvas.width, DOM.canvas.height)
 
       if (State.projectiles.length > 0) {
@@ -85,18 +91,21 @@ let Render = {
 
       // Pop on other edge
       if (State.player.y < 0) {
+        // @ts-ignore
         State.player.y = DOM.canvas.height
       }
+      // @ts-ignore
       else if (State.player.y > DOM.canvas.height) {
         State.player.y = 0
       }
       else if (State.player.x < 0) {
+        // @ts-ignore
         State.player.x = DOM.canvas.width
       }
+      // @ts-ignore
       else if (State.player.x > DOM.canvas.width) {
         State.player.x = 0
       }
-
 
       stats.end()
 
@@ -160,7 +169,7 @@ let Render = {
         ctx.strokeStyle = props.borderColor || 'black' // Defaults to black
         ctx.lineWidth = props.borderWidth * 2 || 2 // A doubled value produces a more accurate result (default: 2 [1px])
 
-        for (let i in lineBreaks) {
+        for (let i = 0; i < lineBreaks.length; i++) {
           ctx.strokeText(
             lineBreaks[i].trim(),
             props.x,
@@ -171,7 +180,7 @@ let Render = {
         ctx.restore()
       }
 
-      for (let i in lineBreaks) {
+      for (let i = 0; i < lineBreaks.length; i++) {
         ctx.fillText(
           lineBreaks[i].trim(),
           props.x,
@@ -190,7 +199,7 @@ let Render = {
    * @param {Object} props - The circle properties.
    * @param {string} props.backgroundColor - The background color of the circle.
    * @param {string} props.borderColor - The border color of the circle.
-   * @param {string} props.borderWidth - The border width of the circle.
+   * @param {number} props.borderWidth - The border width of the circle.
    * @param {number} props.x - The X position of the circle.
    * @param {number} props.y - The Y position of the circle.
    * @param {number} props.size - The size the circle.
@@ -230,7 +239,7 @@ let Render = {
    * Method that renders a image on canvas.
    *
    * @param {Object} props - The image properties.
-   * @param {string} props.image - The image object.
+   * @param {Object} props.image - The image object.
    * @param {number} props.clipX - The X position to clip the image.
    * @param {number} props.clipY - The Y position to clip the image.
    * @param {number} props.clipWidth - The width value to clip the image.

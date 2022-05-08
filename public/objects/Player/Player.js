@@ -1,12 +1,10 @@
+// @ts-check
 import { Config } from '../../scripts/config.js'
 import { DOM } from '../../scripts/modules/dom.js'
 import { State } from '../../scripts/modules/states.js'
 import { Physics } from '../../scripts/modules/physics.js'
 import { SpriteAnimation } from '../../scripts/modules/sprites.js'
 import { Render } from '../../scripts/modules/render.js'
-
-DOM.canvas.width = window.innerWidth
-DOM.canvas.height = window.innerHeight
 
 
 let playerSprite = new Image()
@@ -16,9 +14,9 @@ playerSprite.src = Config.root + Config.player.SPRITE_SHEET_PATH
 class Player {
   constructor() {
     this.sprite = new SpriteAnimation(
-      playerSprite.src, // sprite image object
       State.player.x - (Config.player.WIDTH / 2), // sprite x
       State.player.y - (Config.player.HEIGHT / 2), // sprite y
+      playerSprite, // sprite image object
       Config.player.SIZE * Config.player.SPRITE_SHEET_COLS, // sprite width
       Config.player.SIZE * Config.player.SPRITE_SHEET_ROWS, // sprite height
       100,
@@ -123,8 +121,8 @@ class Player {
       Render.text({
         text: `
           player
-          x: ${parseInt(hitBox.enviroment.x)}
-          y: ${parseInt(hitBox.enviroment.y)}
+          x: ${String(Calc.round(hitBox.enviroment.x))}
+          y: ${String(Calc.round(hitBox.enviroment.y))}
         `,
         fontFamily: 'Arial, sans-serif',
         fontSize: '10px',

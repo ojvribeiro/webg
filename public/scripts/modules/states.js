@@ -1,14 +1,21 @@
+// @ts-check
 import { DOM } from './dom.js'
 import { Config } from '../config.js'
 
-DOM.canvas.width = window.innerWidth
-DOM.canvas.height = window.innerHeight
+const canvas = DOM.canvas
+
+// @ts-ignore
+canvas.width = window.innerWidth
+// @ts-ignore
+canvas.height = window.innerHeight
 
 // These defaults are automatically updated
 let State = {
   player: {
-    x: DOM.canvas.width / 2,
-    y: DOM.canvas.height / 2,
+    // @ts-ignore
+    x: canvas.width / 2,
+    // @ts-ignore
+    y: canvas.height / 2,
     speed: 0,
     facing: 'down',
     state: 'idle',
