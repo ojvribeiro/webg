@@ -14,28 +14,28 @@ const Config = {
   ctx: DOM.canvas.getContext('2d'),
 
   get root() {
-    let localDomain
+    const currentDomain = location.host
+
     let found = false
 
     for (let i in this.localDomain) {
       if (location.host === this.localDomain[i]) {
-        localDomain = this.localDomain[i]
         found = true
 
         break
       }
     }
 
-    if (!found) {
-      return this.protocol + this.domain
-    }
-    else {
-      if (localDomain.indexOf('gitpod.io') === -1) {
-        return this.protocol + location.host + '/public'
+    if (found === false) {
+      if (currentDomain.indexOf('gitpod.io') === -1) {
+        return this.protocol + currentDomain + '/public'
       }
       else {
-        return this.protocol + localDomain
+        return this.protocol + this.domain
       }
+    }
+    else {
+      return this.protocol + currentDomain + '/public'
     }
   },
 
