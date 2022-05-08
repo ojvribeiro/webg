@@ -1,6 +1,5 @@
 // @ts-check
 import { Config } from '../../scripts/config.js'
-import { DOM } from '../../scripts/modules/dom.js'
 import { State } from '../../scripts/modules/states.js'
 import { Physics } from '../../scripts/modules/physics.js'
 import { SpriteAnimation } from '../../scripts/modules/sprites.js'

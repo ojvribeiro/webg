@@ -1,4 +1,5 @@
 // @ts-check
+// import { DOM } from './dom.js'
 import { Config } from '../config.js'
 import { State } from './states.js'
 
@@ -36,7 +37,10 @@ document.addEventListener('keydown', e => {
       State.keyMap.array.push(e.code)
     }
 
-      // DOM.keysPressed.innerText = State.keyMap.array, State.player.speed
+    /**
+    * @todo Make a better front-end debug system
+    */
+    // DOM.keysPressed.innerText = State.keyMap.array, State.player.speed
   }
 })
 
@@ -89,5 +93,8 @@ document.addEventListener('keyup', e => {
     State.keyMap.array.splice(index, 1)
   }
 
+  /**
+  * @todo Make a better front-end debug system
+  */
   // DOM.keysPressed.innerText = State.keyMap.array
 })

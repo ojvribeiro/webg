@@ -1,11 +1,10 @@
-
-const d = document
+const doc = document
 
 const DOM = {
-  canvas: d.getElementById('canvas'),
-  keysPressed: d.getElementById('keys'),
-  playerSpeed: d.getElementById('speed'),
-  playerPosition: d.getElementById('player-pos'),
+  canvas: doc.getElementById('canvas'),
+  keysPressed: doc.getElementById('keys'),
+  playerSpeed: doc.getElementById('speed'),
+  playerPosition: doc.getElementById('player-pos'),
   mousePosition: {
     x: null,
     y: null

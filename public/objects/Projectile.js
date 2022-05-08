@@ -36,6 +36,10 @@ let Projectile = {
   },
 
 
+  /**
+  *
+  * @param {number} index
+  */
   delete: (index) => {
     State.projectiles.splice(index, 1)
   },

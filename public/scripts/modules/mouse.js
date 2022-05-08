@@ -1,4 +1,5 @@
 
+// @ts-check
 import { DOM } from './dom.js'
 import { Config } from '../config.js'
 import { State } from './states.js'
@@ -105,5 +106,8 @@ document.addEventListener('mousemove', e => {
     }
   }
 
-  DOM.keysPressed.innerText = angle
+  /**
+  * @todo Make a better front-end debug system
+  */
+  // DOM.keysPressed.innerText = String(angle)
 })
