@@ -5,7 +5,7 @@ import { DOM } from './modules/dom.js'
 const Config = {
   name: 'webg',
   domain: 'webg.io',
-  localDomain: ['8001-ojvribeiro-webg-5xrpm9ghv21.ws-us42.gitpod.io', 'webg.test'],
+  localDomain: ['webg.test'],
   protocol: 'https://',
 
   showObjectInfo: true,
@@ -31,7 +31,7 @@ const Config = {
     }
     else {
       if (localDomain.indexOf('gitpod.io') === -1) {
-        return this.protocol + localDomain + '/public'
+        return this.protocol + location.host + '/public'
       }
       else {
         return this.protocol + localDomain
