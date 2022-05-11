@@ -9,26 +9,19 @@ class SpriteAnimation {
 
   /**
   * @constructs
-  * @param {object} spritesheet - The spritesheet image object (created with the `new` contructor).
-  * @param {array} keyframes - The keyframes array.
-  * @param {!number} x - The X coordinate of the object.
-  * @param {!number} y - The Y coordinate of the object.
-  * @param {!number} width - Width of spritesheet.
-  * @param {!number} height - Height of spritesheet.
-  * @param {!String} animationName - The animation row to be executed.
-  * @param {number} [numberOfColumns=1] - The number of columns (frames) in the spritesheet.
-  * @param {number} [numberOfRows=1] - The number of rows (animations) in the spritesheet.
+  * @param {object} props - The properties of the object.
+  * @param {object} props.spriteImageObject - The spritesheet image object (created with the `new` contructor).
+  * @param {array} props.keyframes - The keyframes array.
+  * @param {number} props.xPosition - The X coordinate of the object.
+  * @param {number} props.yPosition - The Y coordinate of the object.
+  * @param {number} props.width - Width of spritesheet.
+  * @param {number} props.height - Height of spritesheet.
+  * @param {string} props.animationName - The animation row to be executed.
+  * @param {number} [props.numberOfColumns=1] - The number of columns (frames) in the spritesheet.
+  * @param {number} [props.numberOfRows=1] - The number of rows (animations) in the spritesheet.
   * */
-  constructor(spritesheet, keyframes, x, y, width, height, animationName, numberOfColumns = 1, numberOfRows = 1) {
-    this.spritesheet = spritesheet
-    this.keyframes = keyframes
-    this.x = x
-    this.y = y
-    this.width = width
-    this.height = height
-    this.numberOfColumns = numberOfColumns || 1
-    this.numberOfRows = numberOfRows || 1
-    this.animationName = animationName
+  constructor(props) {
+    this.props = props
 
     // Current frame index pointer
     this.frameIndex = 0
@@ -46,33 +39,30 @@ class SpriteAnimation {
    * @param {!number} y - The Y position of the object on the screen.
    */
   render(animationName, x, y) {
-    let rowIndex
-    const _x = x === undefined ? this.x : x
-    const _y = y === undefined ? this.y : y
+    const _x = x === undefined ? this.props.xPosition : x
+    const _y = y === undefined ? this.props.yPosition : y
 
-    for (let i = 0; i < this.keyframes.length; i++) {
-      const keyframe = this.keyframes[i]
+    for (let i = 0; i < this.props.keyframes.length; i++) {
+      this.currentAnimation = this.props.keyframes[i]
 
-      if (keyframe.name === animationName) {
-        this.animationLength = keyframe.frames.length
-        this.animationFrameRate = keyframe.frameRate
-
-        rowIndex = keyframe.id
+      if (this.currentAnimation.name === animationName) {
+        this.animationLength = this.currentAnimation.frames.length
+        this.animationFrameRate = this.currentAnimation.frameRate
 
         break
       }
     }
 
     const props = {
-      spritesheet: this.spritesheet,
-      clipX: (this.frameIndex * this.width / this.numberOfColumns),
-      clipY: (rowIndex > 0) ? ((this.height / this.numberOfRows)) * rowIndex : 0,
-      clipWidth: (this.width / this.numberOfColumns),
-      clipHeight: (this.height / this.numberOfRows),
+      spritesheet: this.props.spriteImageObject,
+      clipX: (this.frameIndex * this.props.width / this.props.numberOfColumns),
+      clipY: (this.currentAnimation.id > 0) ? ((this.props.height / this.props.numberOfRows)) * this.currentAnimation.id : 0,
+      clipWidth: (this.props.width / this.props.numberOfColumns),
+      clipHeight: (this.props.height / this.props.numberOfRows),
       x: _x,
       y: _y,
-      width: (this.width / this.numberOfColumns),
-      height: (this.height / this.numberOfRows),
+      width: (this.props.width / this.props.numberOfColumns),
+      height: (this.props.height / this.props.numberOfRows),
     }
 
     Render.image({

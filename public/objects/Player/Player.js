@@ -6,7 +6,9 @@ import { SpriteAnimation } from '../../scripts/modules/sprites.js'
 import { Render } from '../../scripts/modules/render.js'
 import { Calc } from '../../scripts/modules/math.js'
 
-import { keyframes } from './animation/basic.js'
+import { basicAnimationKeyframes } from './animation/basic.js'
+
+const basicAnimation = basicAnimationKeyframes
 
 let playerSprite = new Image()
 playerSprite.src = Config.root + Config.player.SPRITE_SHEET_PATH
@@ -14,17 +16,17 @@ playerSprite.src = Config.root + Config.player.SPRITE_SHEET_PATH
 
 class Player {
   constructor() {
-    this.sprite = new SpriteAnimation(
-      playerSprite, // sprite image object
-      keyframes,
-      State.player.x - (Config.player.WIDTH / 2), // sprite x position
-      State.player.y - (Config.player.HEIGHT / 2), // sprite y position
-      Config.player.SIZE * Config.player.SPRITE_SHEET_COLS, // sprite width
-      Config.player.SIZE * Config.player.SPRITE_SHEET_ROWS, // sprite height
-      'idle-down', // sprite frame index
-      Config.player.SPRITE_SHEET_COLS, // sprite sheet columns
-      Config.player.SPRITE_SHEET_ROWS, // sprite sheet rows
-    )
+    this.sprite = new SpriteAnimation({
+      spriteImageObject: playerSprite,
+      keyframes: basicAnimation,
+      xPosition: State.player.x - (Config.player.WIDTH / 2),
+      yPosition: State.player.y - (Config.player.HEIGHT / 2),
+      width: Config.player.SIZE * Config.player.SPRITE_SHEET_COLS,
+      height: Config.player.SIZE * Config.player.SPRITE_SHEET_ROWS,
+      animationName: 'idle-down',
+      numberOfColumns: Config.player.SPRITE_SHEET_COLS,
+      numberOfRows: Config.player.SPRITE_SHEET_ROWS,
+    })
 
     this.player = {
       type: 'player',

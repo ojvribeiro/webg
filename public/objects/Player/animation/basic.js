@@ -1,11 +1,14 @@
 // @ts-check
 // 'sprites/Player/Player.svg'
 
-const keyframes = [
+/**
+ * @type {array}
+ */
+const basicAnimationKeyframes = [
   {
     id: 0,
     name: 'idle-down',
-    frames: [0, 1, 2, 3, 4],
+    frames: [0, 1, 2, 1, 0],
     frameRate: 5,
   },
 
@@ -229,4 +232,4 @@ const keyframes = [
 ]
 
 
-export { keyframes }
+export { basicAnimationKeyframes }
