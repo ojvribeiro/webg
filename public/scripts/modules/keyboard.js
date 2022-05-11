@@ -56,8 +56,6 @@ document.addEventListener('keyup', e => {
     State.keyMap.upRight = false
 
     State.player.state = 'idle'
-
-    State.player.currentRowIndex = Config.player.spriteMap.up
   }
 
   if (e.code === Config.player.KEYBOARD_CONTROLS.down) {
@@ -66,24 +64,18 @@ document.addEventListener('keyup', e => {
     State.keyMap.downRight = false
 
     State.player.state = 'idle'
-
-    State.player.currentRowIndex = Config.player.spriteMap.down
   }
 
   if (e.code === Config.player.KEYBOARD_CONTROLS.left) {
     State.keyMap.left = false
 
     State.player.state = 'idle'
-
-    State.player.currentRowIndex = Config.player.spriteMap.left
   }
 
   if (e.code === Config.player.KEYBOARD_CONTROLS.right) {
     State.keyMap.right = false
 
     State.player.state = 'idle'
-
-    State.player.currentRowIndex = Config.player.spriteMap.right
   }
 
 

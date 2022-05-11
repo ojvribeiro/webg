@@ -56,8 +56,8 @@ const Config = {
     SIZE: 100,
     WIDTH: 50,
     HEIGHT: 100,
-    WALK_MAX_SPEED: 2, // Pixels per frame
-    RUN_MAX_SPEED: 4, // Pixels per frame
+    WALK_MAX_SPEED: 3, // Pixels per frame
+    RUN_MAX_SPEED: 5, // Pixels per frame
 
     SHOW_SPRITE: true,
     SPRITE_SHEET_PATH: '/sprites/Player/Player.svg',
