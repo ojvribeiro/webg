@@ -2,10 +2,11 @@
 import { Config } from '../../scripts/config.js'
 import { State } from '../../scripts/modules/states.js'
 import { Physics } from '../../scripts/modules/physics.js'
-import { SpriteAnimation } from '../../scripts/modules/sprites.js'
+import { Sprite, SpriteAnimation } from '../../scripts/modules/sprites.js'
 import { Render } from '../../scripts/modules/render.js'
 import { Calc } from '../../scripts/modules/math.js'
 
+import { keyframes } from '../../objects/Player/animation/basic.js'
 
 let playerSprite = new Image()
 playerSprite.src = Config.root + Config.player.SPRITE_SHEET_PATH
@@ -38,7 +39,7 @@ class Player {
   }
 
 
-  draw(rowIndex, x, y) {
+  draw(rowIndex, x, y, frameRate = undefined) {
     const hitBox = {
       head: {
         x: State.player.x + 2,
@@ -73,7 +74,7 @@ class Player {
       x: State.player.x,
       y: State.player.y + 45,
       size: hitBox.head.radius / 2,
-      backgroundColor: 'rgba(0,0,0,0.3)',
+      backgroundColor: 'rgba(0, 0, 0, 0.3)',
       borderColor: 'black',
       borderWidth: 1
     })
@@ -114,7 +115,7 @@ class Player {
       width: hitBox.enviroment.width,
       height: hitBox.enviroment.height,
       backgroundColor: hitBox.enviroment.color,
-      borderColor: 'transparent'
+      borderColor: hitBox.enviroment.color,
     })
 
     if (Config.showObjectInfo) {
@@ -372,8 +373,10 @@ class Player {
       }
       // Facing down
       else if (State.player.facing === 'down') {
+        Sprite.animate('walk-down')
+
         this.draw(
-          Config.player.spriteMap['down-walking'],
+          // Config.player.spriteMap['down-walking'],
           State.player.x,
           State.player.y
         )
