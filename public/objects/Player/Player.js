@@ -69,6 +69,12 @@ class Player {
   }
 
 
+  /**
+   *
+   * @param {string} animationName - Name of the animation to play
+   * @param {number} x - X position of the sprite
+   * @param {number} y - Y position of the sprite
+   */
   draw(animationName, x, y) {
     const hitBox = {
       head: {
