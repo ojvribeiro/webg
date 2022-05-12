@@ -6,6 +6,8 @@ import { State } from './states.js'
 import { Projectile } from '../../objects/Projectile.js'
 import { Physics } from './physics.js'
 
+import { playerConfig } from '../../objects/Player/Player.js'
+
 
 document.addEventListener('mousedown', e => {
   let angle, velocity
@@ -31,7 +33,7 @@ document.addEventListener('mousedown', e => {
 
 
 let playerSprite = new Image()
-playerSprite.src = Config.root + Config.player.SPRITE_SHEET_PATH
+playerSprite.src = Config.root + playerConfig.SPRITE_SHEET_PATH
 
 document.addEventListener('mousemove', e => {
   DOM.mousePosition.x = e.clientX

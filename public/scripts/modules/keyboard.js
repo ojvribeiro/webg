@@ -1,7 +1,8 @@
 // @ts-check
 // import { DOM } from './dom.js'
-import { Config } from '../config.js'
+import { playerConfig } from '../../objects/Player/Player.js'
 import { State } from './states.js'
+
 
 document.addEventListener('keydown', e => {
   // Fires the keydown event only once
@@ -11,23 +12,23 @@ document.addEventListener('keydown', e => {
       e.preventDefault()
     }
 
-    if (e.code === Config.player.KEYBOARD_CONTROLS.run) {
+    if (e.code === playerConfig.KEYBOARD_CONTROLS.run) {
       State.keyMap.shift = true
     }
 
-    if (e.code === Config.player.KEYBOARD_CONTROLS.up) {
+    if (e.code === playerConfig.KEYBOARD_CONTROLS.up) {
       State.keyMap.up = true
     }
 
-    if (e.code === Config.player.KEYBOARD_CONTROLS.down) {
+    if (e.code === playerConfig.KEYBOARD_CONTROLS.down) {
       State.keyMap.down = true
     }
 
-    if (e.code === Config.player.KEYBOARD_CONTROLS.left) {
+    if (e.code === playerConfig.KEYBOARD_CONTROLS.left) {
       State.keyMap.left = true
     }
 
-    if (e.code === Config.player.KEYBOARD_CONTROLS.right) {
+    if (e.code === playerConfig.KEYBOARD_CONTROLS.right) {
       State.keyMap.right = true
     }
 
@@ -46,11 +47,11 @@ document.addEventListener('keydown', e => {
 
 
 document.addEventListener('keyup', e => {
-  if (e.code === Config.player.KEYBOARD_CONTROLS.run) {
+  if (e.code === playerConfig.KEYBOARD_CONTROLS.run) {
     State.keyMap.shift = false
   }
 
-  if (e.code === Config.player.KEYBOARD_CONTROLS.up) {
+  if (e.code === playerConfig.KEYBOARD_CONTROLS.up) {
     State.keyMap.up = false
     State.keyMap.upLeft = false
     State.keyMap.upRight = false
@@ -58,7 +59,7 @@ document.addEventListener('keyup', e => {
     State.player.state = 'idle'
   }
 
-  if (e.code === Config.player.KEYBOARD_CONTROLS.down) {
+  if (e.code === playerConfig.KEYBOARD_CONTROLS.down) {
     State.keyMap.down = false
     State.keyMap.downLeft = false
     State.keyMap.downRight = false
@@ -66,13 +67,13 @@ document.addEventListener('keyup', e => {
     State.player.state = 'idle'
   }
 
-  if (e.code === Config.player.KEYBOARD_CONTROLS.left) {
+  if (e.code === playerConfig.KEYBOARD_CONTROLS.left) {
     State.keyMap.left = false
 
     State.player.state = 'idle'
   }
 
-  if (e.code === Config.player.KEYBOARD_CONTROLS.right) {
+  if (e.code === playerConfig.KEYBOARD_CONTROLS.right) {
     State.keyMap.right = false
 
     State.player.state = 'idle'

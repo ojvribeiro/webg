@@ -10,31 +10,59 @@ import { basicAnimationKeyframes } from './animation/basic.js'
 
 const basicAnimation = basicAnimationKeyframes
 
-let playerSprite = new Image()
-playerSprite.src = Config.root + Config.player.SPRITE_SHEET_PATH
+const playerConfig = {
+  SIZE: 100,
+  WIDTH: 50,
+  HEIGHT: 100,
+  WALK_MAX_SPEED: 3, // Pixels per frame
+  RUN_MAX_SPEED: 5, // Pixels per frame
 
+  SHOW_SPRITE: true,
+  SPRITE_SHEET_PATH: '/sprites/Player/Player.svg',
+  SPRITE_SHEET_ROWS: 32,
+  SPRITE_SHEET_COLS: 5,
+
+  SHOW_HITBOX: false,
+  SHOW_COLLISION_BOX: false,
+  HITBOX_COLOR: 'rgba(245, 50, 28, 0.5)',
+  COLLISION_BOX_COLOR: 'rgba(254, 212, 150, 0.5)',
+
+  /**
+  * Define player keyboard controls
+  * Uses `event.code` to capture key codes on `keydown`
+  */
+  KEYBOARD_CONTROLS: {
+    up: 'KeyW',
+    down: 'KeyS',
+    left: 'KeyA',
+    right: 'KeyD',
+    run: 'ShiftLeft',
+  },
+
+}
+
+const playerSprite = new Image()
+playerSprite.src = Config.root + playerConfig.SPRITE_SHEET_PATH
 
 class Player {
   constructor() {
     this.sprite = new SpriteAnimation({
       spriteImageObject: playerSprite,
       keyframes: basicAnimation,
-      xPosition: State.player.x - (Config.player.WIDTH / 2),
-      yPosition: State.player.y - (Config.player.HEIGHT / 2),
-      width: Config.player.SIZE * Config.player.SPRITE_SHEET_COLS,
-      height: Config.player.SIZE * Config.player.SPRITE_SHEET_ROWS,
+      xPosition: State.player.x - (playerConfig.WIDTH / 2),
+      yPosition: State.player.y - (playerConfig.HEIGHT / 2),
+      width: playerConfig.SIZE,
+      height: playerConfig.SIZE,
       animationName: 'idle-down',
-      numberOfColumns: Config.player.SPRITE_SHEET_COLS,
-      numberOfRows: Config.player.SPRITE_SHEET_ROWS,
     })
 
     this.player = {
       type: 'player',
-      x: State.player.x - (Config.player.WIDTH / 4) + 2,
-      y: State.player.y + (Config.player.HEIGHT / 4) + 5,
-      bottomY: State.player.y + (Config.player.HEIGHT / 4) + 5,
-      width: Config.player.WIDTH / 2,
-      height: Config.player.HEIGHT / 5,
+      x: State.player.x - (playerConfig.WIDTH / 4) + 2,
+      y: State.player.y + (playerConfig.HEIGHT / 4) + 5,
+      bottomY: State.player.y + (playerConfig.HEIGHT / 4) + 5,
+      width: playerConfig.WIDTH / 2,
+      height: playerConfig.HEIGHT / 5,
     }
 
     Render.add(this.player)
@@ -45,25 +73,25 @@ class Player {
     const hitBox = {
       head: {
         x: State.player.x + 2,
-        y: State.player.y - (Config.player.HEIGHT / 4) + 3,
-        radius: Config.player.HEIGHT / 4,
-        color: (Config.player.SHOW_HITBOX === true) ? Config.player.HITBOX_COLOR : 'transparent'
+        y: State.player.y - (playerConfig.HEIGHT / 4) + 3,
+        radius: playerConfig.HEIGHT / 4,
+        color: (playerConfig.SHOW_HITBOX === true) ? playerConfig.HITBOX_COLOR : 'transparent'
       },
 
       body: {
-        x: State.player.x - (Config.player.WIDTH / 4) + 2,
+        x: State.player.x - (playerConfig.WIDTH / 4) + 2,
         y: State.player.y,
-        width: (Config.player.WIDTH / 2),
-        height: (Config.player.HEIGHT / 2),
-        color: (Config.player.SHOW_HITBOX === true) ? Config.player.HITBOX_COLOR : 'transparent'
+        width: (playerConfig.WIDTH / 2),
+        height: (playerConfig.HEIGHT / 2),
+        color: (playerConfig.SHOW_HITBOX === true) ? playerConfig.HITBOX_COLOR : 'transparent'
       },
 
       enviroment: {
-        x: State.player.x - (Config.player.WIDTH / 4) + 2,
-        y: State.player.y + (Config.player.HEIGHT / 4) + 5,
-        width: Config.player.WIDTH / 2,
-        height: Config.player.HEIGHT / 5,
-        color: (Config.player.SHOW_COLLISION_BOX === true) ? Config.player.COLLISION_BOX_COLOR : 'transparent'
+        x: State.player.x - (playerConfig.WIDTH / 4) + 2,
+        y: State.player.y + (playerConfig.HEIGHT / 4) + 5,
+        width: playerConfig.WIDTH / 2,
+        height: playerConfig.HEIGHT / 5,
+        color: (playerConfig.SHOW_COLLISION_BOX === true) ? playerConfig.COLLISION_BOX_COLOR : 'transparent'
       }
     }
 
@@ -81,12 +109,12 @@ class Player {
       borderWidth: 1
     })
 
-    if (Config.player.SHOW_SPRITE === true) {
+    if (playerConfig.SHOW_SPRITE === true) {
       // Modifies sprites.js
       this.sprite.render(
         animationName,
-        x - (Config.player.SIZE / 2),
-        y - (Config.player.SIZE / 2)
+        x - (playerConfig.SIZE / 2),
+        y - (playerConfig.SIZE / 2)
       )
     }
 
@@ -166,8 +194,8 @@ class Player {
         State.player.speed += 0.1
 
         // Locks the speed when it hits the maximum defined
-        if (State.player.speed >= Config.player.RUN_MAX_SPEED) {
-          State.player.speed = Config.player.RUN_MAX_SPEED
+        if (State.player.speed >= playerConfig.RUN_MAX_SPEED) {
+          State.player.speed = playerConfig.RUN_MAX_SPEED
         }
 
         // Listens to movement keys (allows multi press)
@@ -209,8 +237,8 @@ class Player {
 
 
       // Locks the velocity to the maximun allowed
-      if (State.player.speed >= Config.player.WALK_MAX_SPEED) {
-        State.player.speed = Config.player.WALK_MAX_SPEED
+      if (State.player.speed >= playerConfig.WALK_MAX_SPEED) {
+        State.player.speed = playerConfig.WALK_MAX_SPEED
       }
 
 
@@ -669,4 +697,4 @@ class Player {
   }
 }
 
-export { Player }
+export { Player, playerConfig }

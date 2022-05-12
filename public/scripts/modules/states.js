@@ -1,6 +1,6 @@
 // @ts-check
 import { DOM } from './dom.js'
-import { Config } from '../config.js'
+import { playerConfig } from '../../objects/Player/Player.js'
 
 const canvas = DOM.canvas
 
@@ -20,7 +20,7 @@ let State = {
     facing: 'down',
     state: 'idle',
     currentRowIndex: 0,
-    sprites: Config.player.SPRITE_SHEET_PATH,
+    sprites: playerConfig.SPRITE_SHEET_PATH,
     hitBox: {
       head: {},
       body: {}
