@@ -17,17 +17,16 @@ class SpriteAnimation {
   * @param {number} props.width - Width of spritesheet.
   * @param {number} props.height - Height of spritesheet.
   * @param {string} props.animationName - The animation row to be executed.
-  * @param {number} [props.numberOfColumns=1] - The number of columns (frames) in the spritesheet.
-  * @param {number} [props.numberOfRows=1] - The number of rows (animations) in the spritesheet.
   * */
   constructor(props) {
-    this.props = props
-
-    // Current frame index pointer
-    this.frameIndex = 0
 
     // Time the frame index was last updated
     this.lastUpdate = Date.now()
+    this.props = props
+
+    this.iterator = 0
+
+    this.frameIndex = 0
   }
 
 
@@ -42,51 +41,69 @@ class SpriteAnimation {
     const _x = x === undefined ? this.props.xPosition : x
     const _y = y === undefined ? this.props.yPosition : y
 
-    for (let i = 0; i < this.props.keyframes.length; i++) {
-      this.currentAnimation = this.props.keyframes[i]
 
-      if (this.currentAnimation.name === animationName) {
+    for (let i = 0; i < this.props.keyframes.length; i++) {
+      if (this.props.keyframes[i].name === animationName) {
+        this.currentAnimation = this.props.keyframes[i]
         this.animationLength = this.currentAnimation.frames.length
         this.animationFrameRate = this.currentAnimation.frameRate
 
-        break
+        this.props.width = (this.props.width * this.animationLength) / this.animationLength
+        this.props.height = (this.props.height * this.props.keyframes.length) / this.props.keyframes.length
+
+        const props = {
+          spritesheet: this.props.spriteImageObject,
+          clipX: (this.props.width * this.frameIndex),
+          clipY: (this.currentAnimation.id > 0) ? this.props.height * (this.currentAnimation.id) : 0,
+          clipWidth: this.props.width,
+          clipHeight: this.props.height,
+          x: _x,
+          y: _y,
+          width: this.props.width,
+          height: this.props.height,
+        }
+
+        Render.image({
+          image: props.spritesheet,
+          clipX: props.clipX,
+          clipY: props.clipY,
+          clipWidth: props.clipWidth,
+          clipHeight: props.clipHeight,
+          x: props.x,
+          y: props.y,
+          width: props.width,
+          height: props.height
+        })
       }
     }
 
-    const props = {
-      spritesheet: this.props.spriteImageObject,
-      clipX: (this.frameIndex * this.props.width / this.props.numberOfColumns),
-      clipY: (this.currentAnimation.id > 0) ? ((this.props.height / this.props.numberOfRows)) * this.currentAnimation.id : 0,
-      clipWidth: (this.props.width / this.props.numberOfColumns),
-      clipHeight: (this.props.height / this.props.numberOfRows),
-      x: _x,
-      y: _y,
-      width: (this.props.width / this.props.numberOfColumns),
-      height: (this.props.height / this.props.numberOfRows),
-    }
 
-    Render.image({
-      image: props.spritesheet,
-      clipX: props.clipX,
-      clipY: props.clipY,
-      clipWidth: props.clipWidth,
-      clipHeight: props.clipHeight,
-      x: props.x,
-      y: props.y,
-      width: props.width,
-      height: props.height
-    })
   }
 
 
   // To update
   update() {
     if (Date.now() - this.lastUpdate > (1000 / this.animationFrameRate)) {
-      this.frameIndex++
+      if (this.iterator < this.animationLength - 1) {
+        this.iterator = this.iterator + 1
 
-      if (this.frameIndex >= this.animationLength) {
-        this.frameIndex = 0
+        // if the iterator is less than the length of the animation...
+        if (this.iterator < this.animationLength - 1) {
+          // ...increment the iterator
+          this.frameIndex = this.currentAnimation.frames[this.iterator + 1]
+        }
+        // if the iterator is equal to the length of the animation...
+        else {
+          // ...reset the iterator
+          this.iterator = 0
+          this.frameIndex = this.currentAnimation.frames[0]
+        }
       }
+      else {
+        this.iterator = 0
+        this.frameIndex = this.currentAnimation.frames[0]
+      }
+
 
       this.lastUpdate = Date.now()
     }
