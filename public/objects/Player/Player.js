@@ -210,7 +210,7 @@ class Player {
       State.player.state = 'walking'
 
       // Increases the speed
-      State.player.speed += 0.1
+      State.player.speed += 0.03
 
 
       // Locks the velocity to the maximun allowed
