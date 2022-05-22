@@ -25,8 +25,6 @@ class SpriteAnimation {
     this.props = props
 
     this.iterator = 0
-
-    this.frameIndex = 0
   }
 
 
@@ -53,7 +51,7 @@ class SpriteAnimation {
 
         const props = {
           spritesheet: this.props.spriteImageObject,
-          clipX: (this.props.width * this.frameIndex),
+          clipX: (this.currentFrameValue <= this.animationLength - 1) ? (this.props.width * this.currentAnimation.frames[this.currentFrameValue]) : 0,
           clipY: (this.currentAnimation.id > 0) ? this.props.height * (this.currentAnimation.id) : 0,
           clipWidth: this.props.width,
           clipHeight: this.props.height,
@@ -74,38 +72,29 @@ class SpriteAnimation {
           width: props.width,
           height: props.height
         })
+
+        this.update()
+
+        break
       }
     }
-
-
   }
 
 
   // To update
   update() {
     if (Date.now() - this.lastUpdate > (1000 / this.animationFrameRate)) {
-      if (this.iterator < this.animationLength - 1) {
-        this.iterator = this.iterator + 1
+      this.lastUpdate = Date.now()
 
-        // if the iterator is less than the length of the animation...
-        if (this.iterator < this.animationLength - 1) {
-          // ...increment the iterator
-          this.frameIndex = this.currentAnimation.frames[this.iterator + 1]
-        }
-        // if the iterator is equal to the length of the animation...
-        else {
-          // ...reset the iterator
-          this.iterator = 0
-          this.frameIndex = this.currentAnimation.frames[0]
-        }
+      if (this.iterator < this.animationLength) {
+        this.currentFrameValue = this.currentAnimation.frames[this.iterator]
+
+        this.iterator++
       }
       else {
         this.iterator = 0
-        this.frameIndex = this.currentAnimation.frames[0]
+        this.currentFrameValue = this.currentAnimation.frames[0]
       }
-
-
-      this.lastUpdate = Date.now()
     }
   }
 }

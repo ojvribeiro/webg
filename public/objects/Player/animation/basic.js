@@ -8,85 +8,85 @@ const basicAnimationKeyframes = [
   {
     id: 0,
     name: 'idle-down',
-    frames: [0, 1, 2, 1, 0],
+    frames: [0, 1, 2, 1],
     frameRate: 5,
   },
 
   {
     id: 1,
     name: 'idle-up',
-    frames: [0, 1, 2, 3, 4],
+    frames: [0, 1, 2, 1],
     frameRate: 5,
   },
 
   {
     id: 2,
     name: 'idle-left',
-    frames: [0, 1, 2, 3, 4],
+    frames: [0, 1, 2, 1, 0],
     frameRate: 5,
   },
 
   {
     id: 3,
     name: 'idle-right',
-    frames: [0, 1, 2, 3, 4],
+    frames: [0, 1, 2, 1],
     frameRate: 5,
   },
 
   {
     id: 4,
     name: 'idle-up-left',
-    frames: [0, 1, 2, 3, 4],
+    frames: [0, 1, 2, 1],
     frameRate: 5,
   },
 
   {
     id: 5,
     name: 'idle-up-right',
-    frames: [0, 1, 2, 3, 4],
+    frames: [0, 1, 2, 1],
     frameRate: 5,
   },
 
   {
     id: 6,
     name: 'idle-down-left',
-    frames: [0, 1, 2, 3, 4],
+    frames: [0, 1, 2, 1],
     frameRate: 5,
   },
 
   {
     id: 7,
     name: 'idle-down-right',
-    frames: [0, 1, 2, 3, 4],
+    frames: [0, 1, 2, 1],
     frameRate: 5,
   },
 
   {
     id: 8,
     name: 'run-down',
-    frames: [0, 1, 2, 3, 4],
-    frameRate: 24,
+    frames: [0, 1, 2, 3, 4, 5],
+    frameRate: 20,
   },
 
   {
     id: 9,
     name: 'run-up',
     frames: [0, 1, 2, 3, 4],
-    frameRate: 24,
+    frameRate: 20,
   },
 
   {
     id: 10,
     name: 'run-left',
     frames: [0, 1, 2, 3, 4],
-    frameRate: 24,
+    frameRate: 30,
   },
 
   {
     id: 11,
     name: 'run-right',
     frames: [0, 1, 2, 3, 4],
-    frameRate: 24,
+    frameRate: 30,
   },
 
   {
@@ -177,28 +177,28 @@ const basicAnimationKeyframes = [
     id: 24,
     name: 'run-down-left',
     frames: [0, 1, 2, 3, 4],
-    frameRate: 24,
+    frameRate: 30,
   },
 
   {
     id: 25,
     name: 'run-down-right',
     frames: [0, 1, 2, 3, 4],
-    frameRate: 24,
+    frameRate: 30,
   },
 
   {
     id: 26,
     name: 'run-up-left',
     frames: [0, 1, 2, 3, 4],
-    frameRate: 24,
+    frameRate: 30,
   },
 
   {
     id: 27,
     name: 'run-up-right',
     frames: [0, 1, 2, 3, 4],
-    frameRate: 24,
+    frameRate: 30,
   },
 
   {

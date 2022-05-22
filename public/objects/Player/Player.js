@@ -699,7 +699,6 @@ class Player {
       )
     }
 
-    this.sprite.update()
   }
 }
 
