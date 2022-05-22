@@ -154,6 +154,8 @@ class Player {
         player.x = State.player.x
         player.y = hitBox.enviroment.y
         player.bottomY = hitBox.enviroment.y + hitBox.enviroment.height
+
+        break
       }
     }
   }
