@@ -85,8 +85,8 @@ const basicAnimationKeyframes = [
 
   {
     name: 'walk-up',
-    frames: [0, 1, 2, 3, 4],
-    frameRate: 8,
+    frames: [0, 1, 2, 3, 4, 3, 2, 1],
+    frameRate: 12,
   },
 
   {
@@ -157,7 +157,7 @@ const basicAnimationKeyframes = [
 
   {
     name: 'walk-down-backwards',
-    frames: [0, 1, 2, 3, 4],
+    frames: [0, 1, 2, 3, 4, 3, 2, 1],
     frameRate: 12,
   },
 
