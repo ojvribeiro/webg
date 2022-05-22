@@ -40,9 +40,9 @@ class SpriteAnimation {
     const _y = y === undefined ? this.props.yPosition : y
 
 
-    for (let i = 0; i < this.props.keyframes.length; i++) {
-      if (this.props.keyframes[i].name === animationName) {
-        this.currentAnimation = this.props.keyframes[i]
+    for (let animationIndex = 0; animationIndex < this.props.keyframes.length; animationIndex++) {
+      if (this.props.keyframes[animationIndex].name === animationName) {
+        this.currentAnimation = this.props.keyframes[animationIndex]
         this.animationLength = this.currentAnimation.frames.length
         this.animationFrameRate = this.currentAnimation.frameRate
 
@@ -52,7 +52,7 @@ class SpriteAnimation {
         const props = {
           spritesheet: this.props.spriteImageObject,
           clipX: (this.currentFrameValue <= this.animationLength - 1) ? (this.props.width * this.currentAnimation.frames[this.currentFrameValue]) : 0,
-          clipY: (this.currentAnimation.id > 0) ? this.props.height * (this.currentAnimation.id) : 0,
+          clipY: (animationIndex > 0) ? this.props.height * (animationIndex) : 0,
           clipWidth: this.props.width,
           clipHeight: this.props.height,
           x: _x,
