@@ -162,7 +162,6 @@ class Player {
 
 
   render() {
-
     // Run
     if (State.keyMap.shift) {
       if (State.keyMap.up || State.keyMap.down || State.keyMap.left || State.keyMap.right) {
@@ -263,16 +262,25 @@ class Player {
 
 
   changeSprite() {
-    /**
-     * Idle
-     * */
-    if (
-      !State.keyMap.up &&
-      !State.keyMap.down &&
-      !State.keyMap.left &&
-      !State.keyMap.right &&
-      !State.keyMap.shift
-    ) {
+    const idle = !State.keyMap.up && !State.keyMap.down && !State.keyMap.left && !State.keyMap.right && !State.keyMap.shift
+
+    const walkingUp = State.keyMap.up && !State.keyMap.down && !State.keyMap.shift
+    const walkingDown = State.keyMap.down && !State.keyMap.up && !State.keyMap.shift
+    const walkingLeft = State.keyMap.left && !State.keyMap.right && !State.keyMap.shift
+    const walkingRight = State.keyMap.right && !State.keyMap.left && !State.keyMap.shift
+
+    const runningUp = State.keyMap.shift && State.keyMap.up && !State.keyMap.down && !State.keyMap.left && !State.keyMap.right
+    const runningDown = State.keyMap.shift && State.keyMap.down && !State.keyMap.up && !State.keyMap.left && !State.keyMap.right
+    const runningLeft = State.keyMap.shift && State.keyMap.left && !State.keyMap.right && !State.keyMap.up && !State.keyMap.down
+    const runningRight = State.keyMap.shift && State.keyMap.right && !State.keyMap.left && !State.keyMap.up && !State.keyMap.down
+
+    const runningUpLeft = State.keyMap.shift && State.keyMap.up && State.keyMap.left && !State.keyMap.right && !State.keyMap.down
+    const runningUpRight = State.keyMap.shift && State.keyMap.up && State.keyMap.right && !State.keyMap.left && !State.keyMap.down
+    const runningDownLeft = State.keyMap.shift && State.keyMap.down && State.keyMap.left && !State.keyMap.right && !State.keyMap.up
+    const runningDownRight = State.keyMap.shift && State.keyMap.down && State.keyMap.right && !State.keyMap.left && !State.keyMap.up
+
+
+    if (idle) {
       switch (State.player.facing) {
         case State.player.facing:
           this.draw(
@@ -288,16 +296,11 @@ class Player {
       }
     }
 
-    /**
-     * Walking up
-     * */
-    else if (State.keyMap.up && !State.keyMap.down && !State.keyMap.shift) {
-      const direction = 'up'
-
+    else if (walkingUp) {
       // Facing up
       if (State.player.facing === 'up') {
         this.draw(
-          'walk-' + direction,
+          'walk-up',
           State.player.x,
           State.player.y
         )
@@ -305,7 +308,7 @@ class Player {
       // Facing down
       else if (State.player.facing === 'down') {
         this.draw(
-          'walk-' + direction + '-backwards',
+          'walk-up-backwards',
           State.player.x,
           State.player.y
         )
@@ -358,13 +361,9 @@ class Player {
           State.player.y
         )
       }
-
     }
 
-    /**
-     * Walking down
-     * */
-    else if (State.keyMap.down && !State.keyMap.up && !State.keyMap.shift) {
+    else if (walkingDown) {
       // Facing up
       if (State.player.facing === 'up') {
         this.draw(
@@ -432,10 +431,7 @@ class Player {
       }
     }
 
-    /**
-     * Walking left
-     * */
-    else if (State.keyMap.left && !State.keyMap.right && !State.keyMap.shift) {
+    else if (walkingLeft) {
       // Facing up
       if (State.player.facing === 'up') {
         this.draw(
@@ -502,10 +498,7 @@ class Player {
       }
     }
 
-    /**
-     * Walking right
-     * */
-    else if (State.keyMap.right && !State.keyMap.left && !State.keyMap.shift) {
+    else if (walkingRight) {
       // Facing up
       if (State.player.facing === 'up') {
         this.draw(
@@ -574,10 +567,7 @@ class Player {
 
 
 
-    /**
-     * Running up
-     * */
-    else if (State.keyMap.shift && State.keyMap.up && !State.keyMap.down && !State.keyMap.left && !State.keyMap.right) {
+    else if (runningUp) {
       this.draw(
         'run-up',
         State.player.x,
@@ -585,10 +575,7 @@ class Player {
       )
     }
 
-    /**
-     * Running down
-     * */
-    else if (State.keyMap.shift && State.keyMap.down && !State.keyMap.up && !State.keyMap.left && !State.keyMap.right) {
+    else if (runningDown) {
       this.draw(
         'run-down',
         State.player.x,
@@ -596,10 +583,7 @@ class Player {
       )
     }
 
-    /**
-     * Running left
-     * */
-    else if (State.keyMap.shift && State.keyMap.left && !State.keyMap.right && !State.keyMap.up && !State.keyMap.down) {
+    else if (runningLeft) {
       this.draw(
         'run-left',
         State.player.x,
@@ -607,10 +591,7 @@ class Player {
       )
     }
 
-    /**
-     * Running right
-     * */
-    else if (State.keyMap.shift && State.keyMap.right && !State.keyMap.left && !State.keyMap.up && !State.keyMap.down) {
+    else if (runningRight) {
       this.draw(
         'run-right',
         State.player.x,
@@ -618,10 +599,7 @@ class Player {
       )
     }
 
-    /**
-     * Running up-left
-     * */
-    else if (State.keyMap.shift && State.keyMap.up && State.keyMap.left && !State.keyMap.right) {
+    else if (runningUpLeft) {
       this.draw(
         'run-up-left',
         State.player.x,
@@ -629,10 +607,7 @@ class Player {
       )
     }
 
-    /**
-     * Running up-right
-     * */
-    else if (State.keyMap.shift && State.keyMap.up && State.keyMap.right) {
+    else if (runningUpRight) {
       this.draw(
         'run-up-right',
         State.player.x,
@@ -640,10 +615,7 @@ class Player {
       )
     }
 
-    /**
-     * Running down-left
-     * */
-    else if (State.keyMap.shift && State.keyMap.down && State.keyMap.left) {
+    else if (runningDownLeft) {
       this.draw(
         'run-down-left',
         State.player.x,
@@ -651,10 +623,7 @@ class Player {
       )
     }
 
-    /**
-     * Running down-right
-     * */
-    else if (State.keyMap.shift && State.keyMap.down && State.keyMap.right) {
+    else if (runningDownRight) {
       this.draw(
         'run-down-right',
         State.player.x,
