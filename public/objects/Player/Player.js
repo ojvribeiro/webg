@@ -637,8 +637,9 @@ class Player {
         State.player.x,
         State.player.y
       )
-    }
 
+      State.player.speed = 0
+    }
   }
 }
 
