@@ -71,7 +71,7 @@ let Projectile = {
 
         if (object.type === 'box' && object.isBulletTangible === true) {
           // Enable collision
-          if (Physics.collision.circleRect(projectile, object)) {
+          if (Physics.collision.detect.circleRect(projectile, object)) {
             // Destroy bullet
             Projectile.delete(index)
           }
