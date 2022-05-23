@@ -23,7 +23,7 @@ stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
 document.body.appendChild(stats.dom)
 
 
-let Render = {
+const Render = {
   /**
    * The rendering order.
    * @todo Every element to be drawn on screen should be here to be swaped when needed
@@ -31,6 +31,11 @@ let Render = {
   */
   chain: [],
 
+
+  /**
+   *
+   * @param {Object} props - The object to be added to the chain
+   */
   add: (props) => {
     Render.chain.push(props)
   },
