@@ -17,6 +17,8 @@ playerSprite.src = Config.root + playerConfig.SPRITE_SHEET_PATH
 
 class Player {
   constructor() {
+    this.hitBox = {}
+
     this.sprite = new SpriteAnimation({
       spriteImageObject: playerSprite,
       keyframes: basicAnimation,
@@ -34,6 +36,11 @@ class Player {
       bottomY: State.player.y + (playerConfig.HEIGHT / 4) + 5,
       width: playerConfig.WIDTH / 2,
       height: playerConfig.HEIGHT / 5,
+      hitBox: {
+        head: this.hitBox.head,
+        body: this.hitBox.body,
+        collisionBox: this.hitBox.enviroment,
+      },
     }
 
     Render.add(this.player)
@@ -47,7 +54,7 @@ class Player {
    * @param {number} y - Y position of the sprite
    */
   draw(animationName, x, y) {
-    const hitBox = {
+    this.hitBox = {
       head: {
         x: State.player.x + 2,
         y: State.player.y - (playerConfig.HEIGHT / 4) + 3,
@@ -72,15 +79,11 @@ class Player {
       }
     }
 
-    State.player.hitBox.head = hitBox.head
-    State.player.hitBox.body = hitBox.body
-    State.player.collisionBox = hitBox.enviroment
-
     // Render player shadow
     Render.circle({
       x: State.player.x,
       y: State.player.y + 45,
-      size: hitBox.head.radius / 2,
+      size: this.hitBox.head.radius / 2,
       backgroundColor: 'rgba(0, 0, 0, 0.3)',
       borderColor: 'black',
       borderWidth: 1
@@ -95,51 +98,75 @@ class Player {
       )
     }
 
-    // Render head hitbox
-    Render.circle({
-      x: hitBox.head.x,
-      y: hitBox.head.y,
-      size: hitBox.head.radius,
-      backgroundColor: hitBox.head.color,
-      borderColor: 'black',
-      borderWidth: 1
-    })
+    if (playerConfig.SHOW_HITBOX) {
+      // Render head hitbox
+      Render.circle({
+        x: this.hitBox.head.x,
+        y: this.hitBox.head.y,
+        size: this.hitBox.head.radius,
+        backgroundColor: this.hitBox.head.backgroundColor,
+        borderColor: this.hitBox.head.borderColor,
+        borderWidth: 1
+      })
 
-    // Render body hitbox
-    Render.box({
-      x: hitBox.body.x,
-      y: hitBox.body.y,
-      width: hitBox.body.width,
-      height: hitBox.body.height,
-      backgroundColor: hitBox.head.color,
-      borderColor: 'transparent'
-    })
+      // Render body hitbox
+      Render.box({
+        x: this.hitBox.body.x,
+        y: this.hitBox.body.y,
+        width: this.hitBox.body.width,
+        height: this.hitBox.body.height,
+        backgroundColor: this.hitBox.head.backgroundColor,
+        borderColor: this.hitBox.head.borderColor,
+        borderWidth: 1
+      })
+    }
 
-    // Render enviroment collision box
-    Render.box({
-      x: hitBox.enviroment.x,
-      y: hitBox.enviroment.y,
-      width: hitBox.enviroment.width,
-      height: hitBox.enviroment.height,
-      backgroundColor: hitBox.enviroment.color,
-      borderColor: hitBox.enviroment.color,
-    })
+    if (playerConfig.SHOW_COLLISION_BOX) {
+      // Render enviroment collision box
+      Render.box({
+        x: this.hitBox.enviroment.x,
+        y: this.hitBox.enviroment.y,
+        width: this.hitBox.enviroment.width,
+        height: this.hitBox.enviroment.height,
+        backgroundColor: this.hitBox.enviroment.backgroundColor,
+        borderColor: this.hitBox.enviroment.borderColor,
+      })
+    }
 
-    if (Config.showObjectInfo) {
+    if (playerConfig.SHOW_OBJECT_INFO) {
       Render.text({
         text: `
           player
-          x: ${String(Calc.round(hitBox.enviroment.x))}
-          y: ${String(Calc.round(hitBox.enviroment.y))}
+          x: ${String(Calc.round(this.hitBox.enviroment.x))}
+          y: ${String(Calc.round(this.hitBox.enviroment.y))}
         `,
         fontFamily: 'Arial, sans-serif',
         fontSize: '10px',
         color: 'lime',
         borderWidth: 1,
         borderColor: 'black',
-        x: hitBox.enviroment.x + hitBox.enviroment.width,
-        y: hitBox.enviroment.y + hitBox.enviroment.height,
+        x: this.hitBox.enviroment.x + this.hitBox.enviroment.width,
+        y: this.hitBox.enviroment.y + this.hitBox.enviroment.height,
       })
+    }
+
+
+    // Pop on other edge
+    if (State.player.y < 0) {
+      // @ts-ignore
+      State.player.y = DOM.canvas.height
+    }
+    // @ts-ignore
+    else if (State.player.y > DOM.canvas.height) {
+      State.player.y = 0
+    }
+    else if (State.player.x < 0) {
+      // @ts-ignore
+      State.player.x = DOM.canvas.width
+    }
+    // @ts-ignore
+    else if (State.player.x > DOM.canvas.width) {
+      State.player.x = 0
     }
 
 
@@ -152,8 +179,22 @@ class Player {
         player = renderChain[i]
 
         player.x = State.player.x
-        player.y = hitBox.enviroment.y
-        player.bottomY = hitBox.enviroment.y + hitBox.enviroment.height
+        player.y = this.hitBox.enviroment.y
+        player.bottomY = this.hitBox.enviroment.y + this.hitBox.enviroment.height
+
+        for (let j = 0; j < renderChainLen; j++) {
+          const box = Render.chain[j]
+
+          if (box.type === 'box') {
+            // Enable collision
+            if (box.isTangible === true) {
+              Physics.collision.resolve.rectRect(this.hitBox.enviroment, box)
+            }
+            else {
+              Physics.collision.detect.rectRect(this.hitBox.enviroment, box)
+            }
+          }
+        }
 
         break
       }

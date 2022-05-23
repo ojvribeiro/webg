@@ -35,11 +35,13 @@ let Render = {
     Render.chain.push(props)
   },
 
+
   loop: () => {
     const player = new Player()
     const projectile = Projectile
     const village = new Village()
-    const boxes = new Box(village.objects)
+
+    new Box(village.objects)
 
     const chainLen = Render.chain.length
 
@@ -66,46 +68,9 @@ let Render = {
 
         else if (obj.type === 'box') {
           village.render(obj)
-          boxes.render(obj)
         }
       }
 
-
-      if (Config.showObjectInfo === true) {
-        Render.text({
-          text: `
-            mouse
-            x: ${DOM.mousePosition.x}
-            y: ${DOM.mousePosition.y}
-          `,
-          fontFamily: 'Arial, sans-serif',
-          fontSize: '10px',
-          color: 'lime',
-          borderWidth: 1,
-          borderColor: 'black',
-          x: DOM.mousePosition.x + 20,
-          y: DOM.mousePosition.y + 20,
-        })
-      }
-
-
-      // Pop on other edge
-      if (State.player.y < 0) {
-        // @ts-ignore
-        State.player.y = DOM.canvas.height
-      }
-      // @ts-ignore
-      else if (State.player.y > DOM.canvas.height) {
-        State.player.y = 0
-      }
-      else if (State.player.x < 0) {
-        // @ts-ignore
-        State.player.x = DOM.canvas.width
-      }
-      // @ts-ignore
-      else if (State.player.x > DOM.canvas.width) {
-        State.player.x = 0
-      }
 
       stats.end()
 
