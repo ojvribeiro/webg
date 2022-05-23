@@ -5,6 +5,7 @@ import { Physics } from '../../scripts/modules/physics.js'
 import { SpriteAnimation } from '../../scripts/modules/sprites.js'
 import { Render } from '../../scripts/modules/render.js'
 import { Calc } from '../../scripts/modules/math.js'
+import { DOM } from '../../scripts/modules/dom.js'
 import { playerConfig } from './config.js'
 
 import { basicAnimationKeyframes } from './animation/basic.js'
