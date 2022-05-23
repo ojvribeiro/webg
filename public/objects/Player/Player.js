@@ -59,7 +59,8 @@ class Player {
         x: State.player.x + 2,
         y: State.player.y - (playerConfig.HEIGHT / 4) + 3,
         radius: playerConfig.HEIGHT / 4,
-        color: (playerConfig.SHOW_HITBOX === true) ? playerConfig.HITBOX_COLOR : 'transparent'
+        backgroundColor: (playerConfig.SHOW_HITBOX === true) ? playerConfig.HITBOX_BACKGROUND_COLOR : 'transparent',
+        borderColor: (playerConfig.SHOW_HITBOX === true) ? playerConfig.HITBOX_BORDER_COLOR : 'transparent',
       },
 
       body: {
@@ -67,7 +68,8 @@ class Player {
         y: State.player.y,
         width: (playerConfig.WIDTH / 2),
         height: (playerConfig.HEIGHT / 2),
-        color: (playerConfig.SHOW_HITBOX === true) ? playerConfig.HITBOX_COLOR : 'transparent'
+        backgroundColor: (playerConfig.SHOW_HITBOX === true) ? playerConfig.HITBOX_BACKGROUND_COLOR : 'transparent',
+        borderColor: (playerConfig.SHOW_HITBOX === true) ? playerConfig.HITBOX_BORDER_COLOR : 'transparent',
       },
 
       enviroment: {
@@ -75,7 +77,8 @@ class Player {
         y: State.player.y + (playerConfig.HEIGHT / 4) + 5,
         width: playerConfig.WIDTH / 2,
         height: playerConfig.HEIGHT / 5,
-        color: (playerConfig.SHOW_COLLISION_BOX === true) ? playerConfig.COLLISION_BOX_COLOR : 'transparent'
+        backgroundColor: (playerConfig.SHOW_COLLISION_BOX === true) ? playerConfig.COLLISION_BOX_BACKGROUND_COLOR : 'transparent',
+        borderColor: (playerConfig.SHOW_COLLISION_BOX === true) ? playerConfig.COLLISION_BOX_BORDER_COLOR : 'transparent',
       }
     }
 
@@ -85,8 +88,6 @@ class Player {
       y: State.player.y + 45,
       size: this.hitBox.head.radius / 2,
       backgroundColor: 'rgba(0, 0, 0, 0.3)',
-      borderColor: 'black',
-      borderWidth: 1
     })
 
     if (playerConfig.SHOW_SPRITE === true) {

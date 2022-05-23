@@ -83,23 +83,26 @@ let Render = {
    * Method that renders a canvas rectangle (box).
    *
    * @param {Object} props - The box properties
-   * @param {!number} props.x - The X position of the box
-   * @param {!number} props.y - The Y position of the box
-   * @param {!number} props.width - The width of the box
-   * @param {!number} props.height - The height of the box
-   * @param {?string} props.backgroundColor - The background color of the box
-   * @param {?string} props.borderColor - The border color of the box
+   * @param {Number} props.x - The X position of the box
+   * @param {Number} props.y - The Y position of the box
+   * @param {Number} props.width - The width of the box
+   * @param {Number} props.height - The height of the box
+   * @param {string} [props.backgroundColor] - The background color of the box
+   * @param {string} [props.borderColor] - The border color of the box
+   * @param {Number} [props.borderWidth] - The border width of the circle.
    */
   box: (props) => {
     ctx.beginPath()
 
-    ctx.fillStyle = props.backgroundColor || 'transparent'
-    ctx.strokeStyle = props.borderColor || 'transparent'
+    ctx.fillStyle = (props.backgroundColor) ? props.backgroundColor : 'transparent'
+
+    ctx.strokeStyle = (props.borderColor) ? props.borderColor : 'transparent'
+    ctx.lineWidth = (props.borderWidth) ? props.borderWidth : 0
 
     ctx.rect(props.x, props.y, props.width, props.height)
 
-    ctx.fill()
     ctx.stroke()
+    ctx.fill()
     ctx.closePath()
   },
 
@@ -159,32 +162,20 @@ let Render = {
 
 
   /**
-   * Method that renders a canvas text.
-   *
-   * @param {Object} props - The circle properties.
-   * @param {string} props.backgroundColor - The background color of the circle.
-   * @param {string} props.borderColor - The border color of the circle.
-   * @param {number} props.borderWidth - The border width of the circle.
-   * @param {number} props.x - The X position of the circle.
-   * @param {number} props.y - The Y position of the circle.
-   * @param {number} props.size - The size the circle.
-   */
+    * Method that renders a canvas text.
+    *
+    * @param {Object} props - The circle properties.
+    * @param {number} props.x - The X position of the circle.
+    * @param {number} props.y - The Y position of the circle.
+    * @param {number} props.size - The size the circle.
+    * @param {string} [props.backgroundColor] - The background color of the circle.
+    * @param {string} [props.borderColor] - The border color of the circle.
+    * @param {number} [props.borderWidth] - The border width of the circle.
+  */
   circle: (props) => {
     ctx.beginPath()
 
-    ctx.fillStyle = props.backgroundColor
-
-    // If borderWidth or borderColor are defined then render a stroke
-    if (typeof props.borderWidth !== 'undefined' || typeof props.borderColor !== 'undefined') {
-      ctx.save()
-
-      ctx.strokeStyle = props.borderColor || 'black' // Defaults to black
-      ctx.lineWidth = props.borderWidth * 2 || 2 // A doubled value produces a more accurate result (default: 2 [1px])
-
-      ctx.stroke()
-
-      ctx.restore()
-    }
+    ctx.fillStyle = props.backgroundColor ? props.backgroundColor : 'transparent'
 
     ctx.arc(
       props.x,
@@ -194,7 +185,15 @@ let Render = {
       (Math.PI * 2),
       false
     )
+
     ctx.fill()
+
+    if (props.borderWidth || props.borderColor) {
+      ctx.strokeStyle = (props.borderColor) ? props.borderColor : 'transparent'
+      ctx.lineWidth = props.borderWidth ? props.borderWidth : 0
+
+      ctx.stroke()
+    }
 
     ctx.closePath()
   },
