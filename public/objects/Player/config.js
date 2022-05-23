@@ -11,9 +11,12 @@ const playerConfig = {
   SPRITE_SHEET_COLS: 5,
 
   SHOW_HITBOX: false,
+  SHOW_OBJECT_INFO: false,
   SHOW_COLLISION_BOX: false,
-  HITBOX_COLOR: 'rgba(245, 50, 28, 0.5)',
-  COLLISION_BOX_COLOR: 'rgba(254, 212, 150, 0.5)',
+  HITBOX_BACKGROUND_COLOR: 'rgba(245, 28, 28, 0.281)',
+  HITBOX_BORDER_COLOR: '#ff0000',
+  COLLISION_BOX_BACKGROUND_COLOR: 'rgba(254, 212, 150, 0.5)',
+  COLLISION_BOX_BORDER_COLOR: '#FEA',
 
   /**
   * Define player keyboard controls

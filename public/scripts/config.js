@@ -8,8 +8,6 @@ const Config = {
   localDomain: ['webg.test'],
   protocol: 'https://',
 
-  showObjectInfo: true,
-
   // @ts-ignore
   ctx: DOM.canvas.getContext('2d'),
 
@@ -54,14 +52,6 @@ const Config = {
       * @type {string} - The projectile's color
     */
     COLOR: '#fff'
-  },
-
-  objects: {
-
-    /**
-      * @type {boolean} - Whether to show the objects' hitboxes
-    */
-    SHOW_COLLISION_BOX: true,
   },
 
 }

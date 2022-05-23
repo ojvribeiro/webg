@@ -2,7 +2,6 @@
 import { State } from '../scripts/modules/states.js'
 import { Physics } from '../scripts/modules/physics.js'
 import { Render } from '../scripts/modules/render.js'
-import { Config } from '../scripts/config.js'
 
 /**
  * Class of a box
