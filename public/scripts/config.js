@@ -6,6 +6,7 @@ const Config = {
   domain: 'webg.vercel.app',
   localDomain: ['webg.test', '127.0.0.1:5500'],
   protocol: 'https://',
+  localProtocol: 'http://',
 
   // @ts-ignore
   ctx: DOM.canvas.getContext('2d'),
@@ -30,7 +31,7 @@ const Config = {
         return this.protocol + this.domain
       }
     } else {
-      return this.protocol + currentDomain + '/public'
+      return this.localProtocol + currentDomain + '/public'
     }
   },
 

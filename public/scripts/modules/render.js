@@ -1,6 +1,4 @@
 // @ts-check
-import Stats from '../../node_modules/stats-js/src/Stats.js'
-
 import { Config } from '../config.js'
 import { DOM } from './dom.js'
 import { State } from './states.js'
