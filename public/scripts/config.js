@@ -1,7 +1,6 @@
 // @ts-check
 import { DOM } from './modules/dom.js'
 
-
 const Config = {
   name: 'webg',
   domain: 'webg.vercel.app',
@@ -27,34 +26,30 @@ const Config = {
     if (found === false) {
       if (currentDomain.indexOf('gitpod.io') !== -1) {
         return this.protocol + currentDomain
-      }
-      else {
+      } else {
         return this.protocol + this.domain
       }
-    }
-    else {
+    } else {
       return this.protocol + currentDomain + '/public'
     }
   },
 
   projectiles: {
     /**
-      * @type {number} - The projectile's size in pixels
-    */
+     * @type {number} - The projectile's size in pixels
+     */
     SIZE: 3, // Projectile hitbox radius (default: 3)
 
     /**
-      * @type {number} - The projectile's speed in pixels per frame
-    */
+     * @type {number} - The projectile's speed in pixels per frame
+     */
     SPEED: 20, // Pixels per frame (default: 15)
 
     /**
-      * @type {string} - The projectile's color
-    */
-    COLOR: '#fff'
+     * @type {string} - The projectile's color
+     */
+    COLOR: '#fff',
   },
-
 }
-
 
 export { Config }

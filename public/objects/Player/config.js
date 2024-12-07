@@ -19,9 +19,9 @@ const playerConfig = {
   COLLISION_BOX_BORDER_COLOR: '#FEA',
 
   /**
-  * Define player keyboard controls
-  * Uses `event.code` to capture key codes on `keydown`
-  */
+   * Define player keyboard controls
+   * Uses `event.code` to capture key codes on `keydown`
+   */
   KEYBOARD_CONTROLS: {
     up: 'KeyW',
     down: 'KeyS',

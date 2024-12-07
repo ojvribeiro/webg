@@ -198,5 +198,4 @@ const basicAnimationKeyframes = [
   },
 ]
 
-
 export { basicAnimationKeyframes }

@@ -1,4 +1,3 @@
-
 // @ts-check
 import { DOM } from './dom.js'
 import { Config } from '../config.js'
@@ -8,15 +7,17 @@ import { Physics } from './physics.js'
 
 import { playerConfig } from '../../objects/Player/Player.js'
 
-
-document.addEventListener('mousedown', e => {
+document.addEventListener('mousedown', (e) => {
   let angle, velocity
 
   if (State.player.state !== 'running') {
     DOM.mousePosition.x = e.clientX
     DOM.mousePosition.y = e.clientY
 
-    angle = Math.atan2(DOM.mousePosition.y - State.player.y, DOM.mousePosition.x - State.player.x)
+    angle = Math.atan2(
+      DOM.mousePosition.y - State.player.y,
+      DOM.mousePosition.x - State.player.x
+    )
     velocity = Physics.velocity(angle, Config.projectiles.SPEED)
 
     const projectile = {
@@ -24,28 +25,31 @@ document.addEventListener('mousedown', e => {
       y: State.player.y,
       radius: Config.projectiles.SIZE,
       color: Config.projectiles.COLOR,
-      velocity: velocity
+      velocity: velocity,
     }
 
     Projectile.shoot(projectile)
   }
 })
 
-
 let playerSprite = new Image()
 playerSprite.src = Config.root + playerConfig.SPRITE_SHEET_PATH
 
-document.addEventListener('mousemove', e => {
+document.addEventListener('mousemove', (e) => {
   DOM.mousePosition.x = e.clientX
   DOM.mousePosition.y = e.clientY
 
-  const angle = Math.atan2(DOM.mousePosition.y - State.player.y, DOM.mousePosition.x - State.player.x)
+  const angle = Math.atan2(
+    DOM.mousePosition.y - State.player.y,
+    DOM.mousePosition.x - State.player.x
+  )
 
   const direction = {
     up: angle <= -1.17 && angle >= -1.97,
     down: angle <= 1.97 && angle >= 1.17,
-    left: angle <= 3.14 && angle >= 2.74 || angle >= -3.14 && angle <= -2.74,
-    right: angle > 0.01 && angle <= 0.4 || angle >= -0.4 && angle <= 0.01,
+    left:
+      (angle <= 3.14 && angle >= 2.74) || (angle >= -3.14 && angle <= -2.74),
+    right: (angle > 0.01 && angle <= 0.4) || (angle >= -0.4 && angle <= 0.01),
     upLeft: angle > -2.74 && angle < -1.97,
     upRight: angle > -1.17 && angle < -0.4,
     downLeft: angle < 2.74 && angle > 1.97,
@@ -109,7 +113,7 @@ document.addEventListener('mousemove', e => {
   }
 
   /**
-  * @todo Make a better front-end debug system
-  */
+   * @todo Make a better front-end debug system
+   */
   // DOM.keysPressed.innerText = String(angle)
 })

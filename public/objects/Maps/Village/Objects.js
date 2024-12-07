@@ -1,7 +1,6 @@
 // @ts-check
 import { Config } from '../../../scripts/config.js'
 
-
 const __dir = Config.root
 const filePath = `${__dir}/sprites/Maps/Village/`
 
@@ -70,11 +69,9 @@ const Objects = [
   },
 ]
 
-
-Objects.forEach(object => {
+Objects.forEach((object) => {
   object.sprite.image = new Image()
   object.sprite.image.src = filePath + object.sprite.fileName
 })
-
 
 export { Objects }

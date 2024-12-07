@@ -3,8 +3,7 @@
 import { playerConfig } from '../../objects/Player/Player.js'
 import { State } from './states.js'
 
-
-document.addEventListener('keydown', e => {
+document.addEventListener('keydown', (e) => {
   // Fires the keydown event only once
   if (!e.repeat) {
     // Disable Alt key
@@ -39,14 +38,13 @@ document.addEventListener('keydown', e => {
     }
 
     /**
-    * @todo Make a better front-end debug system
-    */
+     * @todo Make a better front-end debug system
+     */
     // DOM.keysPressed.innerText = State.keyMap.array, State.player.speed
   }
 })
 
-
-document.addEventListener('keyup', e => {
+document.addEventListener('keyup', (e) => {
   if (e.code === playerConfig.KEYBOARD_CONTROLS.run) {
     State.keyMap.shift = false
   }
@@ -79,7 +77,6 @@ document.addEventListener('keyup', e => {
     State.player.state = 'idle'
   }
 
-
   const index = State.keyMap.array.indexOf(e.code)
 
   if (index > -1) {
@@ -87,7 +84,7 @@ document.addEventListener('keyup', e => {
   }
 
   /**
-  * @todo Make a better front-end debug system
-  */
+   * @todo Make a better front-end debug system
+   */
   // DOM.keysPressed.innerText = State.keyMap.array
 })

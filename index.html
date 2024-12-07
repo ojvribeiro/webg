@@ -1,34 +1,36 @@
 <!-- meta redirection -->
 <html lang="en">
-<head>
+  <head>
     <script>
-        const Config = {
-          localDomain: ['8001-ojvribeiro-webg-5xrpm9ghv21.ws-us42.gitpod.io', 'webg.test'],
-          protocol: 'https://',
+      const Config = {
+        localDomain: [
+          '8001-ojvribeiro-webg-5xrpm9ghv21.ws-us42.gitpod.io',
+          'webg.test',
+        ],
+        protocol: 'https://',
+      }
+
+      ;(() => {
+        let localDomain
+        let found = false
+
+        for (let i in Config.localDomain) {
+          if (location.host === Config.localDomain[i]) {
+            localDomain = Config.localDomain[i]
+            found = true
+
+            break
+          }
         }
 
-        ;(() => {
-          let localDomain
-          let found = false
-
-          for (let i in Config.localDomain) {
-            if (location.host === Config.localDomain[i]) {
-              localDomain = Config.localDomain[i]
-              found = true
-
-              break
-            }
+        if (!found) {
+          return Config.protocol + Config.domain
+        } else {
+          if (localDomain.indexOf('gitpod.io') === -1) {
+            location.href = Config.protocol + localDomain + '/public'
           }
-
-          if (!found) {
-            return Config.protocol + Config.domain
-          }
-          else {
-            if (localDomain.indexOf('gitpod.io') === -1) {
-              location.href = Config.protocol + localDomain + '/public'
-            }
-          }
-        })()
+        }
+      })()
     </script>
-</head>
+  </head>
 </html>

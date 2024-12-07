@@ -3,7 +3,6 @@ import { Objects } from './Objects.js'
 import { Render } from '../../../scripts/modules/render.js'
 import { mapConfig } from './config.js'
 
-
 class Village {
   constructor() {
     this.objects = Objects
@@ -22,7 +21,6 @@ class Village {
       height: props.sprite.height,
     })
 
-
     if (mapConfig.SHOW_OBJECT_INFO) {
       Render.text({
         text: `
@@ -36,7 +34,7 @@ class Village {
         borderWidth: 1,
         borderColor: 'black',
         x: props.x + props.width,
-        y: props.y + props.height + 5
+        y: props.y + props.height + 5,
       })
     }
 
@@ -45,6 +43,5 @@ class Village {
     }
   }
 }
-
 
 export { Village }

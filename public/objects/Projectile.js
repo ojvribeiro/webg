@@ -4,26 +4,23 @@ import { State } from '../scripts/modules/states.js'
 import { Render } from '../scripts/modules/render.js'
 import { Physics } from '../scripts/modules/physics.js'
 
-
 let Projectile = {
-
   /**
-  * @param {Object} arr - The array of projectiles to be rendered
-  */
+   * @param {Object} arr - The array of projectiles to be rendered
+   */
   shoot: (arr) => {
     State.projectiles.push(arr)
 
     Projectile.render()
   },
 
-
   /**
-  *
-  * @param {number} x
-  * @param {number} y
-  * @param {number} radius
-  * @param {string} color
-  */
+   *
+   * @param {number} x
+   * @param {number} y
+   * @param {number} radius
+   * @param {string} color
+   */
   draw: (x, y, radius, color) => {
     Render.circle({
       x: x,
@@ -35,15 +32,13 @@ let Projectile = {
     })
   },
 
-
   /**
-  *
-  * @param {number} index
-  */
+   *
+   * @param {number} index
+   */
   delete: (index) => {
     State.projectiles.splice(index, 1)
   },
-
 
   render: () => {
     State.projectiles.forEach((projectile, index) => {
@@ -51,17 +46,23 @@ let Projectile = {
       projectile.y += projectile.velocity.y
 
       // Remove projectile if outside the canvas plus 50px.
-      if (projectile.x - projectile.radius < -50 ||
+      if (
+        projectile.x - projectile.radius < -50 ||
         // @ts-ignore
         projectile.x + projectile.radius > DOM.canvas.width + 50 ||
         projectile.y - projectile.radius < -50 ||
         // @ts-ignore
-        projectile.y + projectile.radius > DOM.canvas.height + 50) {
-
+        projectile.y + projectile.radius > DOM.canvas.height + 50
+      ) {
         Projectile.delete(index)
       }
 
-      Projectile.draw(projectile.x, projectile.y, projectile.radius, projectile.color)
+      Projectile.draw(
+        projectile.x,
+        projectile.y,
+        projectile.radius,
+        projectile.color
+      )
 
       const renderChain = Render.chain
       const renderChainLen = renderChain.length
@@ -78,8 +79,7 @@ let Projectile = {
         }
       }
     })
-  }
+  },
 }
-
 
 export { Projectile }

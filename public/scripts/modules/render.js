@@ -9,7 +9,6 @@ import { Projectile } from '../../objects/Projectile.js'
 import { Village } from '../../objects/Maps/Village/Village.js'
 import { Box } from '../../objects/Box.js'
 
-
 const ctx = Config.ctx
 
 // @ts-ignore
@@ -22,15 +21,13 @@ const stats = new Stats()
 stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
 document.body.appendChild(stats.dom)
 
-
 const Render = {
   /**
    * The rendering order.
    * @todo Every element to be drawn on screen should be here to be swaped when needed
    * @type {array}
-  */
+   */
   chain: [],
-
 
   /**
    *
@@ -39,7 +36,6 @@ const Render = {
   add: (props) => {
     Render.chain.push(props)
   },
-
 
   loop: () => {
     const player = new Player()
@@ -60,29 +56,23 @@ const Render = {
         projectile.render()
       }
 
-
       Render.chain.sort((a, b) => a.bottomY - b.bottomY)
-
 
       for (let i = 0; i < chainLen; i++) {
         const obj = Render.chain[i]
 
         if (obj.type === 'player') {
           player.render()
-        }
-
-        else if (obj.type === 'box') {
+        } else if (obj.type === 'box') {
           village.render(obj)
         }
       }
-
 
       stats.end()
 
       requestAnimationFrame(update)
     })()
   },
-
 
   /**
    * Method that renders a canvas rectangle (box).
@@ -99,10 +89,12 @@ const Render = {
   box: (props) => {
     ctx.beginPath()
 
-    ctx.fillStyle = (props.backgroundColor) ? props.backgroundColor : 'transparent'
+    ctx.fillStyle = props.backgroundColor
+      ? props.backgroundColor
+      : 'transparent'
 
-    ctx.strokeStyle = (props.borderColor) ? props.borderColor : 'transparent'
-    ctx.lineWidth = (props.borderWidth) ? props.borderWidth : 0
+    ctx.strokeStyle = props.borderColor ? props.borderColor : 'transparent'
+    ctx.lineWidth = props.borderWidth ? props.borderWidth : 0
 
     ctx.rect(props.x, props.y, props.width, props.height)
 
@@ -110,7 +102,6 @@ const Render = {
     ctx.fill()
     ctx.closePath()
   },
-
 
   /**
    * Method that renders a canvas text.
@@ -136,7 +127,10 @@ const Render = {
       ctx.fillStyle = props.color
 
       // If borderWidth or borderColor are defined then render a text stroke
-      if (typeof props.borderWidth !== 'undefined' || typeof props.borderColor !== 'undefined') {
+      if (
+        typeof props.borderWidth !== 'undefined' ||
+        typeof props.borderColor !== 'undefined'
+      ) {
         ctx.save()
 
         ctx.strokeStyle = props.borderColor || 'black' // Defaults to black
@@ -146,7 +140,7 @@ const Render = {
           ctx.strokeText(
             lineBreaks[i].trim(),
             props.x,
-            props.y + (i * lineHeight)
+            props.y + i * lineHeight
           )
         }
 
@@ -154,47 +148,37 @@ const Render = {
       }
 
       for (let i = 0; i < lineBreaks.length; i++) {
-        ctx.fillText(
-          lineBreaks[i].trim(),
-          props.x,
-          props.y + (i * lineHeight)
-        )
+        ctx.fillText(lineBreaks[i].trim(), props.x, props.y + i * lineHeight)
       }
 
       ctx.closePath()
     }
   },
 
-
   /**
-    * Method that renders a canvas text.
-    *
-    * @param {Object} props - The circle properties.
-    * @param {number} props.x - The X position of the circle.
-    * @param {number} props.y - The Y position of the circle.
-    * @param {number} props.size - The size the circle.
-    * @param {string} [props.backgroundColor] - The background color of the circle.
-    * @param {string} [props.borderColor] - The border color of the circle.
-    * @param {number} [props.borderWidth] - The border width of the circle.
-  */
+   * Method that renders a canvas text.
+   *
+   * @param {Object} props - The circle properties.
+   * @param {number} props.x - The X position of the circle.
+   * @param {number} props.y - The Y position of the circle.
+   * @param {number} props.size - The size the circle.
+   * @param {string} [props.backgroundColor] - The background color of the circle.
+   * @param {string} [props.borderColor] - The border color of the circle.
+   * @param {number} [props.borderWidth] - The border width of the circle.
+   */
   circle: (props) => {
     ctx.beginPath()
 
-    ctx.fillStyle = props.backgroundColor ? props.backgroundColor : 'transparent'
+    ctx.fillStyle = props.backgroundColor
+      ? props.backgroundColor
+      : 'transparent'
 
-    ctx.arc(
-      props.x,
-      props.y,
-      props.size,
-      0,
-      (Math.PI * 2),
-      false
-    )
+    ctx.arc(props.x, props.y, props.size, 0, Math.PI * 2, false)
 
     ctx.fill()
 
     if (props.borderWidth || props.borderColor) {
-      ctx.strokeStyle = (props.borderColor) ? props.borderColor : 'transparent'
+      ctx.strokeStyle = props.borderColor ? props.borderColor : 'transparent'
       ctx.lineWidth = props.borderWidth ? props.borderWidth : 0
 
       ctx.stroke()
@@ -202,7 +186,6 @@ const Render = {
 
     ctx.closePath()
   },
-
 
   /**
    * Method that renders a image on canvas.
@@ -238,7 +221,7 @@ const Render = {
     render()
 
     props.image.addEventListener('load', render, false)
-  }
+  },
 }
 
 export { Render }

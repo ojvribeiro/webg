@@ -23,9 +23,9 @@ let State = {
     sprites: playerConfig.SPRITE_SHEET_PATH,
     hitBox: {
       head: {},
-      body: {}
+      body: {},
     },
-    collisionBox: {}
+    collisionBox: {},
   },
 
   keyMap: {
@@ -35,11 +35,10 @@ let State = {
     right: false,
     shift: false,
 
-    array: []
+    array: [],
   },
 
   projectiles: [],
 }
-
 
 export { State }

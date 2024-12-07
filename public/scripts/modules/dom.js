@@ -7,8 +7,8 @@ const DOM = {
   playerPosition: doc.getElementById('player-pos'),
   mousePosition: {
     x: null,
-    y: null
-  }
+    y: null,
+  },
 }
 
 export { DOM }
