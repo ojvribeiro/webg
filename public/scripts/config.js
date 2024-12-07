@@ -4,7 +4,7 @@ import { DOM } from './modules/dom.js'
 const Config = {
   name: 'webg',
   domain: 'webg.vercel.app',
-  localDomain: ['webg.test'],
+  localDomain: ['webg.test', '127.0.0.1:5500'],
   protocol: 'https://',
 
   // @ts-ignore
