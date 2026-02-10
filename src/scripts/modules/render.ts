@@ -36,29 +36,28 @@ const Render = {
   },
 
   loop: () => {
+    // Instantiate game objects ONCE
     const player = new Player()
     const projectile = Projectile
     const village = new Village()
-
     new Box(village.objects)
 
-    const chainLen = Render.chain.length
-
-    ;(function update() {
+    function update() {
       stats.begin()
-
       // @ts-ignore
       Config.ctx.clearRect(0, 0, DOM.canvas.width, DOM.canvas.height)
 
+      // Update and render projectiles
       if (State.projectiles.length > 0) {
         projectile.render()
       }
 
+      // Sort chain for correct rendering order
       Render.chain.sort((a, b) => a.bottomY - b.bottomY)
 
-      for (let i = 0; i < chainLen; i++) {
+      // Render all objects in the chain
+      for (let i = 0; i < Render.chain.length; i++) {
         const obj = Render.chain[i]
-
         if (obj.type === 'player') {
           player.render()
         } else if (obj.type === 'box') {
@@ -67,9 +66,10 @@ const Render = {
       }
 
       stats.end()
-
       requestAnimationFrame(update)
-    })()
+    }
+
+    update()
   },
 
   /**
@@ -217,17 +217,6 @@ const Render = {
 
   /**
    * Method that renders a image on canvas.
-   *
-   * @param props - The image properties.
-   * @param props.image - The image object.
-   * @param props.clipX - The X position to clip the image.
-   * @param props.clipY - The Y position to clip the image.
-   * @param props.clipWidth - The width value to clip the image.
-   * @param props.clipHeight - The height value to clip the image.
-   * @param props.x - The X position of the image.
-   * @param props.y - The Y position of the image.
-   * @param props.width - The width the image.
-   * @param props.height - The height the image.
    */
   image: (props: {
     image: HTMLImageElement
