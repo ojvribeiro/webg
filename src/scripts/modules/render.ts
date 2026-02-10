@@ -10,7 +10,7 @@ import Stats from 'stats.js'
 const ctx = Config.ctx
 
 if (DOM.canvas) {
-  const canvas = DOM.canvas as HTMLCanvasElement
+  const canvas = DOM.canvas
 
   canvas.width = window.innerWidth
   canvas.height = window.innerHeight
@@ -23,12 +23,11 @@ document.body.appendChild(stats.dom)
 const Render = {
   /**
    * The rendering order.
-   * @todo Every element to be drawn on screen should be here to be swaped when needed
    */
   chain: [] as { type: string; [key: string]: any }[],
 
   /**
-   *
+   * Method that adds an object to the rendering chain.
    * @param props - The object to be added to the chain
    */
   add: (props: { type: string; [key: string]: any }) => {
@@ -44,7 +43,7 @@ const Render = {
 
     function update() {
       stats.begin()
-      // @ts-ignore
+
       Config.ctx.clearRect(0, 0, DOM.canvas.width, DOM.canvas.height)
 
       // Update and render projectiles
@@ -74,15 +73,6 @@ const Render = {
 
   /**
    * Method that renders a canvas rectangle (box).
-   *
-   * @param props - The box properties
-   * @param props.x - The X position of the box
-   * @param props.y - The Y position of the box
-   * @param props.width - The width of the box
-   * @param props.height - The height of the box
-   * @param props.backgroundColor - The background color of the box
-   * @param props.borderColor - The border color of the box
-   * @param props.borderWidth - The border width of the circle.
    */
   box: (props: {
     x: number
@@ -113,16 +103,6 @@ const Render = {
 
   /**
    * Method that renders a canvas text.
-   *
-   * @param props - The text properties.
-   * @param props.text - The text to be rendered.
-   * @param props.x - The X position of the text.
-   * @param props.y - The Y position of the text.
-   * @param props.fontFamily - The font to be used (equivalent to font-family in CSS).
-   * @param props.fontSize - The size of the text (equivalent to font-size in CSS).
-   * @param props.color - The color of the text.
-   * @param props.borderWidth - The color of the text.
-   * @param props.borderColor - The color of the text.
    */
   text: (props: {
     text: string
@@ -175,15 +155,7 @@ const Render = {
   },
 
   /**
-   * Method that renders a canvas text.
-   *
-   * @param props - The circle properties.
-   * @param props.x - The X position of the circle.
-   * @param props.y - The Y position of the circle.
-   * @param props.size - The size the circle.
-   * @param props.backgroundColor - The background color of the circle.
-   * @param props.borderColor - The border color of the circle.
-   * @param props.borderWidth - The border width of the circle.
+   * Method that renders a canvas circle.
    */
   circle: (props: {
     x: number
