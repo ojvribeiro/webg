@@ -6,8 +6,8 @@ const playerConfig = {
   SIZE: 2 * METER_SCALE, // 2m tall sprite
   WIDTH: 1 * METER_SCALE, // 1m wide
   HEIGHT: 2 * METER_SCALE, // 2m tall
-  WALK_MAX_SPEED: 4 * METER_SCALE, // 4 m/s walk speed
-  RUN_MAX_SPEED: 8 * METER_SCALE, // 8 m/s run speed
+  WALK_MAX_SPEED: 3 * METER_SCALE, // 3 m/s walk speed
+  RUN_MAX_SPEED: 7 * METER_SCALE, // 7 m/s run speed
 
   SHOW_SPRITE: true,
   SPRITE_SHEET_PATH: '/sprites/Player/Player.svg',
