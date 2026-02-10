@@ -7,6 +7,51 @@ import { Calc } from '../../scripts/modules/math'
 import { DOM } from '../../scripts/modules/dom'
 import { playerConfig } from './config'
 
+interface HitBoxHead {
+  x: number;
+  y: number;
+  radius: number;
+  backgroundColor: string;
+  borderColor: string;
+}
+interface HitBoxBody {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  backgroundColor: string;
+  borderColor: string;
+}
+interface HitBoxEnv {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  backgroundColor: string;
+  borderColor: string;
+}
+interface PlayerHitBox {
+  head: HitBoxHead;
+  body: HitBoxBody;
+  enviroment: HitBoxEnv;
+}
+
+interface PlayerRenderObj {
+  type: 'player';
+  x: number;
+  y: number;
+  bottomY: number;
+  width: number;
+  height: number;
+  hitBox: {
+    head: HitBoxHead;
+    body: HitBoxBody;
+    collisionBox: HitBoxEnv;
+  };
+}
+
+type MoveDir = { up: boolean; down: boolean; left: boolean; right: boolean } | null;
+
 import { basicAnimationKeyframes } from './animation/basic'
 
 const basicAnimation = basicAnimationKeyframes
@@ -15,41 +60,58 @@ const playerSprite = new Image()
 playerSprite.src = Config.root + playerConfig.SPRITE_SHEET_PATH
 
 class Player {
-    // Used for time-based movement
-    static lastFrameTime: number = performance.now();
-    static delta: number = 1 / 60; // fallback default
-  hitBox: any
-  sprite: SpriteAnimation
-  player: any
+  // Used for time-based movement
+  static lastFrameTime: number = performance.now();
+  static delta: number = 1 / 60; // fallback default
+  hitBox: PlayerHitBox;
+  sprite: SpriteAnimation;
+  player: PlayerRenderObj;
+
+  // Cache config values for performance
+  static PX_PER_METER = playerConfig.PX_PER_METER;
+  static WIDTH = playerConfig.WIDTH;
+  static HEIGHT = playerConfig.HEIGHT;
+  static SIZE = playerConfig.SIZE;
+
+  lastMoveDir: MoveDir = null;
 
   constructor() {
-    this.hitBox = {}
-
+    const { WIDTH, HEIGHT, SIZE } = Player;
+    this.hitBox = {
+      head: {
+        x: 0, y: 0, radius: 0, backgroundColor: '', borderColor: ''
+      },
+      body: {
+        x: 0, y: 0, width: 0, height: 0, backgroundColor: '', borderColor: ''
+      },
+      enviroment: {
+        x: 0, y: 0, width: 0, height: 0, backgroundColor: '', borderColor: ''
+      }
+    };
     this.sprite = new SpriteAnimation({
       spriteImageObject: playerSprite,
       keyframes: basicAnimation,
-      xPosition: State.player.x - playerConfig.WIDTH / 2,
-      yPosition: State.player.y - playerConfig.HEIGHT / 2,
-      width: playerConfig.SIZE,
-      height: playerConfig.SIZE,
+      xPosition: State.player.x - WIDTH / 2,
+      yPosition: State.player.y - HEIGHT / 2,
+      width: SIZE,
+      height: SIZE,
       animationName: 'idle-down',
-    })
+    });
 
     this.player = {
       type: 'player',
-      x: State.player.x - playerConfig.WIDTH / 4 + 2,
-      y: State.player.y + playerConfig.HEIGHT / 4 + 5,
-      bottomY: State.player.y + playerConfig.HEIGHT / 4 + 5,
-      width: playerConfig.WIDTH / 2,
-      height: playerConfig.HEIGHT / 5,
+      x: State.player.x - WIDTH / 4 + 2,
+      y: State.player.y + HEIGHT / 4 + 5,
+      bottomY: State.player.y + HEIGHT / 4 + 5,
+      width: WIDTH / 2,
+      height: HEIGHT / 5,
       hitBox: {
         head: this.hitBox.head,
         body: this.hitBox.body,
         collisionBox: this.hitBox.enviroment,
       },
-    }
-
-    Render.add(this.player)
+    };
+    Render.add(this.player);
   }
 
   /**
@@ -58,71 +120,61 @@ class Player {
    * @param x - X position of the sprite
    * @param y - Y position of the sprite
    */
-  draw(animationName: string, x: number, y: number) {
-    this.hitBox = {
-      head: {
-        x: State.player.x + 2,
-        y: State.player.y - playerConfig.HEIGHT / 4 + 3,
-        radius: playerConfig.HEIGHT / 4,
-        backgroundColor:
-          playerConfig.SHOW_HITBOX === true
-            ? playerConfig.HITBOX_BACKGROUND_COLOR
-            : 'transparent',
-        borderColor:
-          playerConfig.SHOW_HITBOX === true
-            ? playerConfig.HITBOX_BORDER_COLOR
-            : 'transparent',
-      },
+  draw(animationName: string, x: number, y: number): void {
+    // Cache config and state values
+    const { WIDTH, HEIGHT } = Player;
+    const showHitbox = playerConfig.SHOW_HITBOX;
+    const showCollisionBox = playerConfig.SHOW_COLLISION_BOX;
+    const hitboxBg = showHitbox ? playerConfig.HITBOX_BACKGROUND_COLOR : 'transparent';
+    const hitboxBorder = showHitbox ? playerConfig.HITBOX_BORDER_COLOR : 'transparent';
+    const collisionBg = showCollisionBox ? playerConfig.COLLISION_BOX_BACKGROUND_COLOR : 'transparent';
+    const collisionBorder = showCollisionBox ? playerConfig.COLLISION_BOX_BORDER_COLOR : 'transparent';
+    const px = State.player.x;
+    const py = State.player.y;
 
-      body: {
-        x: State.player.x - playerConfig.WIDTH / 4 + 2,
-        y: State.player.y,
-        width: playerConfig.WIDTH / 2,
-        height: playerConfig.HEIGHT / 2,
-        backgroundColor:
-          playerConfig.SHOW_HITBOX === true
-            ? playerConfig.HITBOX_BACKGROUND_COLOR
-            : 'transparent',
-        borderColor:
-          playerConfig.SHOW_HITBOX === true
-            ? playerConfig.HITBOX_BORDER_COLOR
-            : 'transparent',
-      },
-
-      enviroment: {
-        x: State.player.x - playerConfig.WIDTH / 4 + 2,
-        y: State.player.y + playerConfig.HEIGHT / 4 + 5,
-        width: playerConfig.WIDTH / 2,
-        height: playerConfig.HEIGHT / 5,
-        backgroundColor:
-          playerConfig.SHOW_COLLISION_BOX === true
-            ? playerConfig.COLLISION_BOX_BACKGROUND_COLOR
-            : 'transparent',
-        borderColor:
-          playerConfig.SHOW_COLLISION_BOX === true
-            ? playerConfig.COLLISION_BOX_BORDER_COLOR
-            : 'transparent',
-      },
-    }
+    // Only update hitBox if position changed (optional optimization)
+    this.hitBox.head = {
+      x: px + 2,
+      y: py - HEIGHT / 4 + 3,
+      radius: HEIGHT / 4,
+      backgroundColor: hitboxBg,
+      borderColor: hitboxBorder,
+    };
+    this.hitBox.body = {
+      x: px - WIDTH / 4 + 2,
+      y: py,
+      width: WIDTH / 2,
+      height: HEIGHT / 2,
+      backgroundColor: hitboxBg,
+      borderColor: hitboxBorder,
+    };
+    this.hitBox.enviroment = {
+      x: px - WIDTH / 4 + 2,
+      y: py + HEIGHT / 4 + 5,
+      width: WIDTH / 2,
+      height: HEIGHT / 5,
+      backgroundColor: collisionBg,
+      borderColor: collisionBorder,
+    };
 
     // Render player shadow
     Render.circle({
-      x: State.player.x,
-      y: State.player.y + 45,
+      x: px,
+      y: py + 45,
       size: this.hitBox.head.radius / 2,
       backgroundColor: 'rgba(0, 0, 0, 0.3)',
-    })
+    });
 
-    if (playerConfig.SHOW_SPRITE === true) {
+    if (playerConfig.SHOW_SPRITE) {
       // Modifies sprites.ts
       this.sprite.render(
         animationName,
-        x - playerConfig.SIZE / 2,
-        y - playerConfig.SIZE / 2
-      )
+        x - Player.SIZE / 2,
+        y - Player.SIZE / 2
+      );
     }
 
-    if (playerConfig.SHOW_HITBOX) {
+    if (showHitbox) {
       // Render head hitbox
       Render.circle({
         x: this.hitBox.head.x,
@@ -131,21 +183,20 @@ class Player {
         backgroundColor: this.hitBox.head.backgroundColor,
         borderColor: this.hitBox.head.borderColor,
         borderWidth: 1,
-      })
-
+      });
       // Render body hitbox
       Render.box({
         x: this.hitBox.body.x,
         y: this.hitBox.body.y,
         width: this.hitBox.body.width,
         height: this.hitBox.body.height,
-        backgroundColor: this.hitBox.head.backgroundColor,
-        borderColor: this.hitBox.head.borderColor,
+        backgroundColor: this.hitBox.body.backgroundColor,
+        borderColor: this.hitBox.body.borderColor,
         borderWidth: 1,
-      })
+      });
     }
 
-    if (playerConfig.SHOW_COLLISION_BOX) {
+    if (showCollisionBox) {
       // Render enviroment collision box
       Render.box({
         x: this.hitBox.enviroment.x,
@@ -154,16 +205,12 @@ class Player {
         height: this.hitBox.enviroment.height,
         backgroundColor: this.hitBox.enviroment.backgroundColor,
         borderColor: this.hitBox.enviroment.borderColor,
-      })
+      });
     }
 
     if (playerConfig.SHOW_OBJECT_INFO) {
       Render.text({
-        text: `
-          player
-          x: ${String(Calc.round(this.hitBox.enviroment.x))}
-          y: ${String(Calc.round(this.hitBox.enviroment.y))}
-        `,
+        text: `player\nx: ${Calc.round(this.hitBox.enviroment.x)}\ny: ${Calc.round(this.hitBox.enviroment.y)}`,
         fontFamily: 'Arial, sans-serif',
         fontSize: '10px',
         color: 'lime',
@@ -171,7 +218,7 @@ class Player {
         borderColor: 'black',
         x: this.hitBox.enviroment.x + this.hitBox.enviroment.width,
         y: this.hitBox.enviroment.y + this.hitBox.enviroment.height,
-      })
+      });
     }
 
     // Pop on other edge
@@ -223,7 +270,7 @@ class Player {
     }
   }
 
-  render() {
+  render(): void {
     // Calculate delta time (in seconds)
     const now = performance.now();
     Player.delta = Math.min((now - Player.lastFrameTime) / 1000, 0.1); // cap delta to avoid jumps
@@ -288,7 +335,7 @@ class Player {
     this.changeSprite()
   }
   // Store last movement direction for inertia
-  lastMoveDir: { up: boolean; down: boolean; left: boolean; right: boolean } | null = null
+  // lastMoveDir is now typed above
 
   changeSprite() {
     const idle =
