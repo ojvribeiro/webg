@@ -8,12 +8,55 @@ canvas.width = window.innerWidth
 // @ts-ignore
 canvas.height = window.innerHeight
 
-// These defaults are automatically updated
-let State = {
+export interface State {
   player: {
-    // @ts-ignore
+    x: number
+    y: number
+    speed: number
+    facing: string
+    state: string
+    currentRowIndex: number
+    sprites: string
+    hitBox: {
+      head: object
+      body: object
+    }
+    collisionBox: object
+  }
+
+  keyMap: {
+    up: boolean
+    down: boolean
+    left: boolean
+    right: boolean
+    shift: boolean
+    upLeft: boolean
+    upRight: boolean
+    downLeft: boolean
+    downRight: boolean
+    diagonal: boolean // Add this line
+
+    array: string[]
+  }
+
+  projectiles: Projectile[]
+}
+
+export interface Projectile {
+  x: number
+  y: number
+  radius: number
+  color: string
+  velocity: {
+    x: number
+    y: number
+  }
+}
+
+// These defaults are automatically updated
+let State: State = {
+  player: {
     x: canvas.width / 2,
-    // @ts-ignore
     y: canvas.height / 2,
     speed: 0,
     facing: 'down',
@@ -37,6 +80,7 @@ let State = {
     upRight: false,
     downLeft: false,
     downRight: false,
+    diagonal: false, // Add this line
 
     array: [] as string[],
   },
