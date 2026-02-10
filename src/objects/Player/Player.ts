@@ -15,6 +15,9 @@ const playerSprite = new Image()
 playerSprite.src = Config.root + playerConfig.SPRITE_SHEET_PATH
 
 class Player {
+    // Used for time-based movement
+    static lastFrameTime: number = performance.now();
+    static delta: number = 1 / 60; // fallback default
   hitBox: any
   sprite: SpriteAnimation
   player: any
@@ -221,103 +224,71 @@ class Player {
   }
 
   render() {
-    // Run
-    if (State.keyMap.shift) {
-      if (
-        State.keyMap.up ||
-        State.keyMap.down ||
-        State.keyMap.left ||
-        State.keyMap.right
-      ) {
-        State.player.state = 'running'
-
-        State.player.speed += 0.1
-
-        // Locks the speed when it hits the maximum defined
-        if (State.player.speed >= playerConfig.RUN_MAX_SPEED) {
-          State.player.speed = playerConfig.RUN_MAX_SPEED
-        }
-
-        // Listens to movement keys (allows multi press)
-        if (State.keyMap.up) {
-          State.player.y -= Physics.speed.normalize()
-        }
-
-        if (State.keyMap.down) {
-          State.player.y += Physics.speed.normalize()
-        }
-
-        if (State.keyMap.left) {
-          State.player.x -= Physics.speed.normalize()
-        }
-
-        if (State.keyMap.right) {
-          State.player.x += Physics.speed.normalize()
-        }
-
-        this.changeSprite()
-      } else {
-        this.changeSprite()
-      }
-    }
-
-    // Walk
-    else if (
-      (!State.keyMap.shift && State.keyMap.up) ||
+    // Calculate delta time (in seconds)
+    const now = performance.now();
+    Player.delta = Math.min((now - Player.lastFrameTime) / 1000, 0.1); // cap delta to avoid jumps
+    Player.lastFrameTime = now;
+    // Determine if any movement key is pressed
+    const isMoving =
+      State.keyMap.up ||
       State.keyMap.down ||
       State.keyMap.left ||
       State.keyMap.right
-    ) {
+    const isRunning = State.keyMap.shift && isMoving
+    const isWalking = !State.keyMap.shift && isMoving
+
+    // Store last movement direction for inertia
+    if (isMoving) {
+      this.lastMoveDir = {
+        up: State.keyMap.up && !State.keyMap.down,
+        down: State.keyMap.down && !State.keyMap.up,
+        left: State.keyMap.left && !State.keyMap.right,
+        right: State.keyMap.right && !State.keyMap.left,
+      }
+    } else if (!this.lastMoveDir) {
+      // Default direction if never moved
+      this.lastMoveDir = { up: false, down: false, left: false, right: false }
+    }
+
+    if (isRunning) {
+      State.player.state = 'running'
+      Physics.speed.accelerate(playerConfig.RUN_MAX_SPEED, Player.delta)
+    } else if (isWalking) {
       State.player.state = 'walking'
-
-      // Increases the speed
-      State.player.speed += 0.03
-
-      // Locks the velocity to the maximun allowed
-      if (State.player.speed >= playerConfig.WALK_MAX_SPEED) {
-        State.player.speed = playerConfig.WALK_MAX_SPEED
-      }
-
-      if (State.keyMap.up) {
-        State.player.y -= Physics.speed.normalize()
-      }
-
-      if (State.keyMap.down) {
-        State.player.y += Physics.speed.normalize()
-      }
-
-      if (State.keyMap.up && State.keyMap.down) {
-        State.player.y += 0
-      }
-
-      if (State.keyMap.left) {
-        State.player.x -= Physics.speed.normalize()
-      }
-
-      if (State.keyMap.right) {
-        State.player.x += Physics.speed.normalize()
-      }
-
-      if (State.keyMap.left && State.keyMap.right) {
-        State.player.y += 0
-      }
-
-      this.changeSprite()
-    }
-
-    // Idle
-    else {
+      Physics.speed.accelerate(playerConfig.WALK_MAX_SPEED, Player.delta)
+    } else {
       State.player.state = 'idle'
-
-      State.player.speed -= 0.1
-
-      if (State.player.speed <= 0) {
-        State.player.speed = 0
-      }
-
-      this.changeSprite()
+      Physics.speed.decelerateToZero(Player.delta)
     }
+
+    // Move if speed > a small threshold, using last direction for inertia
+    if (State.player.speed > 0.01 && this.lastMoveDir) {
+      const dir = this.lastMoveDir;
+      const moveAmount = Physics.speed.normalize() * Player.delta;
+      if (dir.up) {
+        State.player.y -= moveAmount;
+      }
+      if (dir.down) {
+        State.player.y += moveAmount;
+      }
+      if (dir.left) {
+        State.player.x -= moveAmount;
+      }
+      if (dir.right) {
+        State.player.x += moveAmount;
+      }
+    }
+
+    // When speed is very low and not moving, clear lastMoveDir and set speed to 0
+    if (!isMoving && State.player.speed <= 0.01) {
+      State.player.speed = 0
+      this.lastMoveDir = null
+    }
+
+    this.changeSprite()
   }
+  // Store last movement direction for inertia
+  lastMoveDir: { up: boolean; down: boolean; left: boolean; right: boolean } | null = null
 
   changeSprite() {
     const idle =

@@ -13,7 +13,6 @@ const Physics = {
           rectA.y < rectB.y + rectB.height &&
           rectA.height + rectA.y > rectB.y
 
-        // @ts-ignore
         if (formula) {
           return true
         }
@@ -30,7 +29,6 @@ const Physics = {
           circle.y < rect.y + rect.height &&
           circle.radius + circle.y > rect.y
 
-        // @ts-ignore
         if (formula) {
           return true
         }
@@ -79,14 +77,12 @@ const Physics = {
       },
 
       /**
-       *
-       * @param {Object} circle
-       * @param {Object} rect
-       * @returns
+       * Resolves a collision between a circle and a rectangle.
+
        */
       circleRect: (
-        circle: { x: number; y: number; radius: any },
-        rect: { x: number; width: any; y: number; height: any }
+        circle: { x: number; y: number; radius: number },
+        rect: { x: number; width: number; y: number; height: number }
       ) => {
         let distX: number, distY: number, distance: number
 
@@ -134,16 +130,38 @@ const Physics = {
    * Normalizes the diagonal speed
    */
   speed: {
+    // Gradual acceleration and deceleration
+    acceleration: 1800, // Increased acceleration for faster movement
+    deceleration: 1800, // Increased deceleration for faster stopping
     normalize: function () {
+      // Diagonal movement normalization
       if (
         (State.keyMap.up && State.keyMap.left) ||
         (State.keyMap.up && State.keyMap.right) ||
         (State.keyMap.down && State.keyMap.left) ||
         (State.keyMap.down && State.keyMap.right)
       ) {
-        return State.player.speed * 0.707
-      } else if (State.keyMap.shift) return State.player.speed * 1
-      else return State.player.speed * 1
+        return State.player.speed * 0.7071 // 1/sqrt(2) to maintain consistent speed diagonally
+      } else {
+        return State.player.speed
+      }
+    },
+    // Handles acceleration
+    accelerate: function (targetSpeed: number, delta: number = 1 / 60) {
+      if (State.player.speed < targetSpeed) {
+        State.player.speed += Physics.speed.acceleration * delta;
+        if (State.player.speed > targetSpeed) State.player.speed = targetSpeed;
+      } else if (State.player.speed > targetSpeed) {
+        State.player.speed -= Physics.speed.deceleration * delta;
+        if (State.player.speed < targetSpeed) State.player.speed = targetSpeed;
+      }
+    },
+    // Handles deceleration to zero
+    decelerateToZero: function (delta: number = 1 / 60) {
+      if (State.player.speed > 0) {
+        State.player.speed -= Physics.speed.deceleration * delta;
+        if (State.player.speed < 0) State.player.speed = 0;
+      }
     },
   },
 }
